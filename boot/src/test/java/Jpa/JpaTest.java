@@ -1,0 +1,29 @@
+package Jpa;
+
+import cn.beerate.dao.impl.AdminDaoImpl;
+import cn.beerate.model.entity.t_admin;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import java.util.Date;
+
+
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration("/applicationContext.xml")
+public class JpaTest {
+
+    @Autowired
+    private AdminDaoImpl adminDao;
+
+    @Test
+    public void testJpaAdd(){
+        t_admin admin =  new t_admin();
+        admin.setCreateTime(new Date());
+        admin.setAccount("asd");
+        admin.setPassword("123456");
+        adminDao.save(admin);
+    }
+}
