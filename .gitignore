@@ -20,5 +20,6 @@ dist/
 nbdist/
 .nb-gradle/
 
-### playframework ###
-tmp/
+### log file ###
+logs/
+log/
