@@ -23,3 +23,4 @@ nbdist/
 ### log file ###
 logs/
 log/
+*.log
