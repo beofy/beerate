@@ -2,9 +2,9 @@ package cn.beerate.service;
 
 
 import cn.beerate.dao.Impl.StockInfoDaoImpl;
-import cn.beerate.model.entity.stock.CompanySurvey.t_stock_fxxg;
-import cn.beerate.model.entity.stock.CompanySurvey.t_stock_info;
-import cn.beerate.model.entity.stock.CompanySurvey.t_stock_jbzl;
+import cn.beerate.model.entity.stock.companysurvey.t_stock_fxxg;
+import cn.beerate.model.entity.stock.companysurvey.t_stock_info;
+import cn.beerate.model.entity.stock.companysurvey.t_stock_jbzl;
 import com.alibaba.fastjson.JSONObject;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -15,8 +15,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import java.io.IOException;
 
 
@@ -36,7 +34,7 @@ public class CompanySurveyService {
     private final String[] CODE_START={"sz000","sz002","sz300","sh600","sh601","sh603"};
 
     //抓取公司概况
-    public void companySurvey(String url,String stockCode){
+    public void companySurvey(String url){
 
         Document document = null;
         try {
@@ -45,10 +43,10 @@ public class CompanySurveyService {
             e.printStackTrace();
         }
 
-        String jsonResult = document.body().text();
-        JSONObject jsonObject = JSONObject.parseObject(jsonResult);
+        String result = document.body().text();
+        JSONObject jsonObject = JSONObject.parseObject(result);
         if(!StringUtil.isBlank(jsonObject.getString("status"))){
-            log.info(jsonObject.toJSONString()+"----"+stockCode);
+            log.info(jsonObject.toJSONString());
             return;
         }
 
@@ -57,13 +55,12 @@ public class CompanySurveyService {
         t_stock_fxxg stockFxxg = jsonObject.getJSONObject("fxxg").toJavaObject(t_stock_fxxg.class);
         t_stock_jbzl stockJbzl = jsonObject.getJSONObject("jbzl").toJavaObject(t_stock_jbzl.class);
 
-
         //设置主一
-        stockInfo.stock_fxxg=stockFxxg;
-        stockInfo.stock_jbzl=stockJbzl;
+        stockInfo.setStock_fxxg(stockFxxg);
+        stockInfo.setStock_jbzl(stockJbzl);
         //设置从一
-        stockFxxg.stock_info= stockInfo;
-        stockJbzl.stock_info= stockInfo;
+        stockFxxg.setStock_info(stockInfo);
+        stockJbzl.setStock_info(stockInfo);
 
         //级联保存
         stockInfoDao.save(stockInfo);
@@ -85,9 +82,10 @@ public class CompanySurveyService {
                 if(i>=100&&i<1000){
                     num=start+i;
                 }
-                log.info(num);
-                String url ="http://emweb.securities.eastmoney.com/CompanySurvey/CompanySurveyAjax?code="+num;
-                companySurvey(url,num);
+
+                String url ="http://emweb.securities.eastmoney.com/companysurvey/CompanySurveyAjax?code="+num;
+                log.info(url);
+                companySurvey(url);
             }
         }
     }

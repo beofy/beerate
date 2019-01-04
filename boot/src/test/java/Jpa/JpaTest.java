@@ -20,6 +20,8 @@ public class JpaTest {
     @Autowired
     private AdminDaoImpl adminDao;
 
+
+
     @PersistenceContext
     private EntityManager em;
 

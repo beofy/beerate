@@ -1,6 +1,7 @@
 package cn.beerate.model.entity.stock.companysurvey;
 
 import cn.beerate.model.Model;
+import cn.beerate.model.entity.stock.operationsrequired.t_operations_required;
 
 import javax.persistence.*;
 
@@ -36,6 +37,17 @@ public class t_stock_info  extends Model {
 
     @OneToOne(mappedBy = "stock_info",fetch = FetchType.LAZY,cascade = CascadeType.PERSIST)
     private t_stock_jbzl stock_jbzl;
+
+    @OneToOne(mappedBy = "stock_info",fetch =FetchType.LAZY,cascade = CascadeType.PERSIST)
+    private t_operations_required operations_required;
+
+    public t_operations_required getOperations_required() {
+        return operations_required;
+    }
+
+    public void setOperations_required(t_operations_required operations_required) {
+        this.operations_required = operations_required;
+    }
 
     public String getCode() {
         return Code;
