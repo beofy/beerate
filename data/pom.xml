@@ -13,6 +13,12 @@
 
 
     <dependencies>
+        <!-- 依赖common模块 -->
+        <dependency>
+            <groupId>cn.beerate</groupId>
+            <artifactId>common</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
 
         <!-- html解析工具 -->
         <dependency>
