@@ -1,4 +1,4 @@
-package cn.beerate.dao.impl;
+package cn.beerate.dao.Impl;
 
 import cn.beerate.model.entity.t_admin;
 import org.springframework.data.jpa.repository.JpaRepository;
