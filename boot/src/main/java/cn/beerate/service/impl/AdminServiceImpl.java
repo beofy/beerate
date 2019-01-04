@@ -14,6 +14,6 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public t_admin loggin(String account, String password) {
-       return   adminDao.findByAccountAndAndPassword(account, password);
+       return   adminDao.findByAccountAndPassword(account, password);
     }
 }
