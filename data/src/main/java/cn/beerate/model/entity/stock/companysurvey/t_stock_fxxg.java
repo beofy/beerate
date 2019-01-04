@@ -61,7 +61,7 @@ public class t_stock_fxxg extends Model {
 
     @OneToOne(optional = false)
     @JoinColumn(name="stock_info_id",unique = true)
-    public t_stock_info stock_info;
+    private t_stock_info stock_info;
 
     public String getClrq() {
         return clrq;
@@ -206,7 +206,6 @@ public class t_stock_fxxg extends Model {
     public void setStock_info(t_stock_info stock_info) {
         this.stock_info = stock_info;
     }
-
 
     @Override
     public String toString() {
