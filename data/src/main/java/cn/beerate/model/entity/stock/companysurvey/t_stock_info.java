@@ -9,28 +9,28 @@ import javax.persistence.*;
 public class t_stock_info  extends Model {
 
     //"Code": "SZ000001",
-    private String Code;
+    private String code;
 
     //"CodeType": "ABStock",
-    private String CodeType;
+    private String codeType;
 
     //"SecuCode": "000001.SZ",
-    private String  SecuCode;
+    private String  secuCode;
 
     //"SecurityCode": "000001",
-    private String   SecurityCode;
+    private String   securityCode;
 
     //"SecurityShortName": "平安银行",
-    private String SecurityShortName;
+    private String securityShortName;
 
     //"MarketCode": "02",
-    private String MarketCode;
+    private String marketCode;
 
     //"Market": "SZ",
-    private String Market;
+    private String market;
 
     //"ExpireTime": "\/Date(-62135596800000)\/"
-    private String ExpireTime;
+    private String expireTime;
 
     @OneToOne(mappedBy = "stock_info",fetch = FetchType.LAZY,cascade = CascadeType.PERSIST)
     private t_stock_fxxg stock_fxxg;
@@ -50,67 +50,67 @@ public class t_stock_info  extends Model {
     }
 
     public String getCode() {
-        return Code;
+        return code;
     }
 
     public void setCode(String code) {
-        Code = code;
+        this.code = code;
     }
 
     public String getCodeType() {
-        return CodeType;
+        return codeType;
     }
 
     public void setCodeType(String codeType) {
-        CodeType = codeType;
+        this.codeType = codeType;
     }
 
     public String getSecuCode() {
-        return SecuCode;
+        return secuCode;
     }
 
     public void setSecuCode(String secuCode) {
-        SecuCode = secuCode;
+        this.secuCode = secuCode;
     }
 
     public String getSecurityCode() {
-        return SecurityCode;
+        return securityCode;
     }
 
     public void setSecurityCode(String securityCode) {
-        SecurityCode = securityCode;
+        this.securityCode = securityCode;
     }
 
     public String getSecurityShortName() {
-        return SecurityShortName;
+        return securityShortName;
     }
 
     public void setSecurityShortName(String securityShortName) {
-        SecurityShortName = securityShortName;
+        this.securityShortName = securityShortName;
     }
 
     public String getMarketCode() {
-        return MarketCode;
+        return marketCode;
     }
 
     public void setMarketCode(String marketCode) {
-        MarketCode = marketCode;
+        this.marketCode = marketCode;
     }
 
     public String getMarket() {
-        return Market;
+        return market;
     }
 
     public void setMarket(String market) {
-        Market = market;
+        this.market = market;
     }
 
     public String getExpireTime() {
-        return ExpireTime;
+        return expireTime;
     }
 
     public void setExpireTime(String expireTime) {
-        ExpireTime = expireTime;
+        this.expireTime = expireTime;
     }
 
     public t_stock_fxxg getStock_fxxg() {
@@ -127,19 +127,5 @@ public class t_stock_info  extends Model {
 
     public void setStock_jbzl(t_stock_jbzl stock_jbzl) {
         this.stock_jbzl = stock_jbzl;
-    }
-
-    @Override
-    public String toString() {
-        return "t_stock_info{" +
-                "Code='" + Code + '\'' +
-                ", CodeType='" + CodeType + '\'' +
-                ", SecuCode='" + SecuCode + '\'' +
-                ", SecurityCode='" + SecurityCode + '\'' +
-                ", SecurityShortName='" + SecurityShortName + '\'' +
-                ", MarketCode='" + MarketCode + '\'' +
-                ", Market='" + Market + '\'' +
-                ", ExpireTime='" + ExpireTime + '\'' +
-                '}';
     }
 }
