@@ -1,4 +1,4 @@
-package cn.beerate.model.entity.stock;
+package cn.beerate.model.entity.stock.CompanySurvey;
 
 
 import javax.persistence.*;

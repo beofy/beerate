@@ -1,9 +1,9 @@
 package cn.beerate.service;
 
 
-import cn.beerate.model.entity.stock.t_stock_fxxg;
-import cn.beerate.model.entity.stock.t_stock_info;
-import cn.beerate.model.entity.stock.t_stock_jbzl;
+import cn.beerate.model.entity.stock.CompanySurvey.t_stock_fxxg;
+import cn.beerate.model.entity.stock.CompanySurvey.t_stock_info;
+import cn.beerate.model.entity.stock.CompanySurvey.t_stock_jbzl;
 import com.alibaba.fastjson.JSONObject;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
