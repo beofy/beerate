@@ -11,6 +11,7 @@
     <modules>
         <module>boot</module>
         <module>data</module>
+        <module>common</module>
     </modules>
 
     <dependencies>
