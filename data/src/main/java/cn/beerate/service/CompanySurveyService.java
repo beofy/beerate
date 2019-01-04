@@ -1,6 +1,7 @@
 package cn.beerate.service;
 
 
+import cn.beerate.dao.Impl.StockInfoDaoImpl;
 import cn.beerate.model.entity.stock.CompanySurvey.t_stock_fxxg;
 import cn.beerate.model.entity.stock.CompanySurvey.t_stock_info;
 import cn.beerate.model.entity.stock.CompanySurvey.t_stock_jbzl;
@@ -10,6 +11,7 @@ import org.apache.commons.logging.LogFactory;
 import org.jsoup.Jsoup;
 import org.jsoup.helper.StringUtil;
 import org.jsoup.nodes.Document;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -25,8 +27,8 @@ import java.io.IOException;
 @Transactional
 public class CompanySurveyService {
 
-    @PersistenceContext
-    private EntityManager em;
+    @Autowired
+    private StockInfoDaoImpl stockInfoDao;
 
     private Log log = LogFactory.getLog(CompanySurveyService.class);
 
@@ -55,10 +57,6 @@ public class CompanySurveyService {
         t_stock_fxxg stockFxxg = jsonObject.getJSONObject("fxxg").toJavaObject(t_stock_fxxg.class);
         t_stock_jbzl stockJbzl = jsonObject.getJSONObject("jbzl").toJavaObject(t_stock_jbzl.class);
 
-        //开启事务
-//        if(!em.getTransaction().isActive()){
-//            em.getTransaction().begin();
-//        }
 
         //设置主一
         stockInfo.stock_fxxg=stockFxxg;
@@ -67,8 +65,8 @@ public class CompanySurveyService {
         stockFxxg.stock_info= stockInfo;
         stockJbzl.stock_info= stockInfo;
 
-        em.persist(stockInfo);
-//        em.getTransaction().commit();
+        //级联保存
+        stockInfoDao.save(stockInfo);
 
     }
 
