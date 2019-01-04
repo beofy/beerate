@@ -1,6 +1,6 @@
 package cn.beerate.service.impl;
 
-import cn.beerate.dao.impl.AdminDaoImpl;
+import cn.beerate.dao.Impl.AdminDaoImpl;
 import cn.beerate.model.entity.t_admin;
 import cn.beerate.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;

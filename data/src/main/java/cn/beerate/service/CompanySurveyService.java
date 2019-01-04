@@ -18,6 +18,9 @@ import javax.persistence.PersistenceContext;
 import java.io.IOException;
 
 
+/**
+ * 公司概况
+ */
 @Component
 @Transactional
 public class CompanySurveyService {
