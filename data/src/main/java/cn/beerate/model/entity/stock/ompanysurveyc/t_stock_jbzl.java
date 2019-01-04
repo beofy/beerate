@@ -1,4 +1,4 @@
-package cn.beerate.model.entity.stock.CompanySurvey;
+package cn.beerate.model.entity.stock.ompanysurveyc;
 
 import javax.persistence.*;
 import java.util.Date;
