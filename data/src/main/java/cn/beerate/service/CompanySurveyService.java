@@ -20,12 +20,12 @@ import java.io.IOException;
 
 @Component
 @Transactional
-public class StockCodeInfoService {
+public class CompanySurveyService {
 
     @PersistenceContext
     private EntityManager em;
 
-    private Log log = LogFactory.getLog(StockCodeInfoService.class);
+    private Log log = LogFactory.getLog(CompanySurveyService.class);
 
     //股票打头
     private final String[] CODE_START={"sz000","sz002","sz300","sh600","sh601","sh603"};
