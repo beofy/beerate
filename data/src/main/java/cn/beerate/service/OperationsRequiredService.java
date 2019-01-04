@@ -60,8 +60,8 @@ public class OperationsRequiredService {
         JSONObject jsonObject = JSONObject.parseObject(result);
 
         t_operations_required operations_required= JSONObject.toJavaObject(jsonObject, t_operations_required.class);
-        //t_stock_info stock_info = stockInfoDao.findByCode(stockCode);
-     //   operations_required.setStock_info(stock_info);
+        t_stock_info stock_info = stockInfoDao.findByCode(stockCode);
+        operations_required.setStock_info(stock_info);
         operationsRequiredDao.save(operations_required);
     }
 
