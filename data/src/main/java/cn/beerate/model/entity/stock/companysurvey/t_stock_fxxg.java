@@ -1,10 +1,9 @@
 package cn.beerate.model.entity.stock.companysurvey;
 
 
-import beerate.model.Model;
+import cn.beerate.model.Model;
 
 import javax.persistence.*;
-import java.util.Date;
 
 @Entity
 public class t_stock_fxxg extends Model {
