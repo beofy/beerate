@@ -2,6 +2,8 @@ package cn.beerate.model.entity.stock.companysurvey;
 
 import cn.beerate.model.Model;
 import cn.beerate.model.entity.stock.operationsrequired.t_operations_required;
+import cn.beerate.model.entity.stock.t_business_analysis;
+import cn.beerate.model.entity.stock.t_shareholder_research;
 
 import javax.persistence.*;
 
@@ -40,6 +42,28 @@ public class t_stock_info  extends Model {
 
     @OneToOne(mappedBy = "stock_info",fetch =FetchType.LAZY,cascade = CascadeType.PERSIST)
     private t_operations_required operations_required;
+
+    @OneToOne(mappedBy = "stock_info",fetch =FetchType.LAZY,cascade = CascadeType.PERSIST)
+    private t_shareholder_research shareholder_research;
+
+    @OneToOne(mappedBy = "stock_info",fetch =FetchType.LAZY,cascade = CascadeType.PERSIST)
+    private t_business_analysis business_analysis;
+
+    public t_business_analysis getBusiness_analysis() {
+        return business_analysis;
+    }
+
+    public void setBusiness_analysis(t_business_analysis business_analysis) {
+        this.business_analysis = business_analysis;
+    }
+
+    public t_shareholder_research getShareholder_research() {
+        return shareholder_research;
+    }
+
+    public void setShareholder_research(t_shareholder_research shareholder_research) {
+        this.shareholder_research = shareholder_research;
+    }
 
     public t_operations_required getOperations_required() {
         return operations_required;

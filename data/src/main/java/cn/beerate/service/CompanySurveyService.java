@@ -1,6 +1,7 @@
 package cn.beerate.service;
 
 
+import cn.beerate.common.util.Crawler;
 import cn.beerate.dao.Impl.StockInfoDaoImpl;
 import cn.beerate.model.entity.stock.companysurvey.t_stock_fxxg;
 import cn.beerate.model.entity.stock.companysurvey.t_stock_info;
@@ -8,25 +9,25 @@ import cn.beerate.model.entity.stock.companysurvey.t_stock_jbzl;
 import com.alibaba.fastjson.JSONObject;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.jsoup.Jsoup;
 import org.jsoup.helper.StringUtil;
-import org.jsoup.nodes.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 
 /**
  * 公司概况
  */
 @Component
-@Transactional
 public class CompanySurveyService {
 
     @Autowired
     private StockInfoDaoImpl stockInfoDao;
+
+    private final static String URL="http://emweb.securities.eastmoney.com/companysurvey/CompanySurveyAjax";
 
     private Log log = LogFactory.getLog(CompanySurveyService.class);
 
@@ -34,16 +35,15 @@ public class CompanySurveyService {
     private final String[] CODE_START={"sz000","sz002","sz300","sh600","sh601","sh603"};
 
     //抓取公司概况
-    public void companySurvey(String url){
+    @Transactional
+    public void companySurvey(String stockCode){
 
-        Document document = null;
-        try {
-            document = Jsoup.connect(url).ignoreContentType(true).get();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        Map<String,String> params = new HashMap<String,String>();
+        params.put("code",stockCode);
 
-        String result = document.body().text();
+        String result= Crawler.getInstance().getString(this.URL,params);
+
+        //判断股票代码是否正确
         JSONObject jsonObject = JSONObject.parseObject(result);
         if(!StringUtil.isBlank(jsonObject.getString("status"))){
             log.info(jsonObject.toJSONString());
@@ -67,25 +67,22 @@ public class CompanySurveyService {
 
     }
 
-    //抓取所有
+    //遍历所有股票打头
     public void snatchAllcompanySurvey(){
         for(String start: CODE_START){
             //0-999
             for (int i = 0; i <1000 ; i++) {
-                String num="";
+                String stockCode="";
                 if(i<10){
-                    num=start+"00"+i;
+                    stockCode=start+"00"+i;
                 }
                 if(i>=10&&i<100){
-                    num=start+"0"+i;
+                    stockCode=start+"0"+i;
                 }
                 if(i>=100&&i<1000){
-                    num=start+i;
+                    stockCode=start+i;
                 }
-
-                String url ="http://emweb.securities.eastmoney.com/companysurvey/CompanySurveyAjax?code="+num;
-                log.info(url);
-                companySurvey(url);
+                companySurvey(stockCode);
             }
         }
     }
