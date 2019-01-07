@@ -11,46 +11,49 @@ import javax.persistence.OneToOne;
 @Entity
 public class t_operations_required extends Model {
 
-    @Column(columnDefinition = " COMMENT '大事提醒' ")
+    @Column(columnDefinition = "TEXT COMMENT '大事提醒' ")
     private String dstx;
 
+    @Column(columnDefinition = " TEXT COMMENT '限售解禁' ")
     private String xsjj;
 
-    @Column(columnDefinition = " COMMENT '核心题材' ")
+    @Column(columnDefinition = "TEXT COMMENT '核心题材' ")
     private String hxtc;
 
+    @Column(columnDefinition = "TEXT COMMENT '公司新闻' ")
     private String ggxx;
 
+    @Column(columnDefinition = "TEXT COMMENT '公司公告' ")
     private String gggg;
 
-    @Column(columnDefinition = " COMMENT '大宗交易' ")
+    @Column(columnDefinition = "TEXT COMMENT '大宗交易' ")
     private String dzjy;
 
-    @Column(columnDefinition = " COMMENT '融资融券' ")
+    @Column(columnDefinition = "TEXT COMMENT '融资融券' ")
     private String rzrq;
 
-    @Column(columnDefinition = " COMMENT '龙虎榜单' ")
+    @Column(columnDefinition = "TEXT COMMENT '龙虎榜单' ")
     private String lhbd;
 
-    @Column(columnDefinition = " COMMENT '股东分析' ")
+    @Column(columnDefinition = "TEXT COMMENT '股东分析' ")
     private String gdrs;
 
-    @Column(columnDefinition = " COMMENT '主要指标-按报告期' ")
+    @Column(columnDefinition = "TEXT COMMENT '主要指标-按报告期' ")
     private String zyzb_abgq;
 
-    @Column(columnDefinition = " COMMENT '主要指标-按年度' ")
+    @Column(columnDefinition = "TEXT COMMENT '主要指标-按年度' ")
     private String zyzb_and;
 
-    @Column(columnDefinition = " COMMENT '主要指标-按季度' ")
+    @Column(columnDefinition = "TEXT COMMENT '主要指标-按季度' ")
     private String zyzb_adjd;
 
-    @Column(columnDefinition = " COMMENT '最新指标1' ")
+    @Column(columnDefinition = "TEXT COMMENT '最新指标1' ")
     private String zxzb1;
 
-    @Column(columnDefinition = " COMMENT '最新指标2' ")
+    @Column(columnDefinition = "TEXT COMMENT '最新指标2' ")
     private String zxzb2;
 
-    @Column(columnDefinition = " COMMENT '机构预测' ")
+    @Column(columnDefinition = "TEXT COMMENT '机构预测' ")
     private String jgyc;
 
     private String BaseYear;
@@ -60,12 +63,13 @@ public class t_operations_required extends Model {
      * mgsy 每股收益 <br>
      * mgsyzz 每股收益增长
      */
-    @Column(columnDefinition = " COMMENT '机构预测图' ")
+    @Column(columnDefinition = "TEXT COMMENT '机构预测图' ")
     private String jgyc_pic;
 
-    @Column(columnDefinition = " COMMENT '曾用名' ")
+    @Column(columnDefinition = "TEXT COMMENT '曾用名' ")
     private String cym;
 
+    @Column(columnDefinition = "TEXT COMMENT '研报摘要' ")
     private String ggyb;
 
     @OneToOne(optional = false)
