@@ -3,6 +3,7 @@ package cn.beerate.model.entity.stock.operationsrequired;
 import cn.beerate.model.Model;
 import cn.beerate.model.entity.stock.companysurvey.t_stock_info;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
@@ -10,24 +11,61 @@ import javax.persistence.OneToOne;
 @Entity
 public class t_operations_required extends Model {
 
+    @Column(columnDefinition = " COMMENT '大事提醒' ")
     private String dstx;
+
     private String xsjj;
+
+    @Column(columnDefinition = " COMMENT '核心题材' ")
     private String hxtc;
+
     private String ggxx;
+
     private String gggg;
+
+    @Column(columnDefinition = " COMMENT '大宗交易' ")
     private String dzjy;
+
+    @Column(columnDefinition = " COMMENT '融资融券' ")
     private String rzrq;
+
+    @Column(columnDefinition = " COMMENT '龙虎榜单' ")
     private String lhbd;
+
+    @Column(columnDefinition = " COMMENT '股东分析' ")
     private String gdrs;
+
+    @Column(columnDefinition = " COMMENT '主要指标-按报告期' ")
     private String zyzb_abgq;
+
+    @Column(columnDefinition = " COMMENT '主要指标-按年度' ")
     private String zyzb_and;
+
+    @Column(columnDefinition = " COMMENT '主要指标-按季度' ")
     private String zyzb_adjd;
+
+    @Column(columnDefinition = " COMMENT '最新指标1' ")
     private String zxzb1;
+
+    @Column(columnDefinition = " COMMENT '最新指标2' ")
     private String zxzb2;
+
+    @Column(columnDefinition = " COMMENT '机构预测' ")
     private String jgyc;
+
     private String BaseYear;
+
+    /**
+     * "2017A", mgsy: "1.35", mgsyzz: "2.61" <br>
+     * mgsy 每股收益 <br>
+     * mgsyzz 每股收益增长
+     */
+    @Column(columnDefinition = " COMMENT '机构预测图' ")
     private String jgyc_pic;
+
+    @Column(columnDefinition = " COMMENT '曾用名' ")
     private String cym;
+
     private String ggyb;
 
     @OneToOne(optional = false)
