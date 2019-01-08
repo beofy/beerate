@@ -2,6 +2,7 @@ package cn.beerate.service;
 
 
 import cn.beerate.common.util.Crawler;
+import cn.beerate.common.util.StockCodeUtil;
 import cn.beerate.dao.Impl.StockInfoDaoImpl;
 import cn.beerate.model.entity.stock.companysurvey.t_stock_fxxg;
 import cn.beerate.model.entity.stock.companysurvey.t_stock_info;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 
@@ -31,8 +33,7 @@ public class CompanySurveyService {
 
     private Log log = LogFactory.getLog(CompanySurveyService.class);
 
-    //股票打头
-    private final String[] CODE_START={"sz000","sz002","sz300","sh600","sh601","sh603"};
+
 
     //抓取公司概况
     @Transactional
@@ -42,11 +43,11 @@ public class CompanySurveyService {
         params.put("code",stockCode);
 
         String result= Crawler.getInstance().getString(this.URL,params);
+        log.info(result);
 
         //判断股票代码是否正确
         JSONObject jsonObject = JSONObject.parseObject(result);
         if(!StringUtil.isBlank(jsonObject.getString("status"))){
-            log.info(jsonObject.toJSONString());
             return;
         }
 
@@ -69,26 +70,10 @@ public class CompanySurveyService {
 
     //遍历所有股票打头
     public void snatchAllcompanySurvey(){
-        for(String start: CODE_START){
-            //0-999
-            for (int i = 0; i <1000 ; i++) {
-                String stockCode="";
-                if(i<10){
-                    stockCode=start+"00"+i;
-                }
-                if(i>=10&&i<100){
-                    stockCode=start+"0"+i;
-                }
-                if(i>=100&&i<1000){
-                    stockCode=start+i;
-                }
-                companySurvey(stockCode);
-            }
+        List<String> stockCodeList = StockCodeUtil.getStockCode();
+        for (String code :stockCodeList) {
+            this.companySurvey(code);
         }
     }
-
-
-
-
 
 }
