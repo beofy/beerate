@@ -1,16 +1,13 @@
 package cn.beerate.service;
 
-import cn.beerate.common.util.Crawler;
+import cn.beerate.common.Message;
 import cn.beerate.common.util.StockCodeUtil;
-import cn.beerate.dao.Impl.BusinessAnalysisDaoImpl;
 import cn.beerate.dao.Impl.CoreConceptionDaoImpl;
-import cn.beerate.dao.Impl.StockInfoDaoImpl;
-import cn.beerate.model.entity.stock.companysurvey.t_stock_info;
 import cn.beerate.model.entity.stock.t_core_conception;
+import cn.beerate.service.base.BaseCrawlService;
 import com.alibaba.fastjson.JSONObject;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.jsoup.helper.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,7 +17,7 @@ import java.util.List;
 import java.util.Map;
 
 @Component
-public class CoreConceptionService {
+public class CoreConceptionService extends BaseCrawlService {
 
     @Autowired
     private CoreConceptionDaoImpl conceptionDao;
@@ -35,23 +32,24 @@ public class CoreConceptionService {
      * @param stockCode 股票代码
      */
     @Transactional
-    public void crawlCoreConception(String stockCode){
+    public Message<t_core_conception> crawlCoreConception(String stockCode){
         Map<String,String> params = new HashMap<String,String>();
         params.put("code",stockCode);
 
-        String result =  Crawler.getInstance().getString(this.URL,params);
-        log.info(result);
-
-        //判断股票代码是否正确
-        JSONObject jsonObject = JSONObject.parseObject(result);
-        if(!StringUtil.isBlank(jsonObject.getString("status"))){
-            return;
+        Message<String> message = super.crawl(this.URL,params);
+        if(message.getCode()==Message.Code.ERROR){
+            log.info(message.getMsg());
+            return Message.error(message.getMsg());
         }
+
+        JSONObject jsonObject = JSONObject.parseObject(message.getData());
 
         t_core_conception core_conception = jsonObject.toJavaObject(t_core_conception.class);
         core_conception.setStockCode(stockCode);//股票代码
 
         conceptionDao.save(core_conception);
+
+        return Message.success(core_conception);
     }
 
     /**

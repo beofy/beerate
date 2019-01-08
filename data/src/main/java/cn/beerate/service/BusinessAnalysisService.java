@@ -1,7 +1,6 @@
 package cn.beerate.service;
 
 import cn.beerate.common.Message;
-import cn.beerate.common.util.Crawler;
 import cn.beerate.dao.Impl.BusinessAnalysisDaoImpl;
 import cn.beerate.dao.Impl.StockInfoDaoImpl;
 import cn.beerate.model.entity.stock.companysurvey.t_stock_info;
