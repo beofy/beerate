@@ -27,7 +27,7 @@ public class Crawler {
                     .execute()
                     .body();
         } catch (IOException e) {
-            log.warn(e.getMessage());
+            log.warn(e.getMessage(),e);
         }
 
         return string;
