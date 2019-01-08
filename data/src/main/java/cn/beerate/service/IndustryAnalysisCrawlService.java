@@ -34,18 +34,19 @@ public class IndustryAnalysisCrawlService extends BaseCrawlService {
         params.put("code",stockCode);
         params.put("icode","451");
 
-        String result = super.crawl(this.URL,params);
-        if(result==null){
-           return Message.error("抓取同行比较数据失败");
+        Message<String> message = super.crawl(this.URL,params);
+        if(message.getCode()==Message.Code.ERROR){
+            log.info(message.getMsg());
+            return Message.error(message.getMsg());
         }
 
-        JSONObject jsonObject = JSONObject.parseObject(result);
+        JSONObject jsonObject = JSONObject.parseObject(message.getData());
         t_industry_analysis industry_analysis = jsonObject.toJavaObject(t_industry_analysis.class);
         industry_analysis.setStockCode(stockCode);
 
         industryAnalysisDao.save(industry_analysis);
 
-        return Message.ok(industry_analysis);
+        return Message.success(industry_analysis);
     }
 
     /**
@@ -56,13 +57,14 @@ public class IndustryAnalysisCrawlService extends BaseCrawlService {
         Map<String,String> params = new HashMap<String,String>();
         params.put("code",stockCode);
         params.put("month",month);
-        String result = super.crawl(this.STOCKPERFORMANCE_URL,params);
+        Message<String> message = super.crawl(this.STOCKPERFORMANCE_URL,params);
 
-        if(result==null){
-            return Message.error("抓取市场涨幅数据失败");
+        if(message.getCode()==Message.Code.ERROR){
+            log.info(message.getMsg());
+            return message;
         }
 
-        return Message.ok(result);
+        return message;
     }
 
     /**
