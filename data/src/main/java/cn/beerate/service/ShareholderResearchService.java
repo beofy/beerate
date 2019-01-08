@@ -61,4 +61,16 @@ public class ShareholderResearchService {
         String result= Crawler.getInstance().getString(this.POSITION_URL,params);
         return result;
     }
+
+    /**
+     * 抓取所有股东研究
+     */
+    public void crawlAllShareholderResearch(){
+       String[] stockCodeArray = stockInfoDao.findAllStockCode();
+        for (String code :stockCodeArray) {
+            this.crawlShareholderResearch(code);
+        }
+    }
+
+
 }
