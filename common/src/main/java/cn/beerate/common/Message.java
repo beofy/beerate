@@ -25,7 +25,7 @@ public class Message<T> {
     public static Message ok(String msg){
         return new Message(200,msg);
     }
-    public static <T> Message<T> ok(T data){
+    public static <T> Message<T> success(T data){
         return new Message(200,"success",data);
     }
 
@@ -59,5 +59,12 @@ public class Message<T> {
 
     public void setData(T data) {
         this.data = data;
+    }
+
+    public final class  Code{
+        public final static int SUCCESS = 200;
+
+        public final static int ERROR = 500;
+
     }
 }

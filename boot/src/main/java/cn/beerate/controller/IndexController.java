@@ -20,7 +20,7 @@ public class IndexController {
     @GetMapping(value = "/")
     @ResponseBody
     public Message login(HttpServletResponse response){
-        Message<t_admin> message =Message.ok(adminService.loggin("123","123"));
+        Message<t_admin> message =Message.success(adminService.loggin("123","123"));
         message.setMsg("响应成功");
         return message;
     }
