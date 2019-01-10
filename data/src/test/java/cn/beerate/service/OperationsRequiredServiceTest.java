@@ -1,8 +1,6 @@
 package cn.beerate.service;
 
 
-import cn.beerate.model.entity.stock.operationsrequired.t_operations_required;
-import com.alibaba.fastjson.JSONObject;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
