@@ -6,12 +6,11 @@ import com.alibaba.fastjson.JSONObject;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import javax.jnlp.IntegrationService;
 import java.util.Map;
 
 public class BaseCrawlService {
 
-    private static Log log  = LogFactory.getLog(IntegrationService.class);
+    private static Log log  = LogFactory.getLog(BaseCrawlService.class);
 
     //错误代码
     private static int ERROR=-1;

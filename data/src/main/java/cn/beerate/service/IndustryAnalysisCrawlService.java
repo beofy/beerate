@@ -11,7 +11,6 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import javax.jnlp.IntegrationService;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,7 +20,7 @@ public class IndustryAnalysisCrawlService extends BaseCrawlService {
 
     @Autowired
     private IndustryAnalysisDaoImpl industryAnalysisDao;
-    private static Log  log  = LogFactory.getLog(IntegrationService.class);
+    private static Log  log  = LogFactory.getLog(IndustryAnalysisCrawlService.class);
     private final static String URL ="http://emweb.securities.eastmoney.com/IndustryAnalysis/IndustryAnalysisAjax";
     private final static String STOCKPERFORMANCE_URL ="http://emweb.securities.eastmoney.com/IndustryAnalysis/StockPerformanceAjax";
 
