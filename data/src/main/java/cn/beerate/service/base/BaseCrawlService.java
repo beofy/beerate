@@ -21,12 +21,17 @@ public class BaseCrawlService {
 
         log.debug(result);
 
-        //判断股票代码是否正确
-        JSONObject jsonObject = JSONObject.parseObject(result);
-        if(jsonObject.getIntValue("status")==ERROR){
-            Message<String> message = Message.error(jsonObject.getString("message"));
-            message.setData(result);
-            return message;
+        //判断数据是否异常
+        Object object = JSONObject.parse(result);
+
+        //如果是jsonObject，判断是否
+        if(object instanceof com.alibaba.fastjson.JSONObject){
+            JSONObject jsonObject = ((JSONObject) object);
+            if(jsonObject.getIntValue("status")==ERROR){
+                Message<String> message = Message.error(jsonObject.getString("message"));
+                message.setData(result);
+                return message;
+            }
         }
 
         return Message.success(result);
