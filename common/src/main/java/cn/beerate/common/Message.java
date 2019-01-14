@@ -19,22 +19,22 @@ public class Message<T> {
         this.data = data;
     }
 
-    public static Message ok(){
-        return new Message(200,"success");
+    public static <T> Message<T>  ok(){
+        return new Message<T>(Message.Code.SUCCESS,"success");
     }
-    public static Message ok(String msg){
-        return new Message(200,msg);
+    public static <T> Message<T>  ok(String msg){
+        return new Message<T>(Message.Code.SUCCESS,msg);
     }
     public static <T> Message<T> success(T data){
-        return new Message(200,"success",data);
+        return new Message<T>(Message.Code.SUCCESS,"success",data);
     }
 
-    public static Message error(){
-        return new Message(500,"error");
+    public static <T> Message<T> error(){
+        return new Message<T>(Message.Code.ERROR,"error");
     }
 
-    public static Message error(String msg){
-        return new Message(500,msg);
+    public static <T> Message<T> error(String msg){
+        return new Message<T>(Message.Code.ERROR,msg);
     }
 
     public int getCode() {
@@ -61,10 +61,11 @@ public class Message<T> {
         this.data = data;
     }
 
-    public final class  Code{
+    public class Code{
+
         public final static int SUCCESS = 200;
 
-        public final static int ERROR = 500;
+        public final static int ERROR = -1;
 
     }
 }
