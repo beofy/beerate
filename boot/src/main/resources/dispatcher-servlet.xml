@@ -40,11 +40,12 @@
         </mvc:message-converters>
     </mvc:annotation-driven>
 
-
     <!-- 对转向页面的路径解析。prefix：前缀， suffix：后缀 -->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"  >
         <property name="prefix" value="/WEB-INF/view/" />
         <property name="suffix" value=".jsp"></property>
     </bean>
 
+    <!-- 静态资源路劲 -->
+    <mvc:resources mapping="/pages/**" location="/pages/"/>
 </beans>
