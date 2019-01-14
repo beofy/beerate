@@ -6,6 +6,7 @@ import cn.beerate.model.Model;
 import javax.persistence.*;
 
 @Entity
+@org.hibernate.annotations.Table(appliesTo = "t_stock_fxxg",comment="公司概况")
 public class t_stock_fxxg extends Model {
     //"clrq": "1987-12-22",
     private String clrq;

@@ -5,6 +5,7 @@ import cn.beerate.model.Model;
 import javax.persistence.*;
 
 @Entity
+@org.hibernate.annotations.Table(appliesTo = "t_stock_jbzl",comment="公司概况")
 public class t_stock_jbzl extends Model {
 
     //"gsmc": "平安银行股份有限公司",

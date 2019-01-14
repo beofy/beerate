@@ -8,6 +8,7 @@ import cn.beerate.model.entity.stock.t_shareholder_research;
 import javax.persistence.*;
 
 @Entity
+@org.hibernate.annotations.Table(appliesTo = "t_stock_info",comment="公司概况")
 public class t_stock_info  extends Model {
 
     //"Code": "SZ000001",
