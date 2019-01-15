@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 
 @Controller
 public class IndexController {
+    private Log log = LogFactory.getLog(AdminController.class);
 
     @GetMapping(value = "/")
     @ResponseBody
