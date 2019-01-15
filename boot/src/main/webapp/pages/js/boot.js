@@ -12,3 +12,21 @@ requirejs.config({
     }
 });
 
+define(["jquery","layui"],function ($) {
+    //拦截处理器
+    window.interceptor=function(result){
+        if(result=="undefined"||result==null||result.length==0){//无数据
+            window.location.reload();
+            return false;
+        }
+
+        if(result.code == -100){//没有登录
+            location.href="/pages/login.html";
+            return false;
+        }
+
+        return true;
+    }
+
+})
+
