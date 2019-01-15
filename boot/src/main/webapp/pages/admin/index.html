@@ -36,7 +36,7 @@
                         <dd><a href="">安全设置</a></dd>
                     </dl>
                 </li>
-                <li class="layui-nav-item"><a href="">退了</a></li>
+                <li class="layui-nav-item"><a id="loginOut" href="javascript:;">退出</a></li>
             </ul>
         </div>
 
@@ -81,8 +81,25 @@
 
 <script>
     require(['boot'],function () {
-        require(['layui.config']);
+        layui.use(["element"], function(){
+            var element=layui.element;
+        });
+
+
+        //登出
+        $("#loginOut").click(function () {
+            $.get("/admin/loginOut",function (data) {
+                if(interceptor(data)){
+                    if(data.code>0){
+                        location.href="/pages/login.html"
+                    }
+                }
+            },"json")
+        })
     });
+    
+    
+
 </script>
 
 </html>
