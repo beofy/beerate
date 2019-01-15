@@ -126,4 +126,14 @@
         <!--<aop:pointcut id="allServiceMethod" expression="execution(* your service implements package.*.*(..))" />-->
         <!--<aop:advisor pointcut-ref="allServiceMethod" advice-ref="txAdvice" />-->
     <!--</aop:config>-->
+
+    <!-- 系统参数 -->
+    <context:property-placeholder location="classpath:security.properties" ignore-unresolvable="true" system-properties-mode="NEVER"/>
+
+    <bean id="securityKey" class="cn.beerate.common.Constants.SecurityKey" init-method="init">
+        <property name="privateKey" value="${security.privateKey}"/>
+        <property name="publicKey" value="${security.publicKey}"/>
+        <property name="md5Key" value="${security.md5Key}"/>
+    </bean>
+
 </beans>
