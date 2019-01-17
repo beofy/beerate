@@ -1,13 +1,9 @@
 package cn.beerate.service;
 
 import cn.beerate.common.Message;
-import cn.beerate.dao.Impl.ShareholderResearchDaoImpl;
-import cn.beerate.model.entity.stock.t_shareholder_research;
 import cn.beerate.service.base.BaseCrawlService;
-import com.alibaba.fastjson.JSONObject;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,8 +16,6 @@ import java.util.Map;
 @Component
 public class ShareholderResearchService extends BaseCrawlService {
 
-    @Autowired
-    private ShareholderResearchDaoImpl shareholderResearchDao;
     private Log log = LogFactory.getLog(ShareholderResearchService.class);
 
     private final String URL="http://emweb.securities.eastmoney.com/ShareholderResearch/ShareholderResearchAjax";
@@ -32,22 +26,11 @@ public class ShareholderResearchService extends BaseCrawlService {
      *  @param stockCode 股票代码
      */
     @Transactional
-    public Message<t_shareholder_research> crawlShareholderResearch(String stockCode){
+    public Message<String> shareholderResearch(String stockCode){
         Map<String,String> params = new HashMap<String,String>();
         params.put("code",stockCode);
 
-        Message<String> message = super.crawl(this.URL,params);
-        if(message.getCode()==Message.Code.ERROR){
-            log.info(message.getMsg());
-            return Message.error(message.getMsg());
-        }
-
-        JSONObject jsonObject = JSONObject.parseObject(message.getData());
-        t_shareholder_research shareholder_research = jsonObject.toJavaObject(t_shareholder_research.class);
-
-        shareholderResearchDao.save(shareholder_research);
-
-        return Message.success(shareholder_research);
+        return super.crawl(this.URL,params);
     }
 
     /**
@@ -55,18 +38,12 @@ public class ShareholderResearchService extends BaseCrawlService {
      * @param stockCode 股票代码
      * @param date 日期
      */
-    public Message<String> cralwMainPositionsHodler(String stockCode,String date){
+    public Message<String> mainPositionsHodler(String stockCode,String date){
         Map<String,String> params = new HashMap<String,String>();
         params.put("date",date);
         params.put("code",stockCode);
 
-        Message<String> message = super.crawl(this.URL,params);
-        if(message.getCode()==Message.Code.ERROR){
-            log.info(message.getMsg());
-            return message;
-        }
-
-        return message;
+        return super.crawl(this.POSITION_URL,params);
     }
 
 }

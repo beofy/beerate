@@ -14,7 +14,7 @@ public class ResearchReportServiceTest {
     private ResearchReportService researchReportService;
 
     @Test
-    public void testCrawlAllResearchReport(){
-        researchReportService.crawlResearchReport();
+    public void testResearchReport(){
+        researchReportService.researchReport("sz000001");
     }
 }

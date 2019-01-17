@@ -17,10 +17,8 @@ import java.util.Map;
  */
 @Component
 public class CompanySurveyService extends BaseCrawlService {
-
-    private final static String URL="http://emweb.securities.eastmoney.com/companysurvey/CompanySurveyAjax";
-
     private Log log = LogFactory.getLog(CompanySurveyService.class);
+    private final static String URL="http://emweb.securities.eastmoney.com/companysurvey/CompanySurveyAjax";
 
     //抓取公司概况
     @Transactional
@@ -30,7 +28,4 @@ public class CompanySurveyService extends BaseCrawlService {
 
         return super.crawl(this.URL,params);
     }
-
-
-
 }

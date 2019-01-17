@@ -14,7 +14,7 @@ public class NewsBulletinServiceTest {
     private  NewsBulletinService bulletinService;
 
     @Test
-    public void testCrawlAllNewsBulletin(){
-        this.bulletinService.crawlAllNewsBulletin();
+    public void testNewsBulletin(){
+        this.bulletinService.newsBulletin("sz000001");
     }
 }

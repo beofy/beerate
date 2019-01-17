@@ -17,8 +17,8 @@ public class BonusFinancingServiceTest {
     @Test
     public void testAll(){
 
-       Message message = bonusFinancingService.crawlBonusFinancing("SZ000002");
+       Message message = bonusFinancingService.bonusFinancing("SZ000002");
 
-       message= bonusFinancingService.crawlBonusDetailChart("SZ000002","2018-08-21");
+       message= bonusFinancingService.bonusDetailChart("SZ000002","2018-08-21");
     }
 }

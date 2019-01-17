@@ -14,8 +14,8 @@ public class CompanySurveyServiceTest {
     private CompanySurveyService companySurveyService;
 
     @Test
-    public void testSnatchAllcompanySurvey(){
-        companySurveyService.snatchAllcompanySurvey();
+    public void testCompanySurvey(){
+        companySurveyService.companySurvey("sz000001");
     }
 
 }

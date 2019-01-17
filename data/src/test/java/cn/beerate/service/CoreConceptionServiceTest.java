@@ -15,8 +15,8 @@ public class CoreConceptionServiceTest {
     private CoreConceptionService conceptionService;
 
     @Test
-    public void testCrawlAllCoreConception(){
-        conceptionService.crawlAllCoreConception();
+    public void testCoreConception(){
+        conceptionService.coreConception("sz000001");
     }
 
 }

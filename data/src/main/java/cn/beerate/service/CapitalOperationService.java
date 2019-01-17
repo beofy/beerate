@@ -14,6 +14,7 @@ import java.util.Map;
  */
 @Component
 public class CapitalOperationService extends BaseCrawlService {
+
     private Log log = LogFactory.getLog(CapitalOperationService.class);
 
     private final static String CAPITAL_OPERATION_AJAX="http://emweb.securities.eastmoney.com/CapitalOperation/CapitalOperationAjax";
@@ -25,7 +26,7 @@ public class CapitalOperationService extends BaseCrawlService {
      * @param isAsc
      * @return
      */
-    public Message<String> crawlCapitalOperation(String code, String orderBy, String isAsc){
+    public Message<String> capitalOperation(String code, String orderBy, String isAsc){
         Map<String,String> params = new HashMap<String,String>();
         params.put("code",code);
         params.put("orderBy",orderBy);

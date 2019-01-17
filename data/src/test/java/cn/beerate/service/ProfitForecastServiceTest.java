@@ -13,7 +13,7 @@ public class ProfitForecastServiceTest {
     private ProfitForecastService profitForecastService;
 
     @Test
-    public void testCrawlAllProfitForecast(){
-        profitForecastService.crawlAllProfitForecast();
+    public void testProfitForecast(){
+        profitForecastService.profitForecast("sz000001");
     }
 }

@@ -22,7 +22,7 @@ public class CompanyManagementService extends BaseCrawlService {
      * 公司高管
      * @param code 股票代码
      */
-    public Message<String> crawlCompanyManagement(String code){
+    public Message<String> companyManagement(String code){
         Map<String,String> params = new HashMap<String,String>();
         params.put("code",code);
 

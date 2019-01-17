@@ -34,7 +34,7 @@ public class StockRelationshipService extends BaseCrawlService {
     /**
      * 同概念个股排名
      */
-    public Message<String> crawlStockRelationship( String code, String orderBy, String isAsc){
+    public Message<String> stockRelationship( String code, String orderBy, String isAsc){
         Map<String,String> params = new HashMap<String,String>();
         params.put("code",code);
         params.put("orderBy",orderBy);
@@ -94,7 +94,7 @@ public class StockRelationshipService extends BaseCrawlService {
     /**
      * 同地域个股排名
      */
-    public Message<String> crawlStockRelationship3( String code, String orderBy, String isAsc){
+    public Message<String> stockRelationship3( String code, String orderBy, String isAsc){
         Map<String,String> params = new HashMap<String,String>();
         params.put("code",code);
         params.put("orderBy",orderBy);

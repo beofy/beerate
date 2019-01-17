@@ -14,8 +14,7 @@ public class BusinessAnalysisServiceTest {
     private BusinessAnalysisService analysisService;
 
     @Test
-    public void testCrawlAllBusinessAnalysis(){
-        analysisService.crawlAllBusinessAnalysis();
+    public void testBusinessAnalysis(){
+        analysisService.businessAnalysis("sz000001");
     }
-
 }

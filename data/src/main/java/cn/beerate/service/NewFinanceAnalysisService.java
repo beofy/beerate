@@ -39,7 +39,7 @@ public class NewFinanceAnalysisService extends BaseCrawlService {
      * @param type 0-按报告期 1-按年度 2-按单季度
      * @param stockCode 股票代码
      */
-    public Message<String> crawlMainTarget(String type,String stockCode){
+    public Message<String> mainTarget(String type,String stockCode){
         Map<String,String> params = new HashMap<String,String>();
         params.put("code",stockCode);
         params.put("type",type);
@@ -52,7 +52,7 @@ public class NewFinanceAnalysisService extends BaseCrawlService {
      * @param stockCode 股票代码
      * @return
      */
-    public Message<String> crawlDubangAnalysis(String stockCode){
+    public Message<String> dubangAnalysis(String stockCode){
         Map<String,String> params = new HashMap<String,String>();
         params.put("code",stockCode);
 
@@ -82,7 +82,7 @@ public class NewFinanceAnalysisService extends BaseCrawlService {
      * @param stockCode 股票代码
      * @return
      */
-    public Message<String> crawlZcfzb(String companyType,String reportDateType, String  reportType, String  endDate, String  stockCode){
+    public Message<String> zcfzb(String companyType,String reportDateType, String  reportType, String  endDate, String  stockCode){
         Map<String,String> params = new HashMap<String,String>();
         params.put("companyType",companyType);
         params.put("reportDateType",reportDateType);
@@ -114,9 +114,9 @@ public class NewFinanceAnalysisService extends BaseCrawlService {
      * @param stockCode 股票代码
      * @return
      */
-    public Message<String> crawlZcfzb(String reportDateType, String  reportType, String  endDate, String  stockCode){
+    public Message<String> zcfzb(String reportDateType, String  reportType, String  endDate, String  stockCode){
         String companyType=this.getCompanyType(stockCode);
-        return this.crawlZcfzb(companyType,reportDateType,reportType,endDate,stockCode);
+        return this.zcfzb(companyType,reportDateType,reportType,endDate,stockCode);
     }
 
     /**
@@ -146,7 +146,7 @@ public class NewFinanceAnalysisService extends BaseCrawlService {
      * @param stockCode
      * @return
      */
-    public Message<String> crawlLrb(String companyType,String reportDateType, String  reportType, String  endDate, String  stockCode){
+    public Message<String> lrb(String companyType,String reportDateType, String  reportType, String  endDate, String  stockCode){
         Map<String,String> params = new HashMap<String,String>();
         params.put("companyType",companyType);
         params.put("reportDateType",reportDateType);
@@ -165,9 +165,9 @@ public class NewFinanceAnalysisService extends BaseCrawlService {
      * @param stockCode
      * @return
      */
-    public Message<String> crawlLrb(String reportDateType,String reportType,String endDate,String stockCode){
+    public Message<String> lrb(String reportDateType,String reportType,String endDate,String stockCode){
         String companyType=this.getCompanyType(stockCode);
-        return this.crawlLrb(companyType,reportDateType,reportType,endDate,stockCode);
+        return this.lrb(companyType,reportDateType,reportType,endDate,stockCode);
     }
 
     /**
@@ -179,7 +179,7 @@ public class NewFinanceAnalysisService extends BaseCrawlService {
      * @param stockCode
      * @return
      */
-    public Message<String> crawlXjllb(String companyType,String reportDateType, String  reportType, String  endDate, String  stockCode){
+    public Message<String> xjllb(String companyType,String reportDateType, String  reportType, String  endDate, String  stockCode){
         Map<String,String> params = new HashMap<String,String>();
         params.put("companyType",companyType);
         params.put("reportDateType",reportDateType);
@@ -198,9 +198,9 @@ public class NewFinanceAnalysisService extends BaseCrawlService {
      * @param stockCode
      * @return
      */
-    public Message<String> crawlXjllb(String reportDateType, String  reportType, String  endDate, String  stockCode){
+    public Message<String> xjllb(String reportDateType, String  reportType, String  endDate, String  stockCode){
         String companyType=this.getCompanyType(stockCode);
-        return this.crawlXjllb(companyType,reportDateType,reportType,endDate,stockCode);
+        return this.xjllb(companyType,reportDateType,reportType,endDate,stockCode);
     }
 
     /**
@@ -210,7 +210,7 @@ public class NewFinanceAnalysisService extends BaseCrawlService {
      * @param type 0-按报告期 1-按年度 2-按单季度
      * @return
      */
-    public Message<String> crawlPercent(String stockCode,String ctype,String type){
+    public Message<String> percent(String stockCode,String ctype,String type){
         Map<String,String> params = new HashMap<String,String>();
         params.put("code",stockCode);
         params.put("ctype",ctype);
@@ -224,7 +224,7 @@ public class NewFinanceAnalysisService extends BaseCrawlService {
      * @param stockCode 股票代码
      * @return
      */
-    public Message<String> crawlPercentIndex(String stockCode){
+    public Message<String> percentIndex(String stockCode){
         Map<String,String> params = new HashMap<String,String>();
         params.put("code",stockCode);
 
@@ -237,9 +237,9 @@ public class NewFinanceAnalysisService extends BaseCrawlService {
      * @param type 0-按报告期 1-按年度 2-按单季度
      * @return
      */
-    public Message<String> crawlPercent(String stockCode,String type){
+    public Message<String> percent(String stockCode,String type){
         String companyType=this.getCompanyType(stockCode);
-        return this.crawlPercent( stockCode, companyType, type);
+        return this.percent( stockCode, companyType, type);
     }
 
 }

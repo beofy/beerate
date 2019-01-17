@@ -2,9 +2,7 @@ package cn.beerate.service;
 
 import cn.beerate.common.Message;
 import cn.beerate.dao.Impl.OperationsRequiredDaoImpl;
-import cn.beerate.model.entity.stock.t_operations_required;
 import cn.beerate.service.base.BaseCrawlService;
-import com.alibaba.fastjson.JSONObject;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,24 +30,11 @@ public class OperationsRequiredService extends BaseCrawlService {
      *  @param stockCode
      */
     @Transactional
-    public Message<t_operations_required> crawlOperationsRequired(String stockCode){
-
+    public Message<String> operationsRequired(String stockCode){
         Map<String,String> params = new HashMap<String,String>();
         params.put("times","1");
         params.put("code",stockCode);
 
-        Message<String> message = super.crawl(this.URL,params);
-        if(message.getCode()==Message.Code.ERROR){
-            log.info(message.getMsg());
-            return Message.error(message.getMsg());
-        }
-
-        JSONObject jsonObject = JSONObject.parseObject(message.getData());
-
-        t_operations_required operations_required= jsonObject.toJavaObject(t_operations_required.class);
-
-        operationsRequiredDao.save(operations_required);
-
-        return Message.success(operations_required);
+        return super.crawl(this.URL,params);
     }
 }

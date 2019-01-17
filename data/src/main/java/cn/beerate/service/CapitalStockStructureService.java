@@ -14,16 +14,17 @@ import java.util.Map;
  */
 @Component
 public class CapitalStockStructureService extends BaseCrawlService {
-    private Log log = LogFactory.getLog(CapitalStockStructureService.class);
-    private final static String CAPITAL_STOCK_STRUCTURE_AJAX="http://emweb.securities.eastmoney.com/CapitalStockStructure/CapitalStockStructureAjax";
 
+    private Log log = LogFactory.getLog(CapitalStockStructureService.class);
+
+    private final static String CAPITAL_STOCK_STRUCTURE_AJAX="http://emweb.securities.eastmoney.com/CapitalStockStructure/CapitalStockStructureAjax";
 
     /**
      * 股本结构
      * @param code 股票代码
      * @return
      */
-    public Message<String> crawlCapitalStockStructure(String code){
+    public Message<String> capitalStockStructure(String code){
         Map<String,String> params = new HashMap<String,String>();
         params.put("code",code);
 

@@ -14,8 +14,8 @@ public class IndustryAnalysisServiceTest {
     private IndustryAnalysisCrawlService industryAnalysisService;
 
     @Test
-    public void testCrawlAllIndustryAnalysis(){
-        industryAnalysisService.crawlAllIndustryAnalysis();
+    public void testIndustryAnalysis(){
+        industryAnalysisService.industryAnalysis("sz000001");
     }
 
 }

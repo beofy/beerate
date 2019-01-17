@@ -13,7 +13,7 @@ public class CompanyBigNewsServiceTest {
     private CompanyBigNewsService bigNewsService;
 
     @Test
-    public void testCrawlAllCompanyBigNews(){
-        bigNewsService.crawlAllCompanyBigNews();
+    public void testCompanyBigNews(){
+        bigNewsService.companyBigNews("sz000001");
     }
 }

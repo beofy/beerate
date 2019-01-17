@@ -14,7 +14,11 @@ public class ShareholderResearchServiceTest {
     private ShareholderResearchService researchService;
 
     @Test
-    public void testCrawlShareholderResearch(){
-        researchService.crawlAllShareholderResearch();
+    public void testShareholderResearch(){
+        researchService.shareholderResearch("sz000001");
+    }
+    @Test
+    public void testMainPositionsHodler(){
+        researchService.mainPositionsHodler("sz000001","2017-12-31");
     }
 }
