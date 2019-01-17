@@ -3,8 +3,6 @@ package cn.beerate.interceptor;
 import cn.beerate.common.Constants.SessionKey;
 import cn.beerate.common.Message;
 import com.alibaba.fastjson.JSONObject;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.springframework.web.servlet.HandlerInterceptor;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,17 +15,14 @@ import java.io.PrintWriter;
  */
 public class AdminLoginInterceptor implements HandlerInterceptor {
 
-    private Log log = LogFactory.getLog(AdminLoginInterceptor.class);
-
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        HttpSession session = request.getSession();
-        String seesionId = session.getId();
+        HttpSession session = request.getSession(false);
 
         //登录拦截
-        if(session.getAttribute(SessionKey.BACK_+seesionId)==null){
-            log.debug("login interceptor current sessionId :"+seesionId);
+        if(session==null||session.getAttribute(SessionKey.BACK_+session.getId())==null){
             response.setCharacterEncoding("utf-8");
+            response.setHeader("Access-Control-Allow-Origin","*");
             response.setContentType("application/json;application/xml;text/plain;text/html");//;
             PrintWriter writer = response.getWriter();
             Message message = Message.error("未登录");

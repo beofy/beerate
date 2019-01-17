@@ -2,8 +2,6 @@ package cn.beerate.service;
 
 import cn.beerate.common.Message;
 import cn.beerate.dao.Impl.BusinessAnalysisDaoImpl;
-import cn.beerate.dao.Impl.StockInfoDaoImpl;
-import cn.beerate.model.entity.stock.companysurvey.t_stock_info;
 import cn.beerate.model.entity.stock.t_business_analysis;
 import cn.beerate.service.base.BaseCrawlService;
 import com.alibaba.fastjson.JSONObject;
@@ -21,9 +19,6 @@ import java.util.Map;
  */
 @Component
 public class BusinessAnalysisService extends BaseCrawlService {
-
-    @Autowired
-    private StockInfoDaoImpl stockInfoDao;
 
     @Autowired
     private BusinessAnalysisDaoImpl analysisDao;
@@ -51,23 +46,9 @@ public class BusinessAnalysisService extends BaseCrawlService {
         JSONObject jsonObject = JSONObject.parseObject(message.getData());
         t_business_analysis business_analysis = jsonObject.toJavaObject(t_business_analysis.class);
 
-        t_stock_info stock_info = stockInfoDao.findByCode(stockCode);
-        business_analysis.setStock_info(stock_info);
-
         analysisDao.save(business_analysis);
 
         return Message.success(business_analysis);
     }
 
-    /**
-     * 抓取所有经营分析
-     */
-    public Message crawlAllBusinessAnalysis(){
-        String[] stockCodeArray = stockInfoDao.findAllStockCode();
-        for (String code :stockCodeArray) {
-            this.crawlBusinessAnalysis(code);
-        }
-
-        return Message.ok();
-    }
 }

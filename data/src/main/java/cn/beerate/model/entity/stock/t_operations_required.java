@@ -1,16 +1,12 @@
-package cn.beerate.model.entity.stock.operationsrequired;
+package cn.beerate.model.entity.stock;
 
 import cn.beerate.model.Model;
-import cn.beerate.model.entity.stock.companysurvey.t_stock_info;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
 
 @Entity
 public class t_operations_required extends Model {
-
     @Column(columnDefinition = "TEXT COMMENT '大事提醒' ")
     private String dstx;
 
@@ -71,18 +67,6 @@ public class t_operations_required extends Model {
 
     @Column(columnDefinition = "TEXT COMMENT '研报摘要' ")
     private String ggyb;
-
-    @OneToOne(optional = false)
-    @JoinColumn(name = "stock_info_id",unique = true)
-    private t_stock_info stock_info;
-
-    public t_stock_info getStock_info() {
-        return stock_info;
-    }
-
-    public void setStock_info(t_stock_info stock_info) {
-        this.stock_info = stock_info;
-    }
 
     public String getDstx() {
         return dstx;
