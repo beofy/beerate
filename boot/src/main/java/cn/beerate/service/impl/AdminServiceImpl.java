@@ -2,7 +2,7 @@ package cn.beerate.service.impl;
 
 import cn.beerate.common.Constants.SecurityKey;
 import cn.beerate.common.Message;
-import cn.beerate.dao.Impl.AdminDaoImpl;
+import cn.beerate.dao.AdminDao;
 import cn.beerate.model.entity.t_admin;
 import cn.beerate.security.Encrypt;
 import cn.beerate.service.AdminService;
@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 public class AdminServiceImpl implements AdminService {
 
     @Autowired
-    private AdminDaoImpl adminDao;
+    private AdminDao adminDao;
 
     @Override
     public Message<t_admin> login(String account, String password) {

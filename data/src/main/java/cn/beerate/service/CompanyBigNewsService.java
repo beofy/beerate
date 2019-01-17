@@ -1,11 +1,9 @@
 package cn.beerate.service;
 
 import cn.beerate.common.Message;
-import cn.beerate.dao.Impl.CompanyBigNewsDaoImpl;
 import cn.beerate.service.base.BaseCrawlService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.HashMap;

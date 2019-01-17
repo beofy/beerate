@@ -1,11 +1,9 @@
 package cn.beerate.service;
 
 import cn.beerate.common.Message;
-import cn.beerate.dao.Impl.OperationsRequiredDaoImpl;
 import cn.beerate.service.base.BaseCrawlService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,9 +15,6 @@ import java.util.Map;
  */
 @Component
 public class OperationsRequiredService extends BaseCrawlService {
-
-    @Autowired
-    private OperationsRequiredDaoImpl operationsRequiredDao;
 
     private Log log = LogFactory.getLog(OperationsRequiredService.class);
 

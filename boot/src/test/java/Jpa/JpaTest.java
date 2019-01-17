@@ -1,6 +1,6 @@
 package Jpa;
 
-import cn.beerate.dao.Impl.AdminDaoImpl;
+import cn.beerate.dao.AdminDao;
 import cn.beerate.model.entity.t_admin;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -8,8 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import java.util.Date;
 
 
@@ -17,7 +15,7 @@ import java.util.Date;
 @ContextConfiguration("/applicationContext.xml")
 public class JpaTest {
     @Autowired
-    private AdminDaoImpl adminDao;
+    private AdminDao adminDao;
 
     @Test
     public void testJpaAdd(){
