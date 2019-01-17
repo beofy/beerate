@@ -50,15 +50,27 @@
     </bean>
 
     <!-- 静态资源路劲 -->
-    <mvc:resources mapping="/pages/**" location="/pages/"/>
+    <mvc:resources mapping="/pages/**" location="/static/"/>
 
     <!-- 拦截器 -->
     <bean id="adminLoginInterceptor" class="cn.beerate.interceptor.AdminLoginInterceptor" />
+    <bean id="baseInterceptor" class="cn.beerate.interceptor.BaseInterceptor"/>
     <mvc:interceptors>
+        <!-- 访问拦截 -->
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <ref bean="baseInterceptor"/>
+        </mvc:interceptor>
+        <!-- 登录拦截 -->
         <mvc:interceptor>
             <mvc:mapping path="/admin/**"/>
             <mvc:exclude-mapping path="/admin/login"/>
             <ref bean="adminLoginInterceptor"/>
         </mvc:interceptor>
     </mvc:interceptors>
+
+    <!-- 跨域访问 -->
+    <mvc:cors>
+        <mvc:mapping path="/**"  allowed-methods="*" allow-credentials="true" />
+    </mvc:cors>
 </beans>
