@@ -9,6 +9,7 @@ import javax.persistence.Entity;
  * 盈利预测
  */
 @Entity
+@org.hibernate.annotations.Table(appliesTo = "t_profit_forecast",comment="盈利预测")
 public class t_profit_forecast extends Model {
 
     @Column(columnDefinition = " varchar(8) DEFAULT NULL COMMENT '股票代码'")

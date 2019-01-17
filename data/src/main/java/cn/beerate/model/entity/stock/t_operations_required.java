@@ -6,6 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 
 @Entity
+@org.hibernate.annotations.Table(appliesTo = "t_operations_required",comment="操盘必读")
 public class t_operations_required extends Model {
     @Column(columnDefinition = "TEXT COMMENT '大事提醒' ")
     private String dstx;

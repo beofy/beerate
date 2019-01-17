@@ -6,6 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 
 @Entity
+@org.hibernate.annotations.Table(appliesTo = "t_shareholder_research",comment="股东研究")
 public class t_shareholder_research extends Model {
 
     @Column(columnDefinition = " TEXT COMMENT '股东人数' ")

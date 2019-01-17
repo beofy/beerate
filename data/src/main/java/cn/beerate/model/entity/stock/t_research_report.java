@@ -9,6 +9,7 @@ import javax.persistence.Entity;
  * 研究报告
  */
 @Entity
+@org.hibernate.annotations.Table(appliesTo = "t_research_report",comment="研究报告")
 public class t_research_report extends Model {
 
     @Column(columnDefinition = " varchar(8) DEFAULT NULL COMMENT '股票代码'")

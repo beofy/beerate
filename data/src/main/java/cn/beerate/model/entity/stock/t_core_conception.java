@@ -6,6 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 
 @Entity
+@org.hibernate.annotations.Table(appliesTo = "t_core_conception",comment="核心题材")
 public class t_core_conception extends Model {
 
     @Column(columnDefinition = " varchar(8) DEFAULT NULL COMMENT '股票代码'")

@@ -9,6 +9,7 @@ import javax.persistence.Entity;
  * 经营分析
  */
 @Entity
+@org.hibernate.annotations.Table(appliesTo = "t_business_analysis",comment="经营分析")
 public class t_business_analysis extends Model {
 
     @Column(columnDefinition = " TEXT COMMENT '经营范围' ")

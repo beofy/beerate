@@ -9,6 +9,7 @@ import javax.persistence.Entity;
  * 新闻公告
  */
 @Entity
+@org.hibernate.annotations.Table(appliesTo = "t_news_bulletin",comment="新闻公告")
 public class t_news_bulletin extends Model {
     @Column(columnDefinition = " varchar(8) DEFAULT NULL COMMENT '股票代码'")
     private String stockCode;

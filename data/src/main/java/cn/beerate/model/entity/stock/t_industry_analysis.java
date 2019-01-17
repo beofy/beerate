@@ -9,6 +9,7 @@ import javax.persistence.Entity;
  * 同行比较
  */
 @Entity
+@org.hibernate.annotations.Table(appliesTo = "t_industry_analysis",comment="同行比较")
 public class t_industry_analysis extends Model {
 
     @Column(columnDefinition = " varchar(8) DEFAULT NULL COMMENT '股票代码'")
