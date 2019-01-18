@@ -1,11 +1,18 @@
 package cn.beerate.common;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
+@ApiModel(value = "Message", description = "响应数据")
 public class Message<T> {
 
+    @ApiModelProperty(value = "状态码(200：成功,-1：失败)")
     private int code;
 
+    @ApiModelProperty(value = "响应信息")
     private String msg;
 
+    @ApiModelProperty(value = "响应数据")
     private T data;
 
     public Message(int code, String msg) {

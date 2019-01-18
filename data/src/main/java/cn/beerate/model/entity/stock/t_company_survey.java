@@ -1,6 +1,8 @@
 package cn.beerate.model.entity.stock;
 
 import cn.beerate.model.Model;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,100 +12,108 @@ import javax.persistence.Entity;
  */
 @Entity
 @org.hibernate.annotations.Table(appliesTo = "t_company_survey",comment="公司概况")
+@ApiModel(value = "t_company_survey", description = "公司概况数据")
 public class t_company_survey extends Model {
 
+    @ApiModelProperty(value = "代码")
     @Column(columnDefinition = " varchar(255) COMMENT '代码' ")
-    private String Code;
+    private String code;
 
+    @ApiModelProperty(value = "代码类型")
     @Column(columnDefinition = " varchar(255) COMMENT '代码类型' ")
-    private String  CodeType;
+    private String  codeType;
 
+    @ApiModelProperty(value = "过期时间")
     @Column(columnDefinition = " varchar(255) COMMENT '过期时间' ")
-    private String  ExpireTime;
+    private String  expireTime;
 
     @Column(columnDefinition = " varchar(255) ")
-    private String  Market;
+    private String  market;
 
     @Column(columnDefinition = " varchar(255) ")
-    private String  MarketCode;
+    private String  marketCode;
 
     @Column(columnDefinition = " varchar(255) ")
-    private String  SecuCode;
 
+    private String  secuCode;
+    @ApiModelProperty(value = "股票代码")
     @Column(columnDefinition = " varchar(255) COMMENT '股票代码' ")
-    private String  SecurityCode;
+    private String  securityCode;
 
+    @ApiModelProperty(value = "股票代码")
     @Column(columnDefinition = " varchar(255) COMMENT '股票代码' ")
-    private String  SecurityShortName;
+    private String  securityShortName;
 
+    @ApiModelProperty(value = "发行相关")
     @Column(columnDefinition = " TEXT COMMENT '发行相关'")
     private String  fxxg;
 
+    @ApiModelProperty(value = "基本资料")
     @Column(columnDefinition = " TEXT COMMENT '基本资料'")
     private String  jbzl;
 
     public String getCode() {
-        return Code;
+        return code;
     }
 
     public void setCode(String code) {
-        Code = code;
+        this.code = code;
     }
 
     public String getCodeType() {
-        return CodeType;
+        return codeType;
     }
 
     public void setCodeType(String codeType) {
-        CodeType = codeType;
+        this.codeType = codeType;
     }
 
     public String getExpireTime() {
-        return ExpireTime;
+        return expireTime;
     }
 
     public void setExpireTime(String expireTime) {
-        ExpireTime = expireTime;
+        this.expireTime = expireTime;
     }
 
     public String getMarket() {
-        return Market;
+        return market;
     }
 
     public void setMarket(String market) {
-        Market = market;
+        this.market = market;
     }
 
     public String getMarketCode() {
-        return MarketCode;
+        return marketCode;
     }
 
     public void setMarketCode(String marketCode) {
-        MarketCode = marketCode;
+        this.marketCode = marketCode;
     }
 
     public String getSecuCode() {
-        return SecuCode;
+        return secuCode;
     }
 
     public void setSecuCode(String secuCode) {
-        SecuCode = secuCode;
+        this.secuCode = secuCode;
     }
 
     public String getSecurityCode() {
-        return SecurityCode;
+        return securityCode;
     }
 
     public void setSecurityCode(String securityCode) {
-        SecurityCode = securityCode;
+        this.securityCode = securityCode;
     }
 
     public String getSecurityShortName() {
-        return SecurityShortName;
+        return securityShortName;
     }
 
     public void setSecurityShortName(String securityShortName) {
-        SecurityShortName = securityShortName;
+        this.securityShortName = securityShortName;
     }
 
     public String getFxxg() {

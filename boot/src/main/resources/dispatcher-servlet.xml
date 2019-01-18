@@ -51,6 +51,11 @@
 
     <!-- 静态资源路劲 -->
     <mvc:resources mapping="/pages/**" location="/static/"/>
+    <!-- swagger2生成的接口文档页面 -->
+    <mvc:resources location="classpath:/META-INF/resources/" mapping="swagger-ui.html"/>
+    <mvc:resources mapping="/webjars/**" location="classpath:/META-INF/resources/webjars/" />
+    <!--重要！SwaggerConfig配置类注入-->
+    <bean id="swaggerConfig" class="cn.beerate.config.Swagger2Config"/>
 
     <!-- 拦截器 -->
     <bean id="adminLoginInterceptor" class="cn.beerate.interceptor.AdminLoginInterceptor" />
