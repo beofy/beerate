@@ -47,7 +47,7 @@ public class Swagger2Config extends WebMvcConfigurationSupport {
                 .title("巴雷特接口文档")
                 .description("文档描述~~")
                 .termsOfServiceUrl("NO terms of service")
-                .contact(new Contact("张敏祥","none","294315568@qq.com"))
+                .contact(new Contact("zhangminxiang","none","294315568@qq.com"))
                 .version("1.0.0")
                 .build();
     }
