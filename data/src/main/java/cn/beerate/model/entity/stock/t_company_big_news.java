@@ -1,8 +1,6 @@
 package cn.beerate.model.entity.stock;
 
 import cn.beerate.model.Model;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,56 +9,43 @@ import javax.persistence.Entity;
  * 公司大事
  */
 @Entity
-@ApiModel(value = "t_company_big_news", description = "公司大事数据")
 @org.hibernate.annotations.Table(appliesTo = "t_company_big_news",comment="公司大事")
 public class t_company_big_news extends Model {
 
     @Column(columnDefinition = " varchar(8) DEFAULT NULL COMMENT '股票代码'")
-    @ApiModelProperty(value = "股票代码")
     private String stockCode;
 
     @Column(columnDefinition = " TEXT COMMENT '大事提醒'")
-    @ApiModelProperty(value = "大事提醒")
     private String  dstx;
 
     @Column(columnDefinition = " TEXT COMMENT '对外担保'")
-    @ApiModelProperty(value = "对外担保")
     private String  dwdb;
 
     @Column(columnDefinition = " TEXT COMMENT '股权质押'")
-    @ApiModelProperty(value = "股权质押")
     private String  gqzy;
 
     @Column(columnDefinition = " TEXT COMMENT '诉讼仲裁'")
-    @ApiModelProperty(value = "诉讼仲裁")
     private String  sszc;
 
     @Column(columnDefinition = " MEDIUMTEXT COMMENT '违规处理'")
-    @ApiModelProperty(value = "违规处理")
     private String  wgcl;
 
     @Column(columnDefinition = " TEXT COMMENT '大宗交易'")
-    @ApiModelProperty(value = "大宗交易")
     private String dzjy;
 
     @Column(columnDefinition = " TEXT COMMENT '高管持股变动'")
-    @ApiModelProperty(value = "高管持股变动")
     private String ggcgbd;
 
     @Column(columnDefinition = " TEXT COMMENT '龙虎榜单'")
-    @ApiModelProperty(value = "龙虎榜单")
     private String lhbd;
 
     @Column(columnDefinition = " TEXT COMMENT '融资融券'")
-    @ApiModelProperty(value = "融资融券")
     private String  rzrq;
 
     @Column(columnDefinition = " TEXT COMMENT '十大股东持股变动'")
-    @ApiModelProperty(value = "十大股东持股变动")
     private String  sdgdcgbd;
 
     @Column(columnDefinition = " TEXT COMMENT '限售解禁'")
-    @ApiModelProperty(value = "限售解禁")
     private String  xsjj;
 
     public String getStockCode() {

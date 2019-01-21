@@ -1,8 +1,6 @@
 package cn.beerate.model.entity.stock;
 
 import cn.beerate.model.Model;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,18 +10,14 @@ import javax.persistence.Entity;
  */
 @Entity
 @org.hibernate.annotations.Table(appliesTo = "t_company_survey",comment="公司概况")
-@ApiModel(value = "t_company_survey", description = "公司概况数据")
 public class t_company_survey extends Model {
 
-    @ApiModelProperty(value = "代码")
     @Column(columnDefinition = " varchar(255) COMMENT '代码' ")
     private String code;
 
-    @ApiModelProperty(value = "代码类型")
     @Column(columnDefinition = " varchar(255) COMMENT '代码类型' ")
     private String  codeType;
 
-    @ApiModelProperty(value = "过期时间")
     @Column(columnDefinition = " varchar(255) COMMENT '过期时间' ")
     private String  expireTime;
 
@@ -36,19 +30,15 @@ public class t_company_survey extends Model {
     @Column(columnDefinition = " varchar(255) ")
 
     private String  secuCode;
-    @ApiModelProperty(value = "股票代码")
     @Column(columnDefinition = " varchar(255) COMMENT '股票代码' ")
     private String  securityCode;
 
-    @ApiModelProperty(value = "股票代码")
     @Column(columnDefinition = " varchar(255) COMMENT '股票代码' ")
     private String  securityShortName;
 
-    @ApiModelProperty(value = "发行相关")
     @Column(columnDefinition = " TEXT COMMENT '发行相关'")
     private String  fxxg;
 
-    @ApiModelProperty(value = "基本资料")
     @Column(columnDefinition = " TEXT COMMENT '基本资料'")
     private String  jbzl;
 

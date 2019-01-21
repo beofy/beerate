@@ -20,7 +20,7 @@ public class CompanyBigNewsService extends BaseCrawlService {
     @Autowired
     private CompanyBigNewsDao companyBigNewsDao;
 
-    private final static String URL = "http://emweb.securities.eastmoney.com/CompanyBigNews/CompanyBigNewsAjax";
+    private final static String URL = "http://emweb.securities.eastmoney.com/companybignews/CompanyBigNewsAjax";
 
     /**
      *  抓取公司大事
