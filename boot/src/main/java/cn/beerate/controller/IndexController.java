@@ -21,6 +21,6 @@ public class IndexController {
     @GetMapping(value = "/")
     @ResponseBody
     public Message login(){
-        return Message.ok("响应成功");
+        return Message.ok("测试响应成功");
     }
 }
