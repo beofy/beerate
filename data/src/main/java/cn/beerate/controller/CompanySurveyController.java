@@ -29,7 +29,7 @@ public class CompanySurveyController {
     @ApiImplicitParams({
             @ApiImplicitParam(value = "股票代码", name = "code", paramType = "query", dataType = "string", required = true),
     })
-    public Message<t_company_survey> companySurvey(@Param(value = "code")String code){
+    public Message companySurvey(@Param(value = "code")String code){
         if(StringUtil.isBlank(code)){
             Message.error("股票代码错误");
         }
@@ -44,7 +44,7 @@ public class CompanySurveyController {
             }
 
             //json转对象
-            return Message.success(JSONObject.parseObject(message1.getData()).toJavaObject(t_company_survey.class));
+            return Message.success(JSONObject.parseObject(message1.getData()));
         }
 
         return message;
