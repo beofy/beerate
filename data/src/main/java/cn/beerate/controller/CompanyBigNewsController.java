@@ -32,7 +32,7 @@ public class CompanyBigNewsController {
             "限售解禁:xsjj|十大股东持股变动:sdgdcgbd |高管持股变动:ggcgbd|" +
             "龙虎榜单:lhbd|大宗交易:dzjy|融资融券:rzrq)")
     @ApiImplicitParams({
-            @ApiImplicitParam(value = "股票代码", name = "code", paramType = "query", dataType = "string", required = true),
+            @ApiImplicitParam(value = "股票代码(sz000,sz002,sz300,sh600,sh601,sh603开头)", name = "code", paramType = "查询", dataType = "字符", required = true),
     })
     public Message<CompanyBigNews> companyBigNews(@Param(value = "code") String code){
         if(StringUtil.isBlank(code)){
