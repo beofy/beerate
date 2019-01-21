@@ -22,7 +22,7 @@ public class ResearchReportService extends BaseCrawlService {
      * @return
      */
     public Message<String> researchReport(String stockCode){
-        Map<String,String> params = new HashMap<>();
+        Map<String,String> params = new HashMap<String,String>();
         params.put("code",stockCode);
         params.put("icode","475");
 
