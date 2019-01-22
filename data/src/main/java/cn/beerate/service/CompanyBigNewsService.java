@@ -22,6 +22,8 @@ public class CompanyBigNewsService extends BaseCrawlService {
 
     private final static String URL = "http://emweb.securities.eastmoney.com/companybignews/CompanyBigNewsAjax";
 
+    private final static String PLEDGEHOLDER_URL="http://emweb.securities.eastmoney.com/CompanyBigNews/GetPledgeHolder";
+
     /**
      *  抓取公司大事
      * @param stockCode
@@ -32,6 +34,20 @@ public class CompanyBigNewsService extends BaseCrawlService {
         params.put("code",stockCode);
 
         return super.crawl(this.URL, params);
+    }
+
+    /**
+     * 分页获取股票质押
+     * @param code 股票代码
+     * @param pageIndex 页数
+     * @return
+     */
+    public Message<String> getPledgeHolder(String code,String pageIndex){
+        Map<String,String> params = new HashMap<String,String>();
+        params.put("code",code);
+        params.put("pageIndex",pageIndex);
+
+        return super.crawl(this.PLEDGEHOLDER_URL,params);
     }
 
     /**
@@ -47,6 +63,9 @@ public class CompanyBigNewsService extends BaseCrawlService {
 
          return Message.success(company_big_news);
     }
+
+
+
 
 
 }
