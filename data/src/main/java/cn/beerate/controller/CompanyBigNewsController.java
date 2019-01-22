@@ -1,6 +1,7 @@
 package cn.beerate.controller;
 
 import cn.beerate.common.Message;
+import cn.beerate.common.util.StockCodeUtil;
 import cn.beerate.model.bean.CompanyBigNews;
 import cn.beerate.model.bean.companybignews.Dwdb;
 import cn.beerate.model.bean.companybignews.Gqzy;
@@ -32,30 +33,49 @@ public class CompanyBigNewsController {
             "限售解禁:xsjj|十大股东持股变动:sdgdcgbd |高管持股变动:ggcgbd|" +
             "龙虎榜单:lhbd|大宗交易:dzjy|融资融券:rzrq)")
     @ApiImplicitParams({
-            @ApiImplicitParam(value = "股票代码(sz000,sz002,sz300,sh600,sh601,sh603开头)", name = "code", paramType = "查询", dataType = "字符", required = true),
+            @ApiImplicitParam(value = "股票代码", name = "code", paramType = "path", dataType = "string", required = true),
     })
     public Message<CompanyBigNews> companyBigNews(@Param(value = "code") String code){
-        if(StringUtil.isBlank(code)){
-            Message.error("股票代码错误");
+        String aBStock = StockCodeUtil.getABStock(code);
+        if(aBStock==null){
+            return Message.error("股票代码错误");
         }
 
-        Message<String> message = bigNewsService.companyBigNews(code);
+        Message<String> message = bigNewsService.companyBigNews(aBStock);
         //未抓取到
         if(message.getCode()==Message.Code.ERROR){
            return Message.error("无数据");
         }
 
-        CompanyBigNews companyBigNews = new CompanyBigNews();
-        JSONObject jsonObject = JSONObject.parseObject(message.getData());
-
         //json转对象
+        JSONObject jsonObject = JSONObject.parseObject(message.getData());
         List<Gqzy> gqzyList = jsonObject.getJSONArray("gqzy").toJavaList(Gqzy.class);
         List<Dwdb> dwdbList = jsonObject.getJSONArray("dwdb").toJavaList(Dwdb.class);
 
+        CompanyBigNews companyBigNews = new CompanyBigNews();
         companyBigNews.gqzy=gqzyList;
         companyBigNews.dwdb=dwdbList;
 
         return Message.success(companyBigNews);
+    }
 
+    @GetMapping(value = "/getPledgeHolder")
+    @ApiOperation(value = "分页获取股票质押", notes = "分页获取股票质押")
+    @ApiImplicitParams({
+            @ApiImplicitParam(value = "股票代码", name = "code", paramType = "path", dataType = "string", required = true),
+            @ApiImplicitParam(value = "页数", name = "index", paramType = "path", dataType = "string", required = true),
+    })
+    public Message<List<Gqzy>> getPledgeHolder(@Param(value = "code") String code,@Param(value = "index") String index){
+        String aBStock = StockCodeUtil.getABStock(code);
+        if(aBStock==null){
+            return Message.error("股票代码错误");
+        }
+
+        Message<String> message = bigNewsService.getPledgeHolder(aBStock,index);
+        if(message.getCode()==Message.Code.ERROR){
+            return Message.error("无数据");
+        }
+
+        return Message.success(JSONObject.parseArray(message.getData()).toJavaList(Gqzy.class));
     }
 }
