@@ -11,16 +11,12 @@ public class CompanyBigNews {
     @ApiModelProperty(value = "大事提醒")
     public Dstx dstx;
 
-    //@ApiModelProperty(value = "对外担保")
     public List<Dwdb> dwdb;
 
-    //@ApiModelProperty(value = "股权质押")
     public List<Gqzy> gqzy;
 
-    //@ApiModelProperty(value = "诉讼仲裁")
     public List<Sszc> sszc;
 
-    //@ApiModelProperty(value = "违规处理")
     public List<Wgcl> wgcl;
 
     @ApiModelProperty(value = "大宗交易")
