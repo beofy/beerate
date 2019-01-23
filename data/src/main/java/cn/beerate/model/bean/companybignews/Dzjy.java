@@ -4,6 +4,7 @@
 package cn.beerate.model.bean.companybignews;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
 
 import java.util.Date;
 
@@ -14,10 +15,10 @@ import java.util.Date;
  * @website http://www.bejson.com/java2pojo/
  */
 @ApiModel(description = "大宗交易")
+@Data
 public class Dzjy {
-
     @ApiModelProperty(value = "交易日期")
-    private Date jyrq;
+    private String jyrq;
 
     @ApiModelProperty(value = "成交价(元)")
     private String cjj;
@@ -33,47 +34,4 @@ public class Dzjy {
 
     @ApiModelProperty(value = "卖出营业部")
     private String mcyyb;
-
-    public void setJyrq(Date jyrq) {
-         this.jyrq = jyrq;
-     }
-     public Date getJyrq() {
-         return jyrq;
-     }
-
-    public void setCjj(String cjj) {
-         this.cjj = cjj;
-     }
-     public String getCjj() {
-         return cjj;
-     }
-
-    public void setCjl(String cjl) {
-         this.cjl = cjl;
-     }
-     public String getCjl() {
-         return cjl;
-     }
-
-    public void setCjje(String cjje) {
-         this.cjje = cjje;
-     }
-     public String getCjje() {
-         return cjje;
-     }
-
-    public void setMryyb(String mryyb) {
-         this.mryyb = mryyb;
-     }
-     public String getMryyb() {
-         return mryyb;
-     }
-
-    public void setMcyyb(String mcyyb) {
-         this.mcyyb = mcyyb;
-     }
-     public String getMcyyb() {
-         return mcyyb;
-     }
-
 }

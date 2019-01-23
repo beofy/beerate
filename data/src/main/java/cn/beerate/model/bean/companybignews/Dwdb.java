@@ -4,6 +4,7 @@
 package cn.beerate.model.bean.companybignews;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
 
 import java.util.Date;
 
@@ -14,10 +15,10 @@ import java.util.Date;
  * @website http://www.bejson.com/java2pojo/
  */
 @ApiModel(description = "对外担保")
+@Data
 public class Dwdb {
-
     @ApiModelProperty(value = "公告日期")
-    private Date ggrq;
+    private String ggrq;
 
     @ApiModelProperty(value = "担保方")
     private String dbf;
@@ -60,110 +61,4 @@ public class Dwdb {
 
     @ApiModelProperty(value = "报告期类别")
     private String bgqlb;
-
-    public void setGgrq(Date ggrq) {
-         this.ggrq = ggrq;
-     }
-     public Date getGgrq() {
-         return ggrq;
-     }
-
-    public void setDbf(String dbf) {
-         this.dbf = dbf;
-     }
-     public String getDbf() {
-         return dbf;
-     }
-
-    public void setBdbf(String bdbf) {
-         this.bdbf = bdbf;
-     }
-     public String getBdbf() {
-         return bdbf;
-     }
-
-    public void setDbfs(String dbfs) {
-         this.dbfs = dbfs;
-     }
-     public String getDbfs() {
-         return dbfs;
-     }
-
-    public void setDbje(String dbje) {
-         this.dbje = dbje;
-     }
-     public String getDbje() {
-         return dbje;
-     }
-
-    public void setBz(String bz) {
-         this.bz = bz;
-     }
-     public String getBz() {
-         return bz;
-     }
-
-    public void setDbqx(String dbqx) {
-         this.dbqx = dbqx;
-     }
-     public String getDbqx() {
-         return dbqx;
-     }
-
-    public void setDbqsr(String dbqsr) {
-         this.dbqsr = dbqsr;
-     }
-     public String getDbqsr() {
-         return dbqsr;
-     }
-
-    public void setDbzzr(String dbzzr) {
-         this.dbzzr = dbzzr;
-     }
-     public String getDbzzr() {
-         return dbzzr;
-     }
-
-    public void setSflxwb(String sflxwb) {
-         this.sflxwb = sflxwb;
-     }
-     public String getSflxwb() {
-         return sflxwb;
-     }
-
-    public void setSfgljy(String sfgljy) {
-         this.sfgljy = sfgljy;
-     }
-     public String getSfgljy() {
-         return sfgljy;
-     }
-
-    public void setJyrq(String jyrq) {
-         this.jyrq = jyrq;
-     }
-     public String getJyrq() {
-         return jyrq;
-     }
-
-    public void setDbsjsm(String dbsjsm) {
-         this.dbsjsm = dbsjsm;
-     }
-     public String getDbsjsm() {
-         return dbsjsm;
-     }
-
-    public void setBgq(String bgq) {
-         this.bgq = bgq;
-     }
-     public String getBgq() {
-         return bgq;
-     }
-
-    public void setBgqlb(String bgqlb) {
-         this.bgqlb = bgqlb;
-     }
-     public String getBgqlb() {
-         return bgqlb;
-     }
-
 }

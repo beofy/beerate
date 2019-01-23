@@ -5,8 +5,6 @@ package cn.beerate.model.bean.companybignews;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
-import java.util.Date;
-
 /**
  * Auto-generated: 2019-01-22 17:37:49
  *
@@ -16,7 +14,7 @@ import java.util.Date;
 @ApiModel(description = "违规处理")
 public class Wgcl {
     @ApiModelProperty(value = "公告日期")
-    private Date ggrq;
+    private String ggrq;
 
     @ApiModelProperty(value = "类型")
     private String lx;
@@ -39,12 +37,13 @@ public class Wgcl {
     @ApiModelProperty(value = "处罚金额(万元)")
     private String cfje;
 
-    public void setGgrq(Date ggrq) {
-         this.ggrq = ggrq;
-     }
-     public Date getGgrq() {
-         return ggrq;
-     }
+    public String getGgrq() {
+        return ggrq;
+    }
+
+    public void setGgrq(String ggrq) {
+        this.ggrq = ggrq;
+    }
 
     public void setLx(String lx) {
          this.lx = lx;

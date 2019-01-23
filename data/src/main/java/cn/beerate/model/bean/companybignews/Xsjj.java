@@ -4,8 +4,7 @@
 package cn.beerate.model.bean.companybignews;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-
-import java.util.Date;
+import lombok.Data;
 
 /**
  * Auto-generated: 2019-01-22 17:37:49
@@ -14,10 +13,11 @@ import java.util.Date;
  * @website http://www.bejson.com/java2pojo/
  */
 @ApiModel(description = "限售解禁")
+@Data
 public class Xsjj {
 
     @ApiModelProperty(value = "解禁时间")
-    private Date jjsj;
+    private String jjsj;
 
     @ApiModelProperty(value = "解禁数量(股)")
     private String jjsl;
@@ -30,40 +30,4 @@ public class Xsjj {
 
     @ApiModelProperty(value = "股票类型")
     private String gplx;
-
-    public void setJjsj(Date jjsj) {
-         this.jjsj = jjsj;
-     }
-     public Date getJjsj() {
-         return jjsj;
-     }
-
-    public void setJjsl(String jjsl) {
-         this.jjsl = jjsl;
-     }
-     public String getJjsl() {
-         return jjsl;
-     }
-
-    public void setJjgzzgbbl(String jjgzzgbbl) {
-         this.jjgzzgbbl = jjgzzgbbl;
-     }
-     public String getJjgzzgbbl() {
-         return jjgzzgbbl;
-     }
-
-    public void setJjgzltgbbl(String jjgzltgbbl) {
-         this.jjgzltgbbl = jjgzltgbbl;
-     }
-     public String getJjgzltgbbl() {
-         return jjgzltgbbl;
-     }
-
-    public void setGplx(String gplx) {
-         this.gplx = gplx;
-     }
-     public String getGplx() {
-         return gplx;
-     }
-
 }
