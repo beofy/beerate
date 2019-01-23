@@ -4,6 +4,7 @@
 package cn.beerate.model.bean.companybignews;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
 
 /**
  * Auto-generated: 2019-01-22 17:37:49
@@ -12,6 +13,7 @@ import io.swagger.annotations.ApiModelProperty;
  * @website http://www.bejson.com/java2pojo/
  */
 @ApiModel(description = "违规处理")
+@Data
 public class Wgcl {
     @ApiModelProperty(value = "公告日期")
     private String ggrq;
@@ -36,62 +38,4 @@ public class Wgcl {
 
     @ApiModelProperty(value = "处罚金额(万元)")
     private String cfje;
-
-    public String getGgrq() {
-        return ggrq;
-    }
-
-    public void setGgrq(String ggrq) {
-        this.ggrq = ggrq;
-    }
-
-    public void setLx(String lx) {
-         this.lx = lx;
-     }
-     public String getLx() {
-         return lx;
-     }
-
-    public void setCfdx(String cfdx) {
-         this.cfdx = cfdx;
-     }
-     public String getCfdx() {
-         return cfdx;
-     }
-
-    public void setWgxw(String wgxw) {
-         this.wgxw = wgxw;
-     }
-     public String getWgxw() {
-         return wgxw;
-     }
-
-    public void setCflx(String cflx) {
-         this.cflx = cflx;
-     }
-     public String getCflx() {
-         return cflx;
-     }
-
-    public void setCfcs(String cfcs) {
-         this.cfcs = cfcs;
-     }
-     public String getCfcs() {
-         return cfcs;
-     }
-
-    public void setClr(String clr) {
-         this.clr = clr;
-     }
-     public String getClr() {
-         return clr;
-     }
-
-    public void setCfje(String cfje) {
-         this.cfje = cfje;
-     }
-     public String getCfje() {
-         return cfje;
-     }
-
 }
