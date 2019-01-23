@@ -14,6 +14,7 @@ import java.util.Map;
  * 股东研究
  */
 @Component
+@Transactional
 public class ShareholderResearchService extends BaseCrawlService {
 
     private Log log = LogFactory.getLog(ShareholderResearchService.class);
@@ -25,7 +26,6 @@ public class ShareholderResearchService extends BaseCrawlService {
      *  根据股票代码抓取-股东研究
      *  @param stockCode 股票代码
      */
-    @Transactional
     public Message<String> shareholderResearch(String stockCode){
         Map<String,String> params = new HashMap<String,String>();
         params.put("code",stockCode);

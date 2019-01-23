@@ -14,6 +14,7 @@ import java.util.Map;
  *  操盘必读
  */
 @Component
+@Transactional
 public class OperationsRequiredService extends BaseCrawlService {
 
     private Log log = LogFactory.getLog(OperationsRequiredService.class);
@@ -24,7 +25,6 @@ public class OperationsRequiredService extends BaseCrawlService {
      *  操盘必读
      *  @param stockCode
      */
-    @Transactional
     public Message<String> operationsRequired(String stockCode){
         Map<String,String> params = new HashMap<String,String>();
         params.put("times","1");

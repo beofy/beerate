@@ -5,6 +5,7 @@ import cn.beerate.service.base.BaseCrawlService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -13,6 +14,7 @@ import java.util.Map;
  * 股本结构
  */
 @Component
+@Transactional
 public class CapitalStockStructureService extends BaseCrawlService {
 
     private Log log = LogFactory.getLog(CapitalStockStructureService.class);
