@@ -12,10 +12,9 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Date;
 import java.util.List;
 
-@Api(description = "公司大事")
+@Api(description = "分红融资")
 @RestController
 @ApiResponses({
         @ApiResponse(code = Message.Code.SUCCESS,message = "success"),
