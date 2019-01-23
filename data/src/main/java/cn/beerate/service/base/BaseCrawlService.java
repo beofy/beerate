@@ -6,6 +6,7 @@ import com.alibaba.fastjson.JSONObject;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class BaseCrawlService {
@@ -34,6 +35,43 @@ public class BaseCrawlService {
         }
 
         return Message.success(result);
+    }
+
+    /**
+     * 获取icode
+     * @param stockCode
+     * @return
+     */
+    public String getICode(String url,String stockCode){
+        Map<String,String> params = new HashMap<String,String>();
+        params.put("type","soft");
+        params.put("code",stockCode);
+
+        Map<String,String> map = Crawler.getInstance().getHidden(url,params);
+        if(map==null||map.isEmpty()){
+            return "";
+        }
+
+        return map.get("hidIndustryCode");
+    }
+
+
+    /**
+     * 获取companyType
+     * @param stockCode
+     * @return
+     */
+    public String getCompanyType(String url,String stockCode){
+        Map<String,String> params = new HashMap<String,String>();
+        params.put("type","soft");
+        params.put("code",stockCode);
+
+        Map<String,String> map = Crawler.getInstance().getHidden(url,params);
+        if(map==null||map.isEmpty()){
+            return "";
+        }
+
+        return map.get("hidctype");
     }
 
 }

@@ -115,27 +115,11 @@ public class NewFinanceAnalysisService extends BaseCrawlService {
      * @return
      */
     public Message<String> zcfzb(String reportDateType, String  reportType, String  endDate, String  stockCode){
-        String companyType=this.getCompanyType(stockCode);
+        String companyType=this.getCompanyType(this.INDEX_URL,stockCode);
         return this.zcfzb(companyType,reportDateType,reportType,endDate,stockCode);
     }
 
-    /**
-     * 获取companyType
-     * @param stockCode
-     * @return
-     */
-    public String getCompanyType(String stockCode){
-        Map<String,String> params = new HashMap<String,String>();
-        params.put("type","soft");
-        params.put("code",stockCode);
 
-        Map<String,String> map = Crawler.getInstance().getHidden(this.INDEX_URL,params);
-        if(map==null||map.isEmpty()){
-            return "";
-        }
-
-        return map.get("hidctype");
-    }
 
     /**
      * 抓取利润表
@@ -166,7 +150,7 @@ public class NewFinanceAnalysisService extends BaseCrawlService {
      * @return
      */
     public Message<String> lrb(String reportDateType,String reportType,String endDate,String stockCode){
-        String companyType=this.getCompanyType(stockCode);
+        String companyType=this.getCompanyType(this.INDEX_URL,stockCode);
         return this.lrb(companyType,reportDateType,reportType,endDate,stockCode);
     }
 
@@ -199,7 +183,7 @@ public class NewFinanceAnalysisService extends BaseCrawlService {
      * @return
      */
     public Message<String> xjllb(String reportDateType, String  reportType, String  endDate, String  stockCode){
-        String companyType=this.getCompanyType(stockCode);
+        String companyType=this.getCompanyType(this.INDEX_URL,stockCode);
         return this.xjllb(companyType,reportDateType,reportType,endDate,stockCode);
     }
 
@@ -238,7 +222,7 @@ public class NewFinanceAnalysisService extends BaseCrawlService {
      * @return
      */
     public Message<String> percent(String stockCode,String type){
-        String companyType=this.getCompanyType(stockCode);
+        String companyType=this.getCompanyType(this.INDEX_URL,stockCode);
         return this.percent( stockCode, companyType, type);
     }
 
