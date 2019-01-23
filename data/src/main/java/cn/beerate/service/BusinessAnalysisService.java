@@ -14,6 +14,7 @@ import java.util.Map;
  * 经营分析
  */
 @Component
+@Transactional
 public class BusinessAnalysisService extends BaseCrawlService {
 
     private Log log = LogFactory.getLog(BusinessAnalysisService.class);
@@ -24,7 +25,6 @@ public class BusinessAnalysisService extends BaseCrawlService {
      * 抓取经营分析
      * @param stockCode 股票代码
      */
-    @Transactional
     public Message<String> businessAnalysis(String stockCode){
         Map<String,String> params = new HashMap<String,String>();
         params.put("code",stockCode);
