@@ -14,8 +14,6 @@ public class BaseCrawlService {
     private static Log log  = LogFactory.getLog(BaseCrawlService.class);
 
     //错误代码
-    private static int ERROR=-1;
-
     public Message<String> crawl(String url, Map<String,String> params){
         String result =  Crawler.getInstance().getString(url,params);
 
@@ -27,7 +25,7 @@ public class BaseCrawlService {
         //如果是jsonObject，判断是否
         if(object instanceof com.alibaba.fastjson.JSONObject){
             JSONObject jsonObject = ((JSONObject) object);
-            if(jsonObject.getIntValue("status")==ERROR){
+            if(jsonObject.getIntValue("status")==Message.Code.ERROR){
                 Message<String> message = Message.error(jsonObject.getString("message"));
                 message.setData(result);
                 return message;
@@ -39,10 +37,10 @@ public class BaseCrawlService {
 
     /**
      * 获取icode
-     * @param stockCode
-     * @return
+     * @param stockCode 股票代码
+     * @return String
      */
-    public String getICode(String url,String stockCode){
+    protected String getICode(String url,String stockCode){
         Map<String,String> params = new HashMap<String,String>();
         params.put("type","soft");
         params.put("code",stockCode);
@@ -58,10 +56,10 @@ public class BaseCrawlService {
 
     /**
      * 获取companyType
-     * @param stockCode
-     * @return
+     * @param stockCode 股票代码
+     * @return String
      */
-    public String getCompanyType(String url,String stockCode){
+    protected String getCompanyType(String url,String stockCode){
         Map<String,String> params = new HashMap<String,String>();
         params.put("type","soft");
         params.put("code",stockCode);
