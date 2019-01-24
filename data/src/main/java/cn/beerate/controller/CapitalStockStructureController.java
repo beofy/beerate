@@ -27,7 +27,7 @@ public class CapitalStockStructureController {
     @GetMapping(value = "/capitalStockStructure")
     @ApiOperation(value = "根据股票代码获取股本结构", notes = "包含(限售解禁| 股本结构| 历年股本变动| 股本构成)")
     @ApiImplicitParams({
-            @ApiImplicitParam(value = "股票代码", name = "code", paramType = "path", dataType = "string", required = true),
+            @ApiImplicitParam(value = "股票代码", name = "code", paramType = "query", dataType = "string", required = true),
     })
     public Message<CapitalStockStructure> capitalStockStructure(@Param("code") String code){
         //参数校验
