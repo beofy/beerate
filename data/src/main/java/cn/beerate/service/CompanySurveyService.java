@@ -5,8 +5,6 @@ import cn.beerate.common.Message;
 import cn.beerate.dao.CompanySurveyDao;
 import cn.beerate.model.entity.stock.t_company_survey;
 import cn.beerate.service.base.BaseCrawlService;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,7 +19,6 @@ import java.util.Map;
 @Component
 @Transactional
 public class CompanySurveyService extends BaseCrawlService {
-    private Log log = LogFactory.getLog(CompanySurveyService.class);
     private final static String URL="http://emweb.securities.eastmoney.com/companysurvey/CompanySurveyAjax";
 
     @Autowired
@@ -29,10 +26,10 @@ public class CompanySurveyService extends BaseCrawlService {
 
     //抓取公司概况
     public Message<String> companySurvey(String stockCode){
-        Map<String,String> params = new HashMap<String,String>();
+        Map<String,String> params = new HashMap<>();
         params.put("code",stockCode);
 
-        return super.crawl(this.URL,params);
+        return super.crawl(CompanySurveyService.URL,params);
     }
 
     public Message<t_company_survey> findByCode(String stockCode){

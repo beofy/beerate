@@ -1,10 +1,7 @@
 package cn.beerate.service;
 
 import cn.beerate.common.Message;
-import cn.beerate.common.util.Crawler;
 import cn.beerate.service.base.BaseCrawlService;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,8 +14,6 @@ import java.util.Map;
 @Component
 @Transactional
 public class NewFinanceAnalysisService extends BaseCrawlService {
-
-    private Log log = LogFactory.getLog(NewFinanceAnalysisService.class);
 
     /** 财务分析-页面 */
     private final static String INDEX_URL="http://emweb.securities.eastmoney.com/NewFinanceAnalysis/Index";
@@ -42,23 +37,23 @@ public class NewFinanceAnalysisService extends BaseCrawlService {
      * @param stockCode 股票代码
      */
     public Message<String> mainTarget(String type,String stockCode){
-        Map<String,String> params = new HashMap<String,String>();
+        Map<String,String> params = new HashMap<>();
         params.put("code",stockCode);
         params.put("type",type);
 
-        return  super.crawl(this.MAIN_TARGET_URL,params);
+        return  super.crawl(NewFinanceAnalysisService.MAIN_TARGET_URL,params);
     }
 
     /**
      * 抓取杜邦分析
      * @param stockCode 股票代码
-     * @return
+     * @return Message<String>
      */
     public Message<String> dubangAnalysis(String stockCode){
-        Map<String,String> params = new HashMap<String,String>();
+        Map<String,String> params = new HashMap<>();
         params.put("code",stockCode);
 
-        return super.crawl(this.DUBANG_ANALYSIS_URL,params);
+        return super.crawl(NewFinanceAnalysisService.DUBANG_ANALYSIS_URL,params);
     }
 
     /**
@@ -77,22 +72,22 @@ public class NewFinanceAnalysisService extends BaseCrawlService {
      *          <span>年度同比 -- reportdatetype="0" reporttype="1"</span>
      *      </li>
      * </ul>
-     * @param companyType
-     * @param reportDateType
-     * @param reportType
-     * @param endDate
+     * @param companyType companyType
+     * @param reportDateType reportDateType
+     * @param reportType reportDateType
+     * @param endDate reportDateType
      * @param stockCode 股票代码
-     * @return
+     * @return Message<String>
      */
     public Message<String> zcfzb(String companyType,String reportDateType, String  reportType, String  endDate, String  stockCode){
-        Map<String,String> params = new HashMap<String,String>();
+        Map<String,String> params = new HashMap<>();
         params.put("companyType",companyType);
         params.put("reportDateType",reportDateType);
         params.put("reportType",reportType);
         params.put("endDate",endDate);//可为空
         params.put("code",stockCode);
 
-        return super.crawl(this.ZCFZB_URL,params);
+        return super.crawl(NewFinanceAnalysisService.ZCFZB_URL,params);
     }
     /**
      * 资产负债表 <br>
@@ -110,14 +105,14 @@ public class NewFinanceAnalysisService extends BaseCrawlService {
      *          <span>年度同比 -- reportdatetype="0" reporttype="1"</span>
      *      </li>
      * </ul>
-     * @param reportDateType
-     * @param reportType
-     * @param endDate
+     * @param reportDateType reportDateType
+     * @param reportType reportType
+     * @param endDate endDate
      * @param stockCode 股票代码
-     * @return
+     * @return Message<String>
      */
     public Message<String> zcfzb(String reportDateType, String  reportType, String  endDate, String  stockCode){
-        String companyType=this.getCompanyType(this.INDEX_URL,stockCode);
+        String companyType=this.getCompanyType(NewFinanceAnalysisService.INDEX_URL,stockCode);
         return this.zcfzb(companyType,reportDateType,reportType,endDate,stockCode);
     }
 
@@ -125,106 +120,106 @@ public class NewFinanceAnalysisService extends BaseCrawlService {
 
     /**
      * 抓取利润表
-     * @param companyType
-     * @param reportDateType
-     * @param reportType
-     * @param endDate
-     * @param stockCode
-     * @return
+     * @param companyType companyType
+     * @param reportDateType reportDateType
+     * @param reportType reportType
+     * @param endDate endDate
+     * @param stockCode 股票代码
+     * @return Message<String>
      */
     public Message<String> lrb(String companyType,String reportDateType, String  reportType, String  endDate, String  stockCode){
-        Map<String,String> params = new HashMap<String,String>();
+        Map<String,String> params = new HashMap<>();
         params.put("companyType",companyType);
         params.put("reportDateType",reportDateType);
         params.put("reportType",reportType);
         params.put("endDate",endDate);//可为空
         params.put("code",stockCode);
 
-        return super.crawl(this.LRB_URL,params);
+        return super.crawl(NewFinanceAnalysisService.LRB_URL,params);
     }
 
     /**
      * 抓取利润表
-     * @param reportDateType
-     * @param reportType
-     * @param endDate
-     * @param stockCode
-     * @return
+     * @param reportDateType reportDateType
+     * @param reportType reportType
+     * @param endDate endDate
+     * @param stockCode stockCode
+     * @return Message<String>
      */
     public Message<String> lrb(String reportDateType,String reportType,String endDate,String stockCode){
-        String companyType=this.getCompanyType(this.INDEX_URL,stockCode);
+        String companyType=this.getCompanyType(NewFinanceAnalysisService.INDEX_URL,stockCode);
         return this.lrb(companyType,reportDateType,reportType,endDate,stockCode);
     }
 
     /**
      * 抓取现金流量表
-     * @param companyType
-     * @param reportDateType
-     * @param reportType
-     * @param endDate
-     * @param stockCode
-     * @return
+     * @param companyType companyType
+     * @param reportDateType reportDateType
+     * @param reportType reportType
+     * @param endDate endDate
+     * @param stockCode stockCode
+     * @return Message<String>
      */
     public Message<String> xjllb(String companyType,String reportDateType, String  reportType, String  endDate, String  stockCode){
-        Map<String,String> params = new HashMap<String,String>();
+        Map<String,String> params = new HashMap<>();
         params.put("companyType",companyType);
         params.put("reportDateType",reportDateType);
         params.put("reportType",reportType);
         params.put("endDate",endDate);//可为空
         params.put("code",stockCode);
 
-        return super.crawl(this.XJLLB_URL,params);
+        return super.crawl(NewFinanceAnalysisService.XJLLB_URL,params);
     }
 
     /**
      * 抓取现金流量表
-     * @param reportDateType
-     * @param reportType
-     * @param endDate
-     * @param stockCode
-     * @return
+     * @param reportDateType reportDateType
+     * @param reportType reportType
+     * @param endDate endDate
+     * @param stockCode stockCode
+     * @return Message<String>
      */
     public Message<String> xjllb(String reportDateType, String  reportType, String  endDate, String  stockCode){
-        String companyType=this.getCompanyType(this.INDEX_URL,stockCode);
+        String companyType=this.getCompanyType(NewFinanceAnalysisService.INDEX_URL,stockCode);
         return this.xjllb(companyType,reportDateType,reportType,endDate,stockCode);
     }
 
     /**
      * 抓取百分比表
      * @param stockCode 股票代码
-     * @param ctype
+     * @param ctype ctype
      * @param type 0-按报告期 1-按年度 2-按单季度
-     * @return
+     * @return Message<String>
      */
     public Message<String> percent(String stockCode,String ctype,String type){
-        Map<String,String> params = new HashMap<String,String>();
+        Map<String,String> params = new HashMap<>();
         params.put("code",stockCode);
         params.put("ctype",ctype);
         params.put("type",type);
 
-        return super.crawl(this.PERCENT_URL,params);
+        return super.crawl(NewFinanceAnalysisService.PERCENT_URL,params);
     }
 
     /**
      * 抓取百分比报表
      * @param stockCode 股票代码
-     * @return
+     * @return Message<String>
      */
     public Message<String> percentIndex(String stockCode){
-        Map<String,String> params = new HashMap<String,String>();
+        Map<String,String> params = new HashMap<>();
         params.put("code",stockCode);
 
-        return super.crawl(this.PERCENT_INDEX_URL,params);
+        return super.crawl(NewFinanceAnalysisService.PERCENT_INDEX_URL,params);
     }
 
     /**
      *  按类型-抓取百分比表
      * @param stockCode 股票代码
      * @param type 0-按报告期 1-按年度 2-按单季度
-     * @return
+     * @return Message<String>
      */
     public Message<String> percent(String stockCode,String type){
-        String companyType=this.getCompanyType(this.INDEX_URL,stockCode);
+        String companyType=this.getCompanyType(NewFinanceAnalysisService.INDEX_URL,stockCode);
         return this.percent( stockCode, companyType, type);
     }
 

@@ -2,8 +2,6 @@ package cn.beerate.service;
 
 import cn.beerate.common.Message;
 import cn.beerate.service.base.BaseCrawlService;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,8 +14,6 @@ import java.util.Map;
 @Component
 @Transactional
 public class CompanyManagementService extends BaseCrawlService {
-    private Log log = LogFactory.getLog(CompanyManagementService.class);
-
     private final static String COMPANY_MANAGEMENT_AJAX="http://emweb.securities.eastmoney.com/CompanyManagement/CompanyManagementAjax";
 
     /**
@@ -25,10 +21,10 @@ public class CompanyManagementService extends BaseCrawlService {
      * @param code 股票代码
      */
     public Message<String> companyManagement(String code){
-        Map<String,String> params = new HashMap<String,String>();
+        Map<String,String> params = new HashMap<>();
         params.put("code",code);
 
-        return super.crawl(this.COMPANY_MANAGEMENT_AJAX,params);
+        return super.crawl(CompanyManagementService.COMPANY_MANAGEMENT_AJAX,params);
     }
 
 }

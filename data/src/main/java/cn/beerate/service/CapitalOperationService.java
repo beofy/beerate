@@ -2,8 +2,6 @@ package cn.beerate.service;
 
 import cn.beerate.common.Message;
 import cn.beerate.service.base.BaseCrawlService;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,16 +15,34 @@ import java.util.Map;
 @Transactional
 public class CapitalOperationService extends BaseCrawlService {
 
-    private Log log = LogFactory.getLog(CapitalOperationService.class);
-
     private final static String CAPITAL_OPERATION_AJAX="http://emweb.securities.eastmoney.com/CapitalOperation/CapitalOperationAjax";
 
     /**
      * 资本运作
-     * @param code
+     * @param code 股票代码
      * @param orderBy
-     * @param isAsc
-     * @return
+     *       <ul style="color:red">
+     *           <li >
+     *              <span>截止日期 -- 1</span>
+     *           </li>
+     *            <li>
+     *              <span>计划投资(万元) -- 2</span>
+     *           </li>
+     *            <li>
+     *               <span>已投入募集资金(万元) -- 3</span>
+     *           </li>
+     *           <li>
+     *               <span>建设期(年) -- 4</span>
+     *            </li>
+     *            <li>
+     *               <span>收益率(税后) -- 5</span>
+     *            </li>
+     *            <li>
+     *               <span>投资回收期(年) -- 6</span>
+     *           </li>
+     *       </ul>
+     * @param isAsc  false：降序 | true:升序
+     * @return Message<String>
      */
     public Message<String> capitalOperation(String code, String orderBy, String isAsc){
         Map<String,String> params = new HashMap<String,String>();
@@ -34,7 +50,7 @@ public class CapitalOperationService extends BaseCrawlService {
         params.put("orderBy",orderBy);
         params.put("isAsc",isAsc);
 
-        return super.crawl(this.CAPITAL_OPERATION_AJAX,params);
+        return super.crawl(CapitalOperationService.CAPITAL_OPERATION_AJAX,params);
     }
 
 }
