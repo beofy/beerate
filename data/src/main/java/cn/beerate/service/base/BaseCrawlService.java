@@ -14,7 +14,7 @@ public class BaseCrawlService {
     private static Log log  = LogFactory.getLog(BaseCrawlService.class);
 
     //错误代码
-    public Message<String> crawl(String url, Map<String,String> params){
+    protected Message<String> crawl(String url, Map<String,String> params){
         String result =  Crawler.getInstance().getString(url,params);
 
         log.debug(result);
@@ -41,7 +41,7 @@ public class BaseCrawlService {
      * @return String
      */
     protected String getICode(String url,String stockCode){
-        Map<String,String> params = new HashMap<String,String>();
+        Map<String,String> params = new HashMap<>();
         params.put("type","soft");
         params.put("code",stockCode);
 
@@ -60,7 +60,7 @@ public class BaseCrawlService {
      * @return String
      */
     protected String getCompanyType(String url,String stockCode){
-        Map<String,String> params = new HashMap<String,String>();
+        Map<String,String> params = new HashMap<>();
         params.put("type","soft");
         params.put("code",stockCode);
 
