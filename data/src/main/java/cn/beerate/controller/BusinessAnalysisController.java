@@ -3,7 +3,6 @@ package cn.beerate.controller;
 import cn.beerate.common.Message;
 import cn.beerate.common.util.StockCodeUtil;
 import cn.beerate.model.bean.BusinessAnalysis;
-import cn.beerate.model.bean.CapitalOperation;
 import cn.beerate.service.BusinessAnalysisService;
 import com.alibaba.fastjson.JSONObject;
 import io.swagger.annotations.*;
