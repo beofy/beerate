@@ -27,7 +27,7 @@ public class BonusFinancingController {
     @GetMapping(value = "/bonusFinancing")
     @ApiOperation(value = "根据股票代码获取分红融资", notes = "包含(分红影响 |历年分红融资|增发明细|配股明细)")
     @ApiImplicitParams({
-            @ApiImplicitParam(value = "股票代码", name = "code", paramType = "path", dataType = "string", required = true),
+            @ApiImplicitParam(value = "股票代码", name = "code", paramType = "query", dataType = "string", required = true),
     })
     public Message<BonusFinancing> bonusFinancing(@Param("code") String code){
         //参数校验
@@ -50,6 +50,10 @@ public class BonusFinancingController {
 
     @GetMapping(value = "/getBonusDetail")
     @ApiOperation(value = "按日期获取分红融资明细", notes = "时期内每日收盘价格(元)")
+    @ApiImplicitParams({
+            @ApiImplicitParam(value = "股票代码", name = "code", paramType = "query", dataType = "string", required = true),
+            @ApiImplicitParam(value = "日期", name = "date", paramType = "query", dataType = "string", required = true),
+    })
     public Message<List<String>> getBonusDetail(@Param("code") String code, @Param("date") String date){
         //参数校验
         String aBStock = StockCodeUtil.getABStock(code);

@@ -51,8 +51,8 @@ public class CompanyBigNewsController {
     @GetMapping(value = "/getPledgeHolder")
     @ApiOperation(value = "分页获取股票质押", notes = "分页获取股票质押")
     @ApiImplicitParams({
-            @ApiImplicitParam(value = "股票代码", name = "code", paramType = "path", dataType = "string", required = true),
-            @ApiImplicitParam(value = "页数", name = "index", paramType = "path", dataType = "string", required = true),
+            @ApiImplicitParam(value = "股票代码", name = "code", paramType = "query", dataType = "string", required = true),
+            @ApiImplicitParam(value = "页数", name = "index", paramType = "query", dataType = "string", required = true),
     })
     public Message<List<Gqzy>> getPledgeHolder(@Param(value = "code") String code,@Param(value = "index") String index){
         String aBStock = StockCodeUtil.getABStock(code);
