@@ -1,6 +1,9 @@
 package cn.beerate.controller;
 
 import cn.beerate.common.Message;
+import cn.beerate.common.util.StockCodeUtil;
+import cn.beerate.model.bean.CompanySurvey;
+import cn.beerate.model.bean.ResearchReport;
 import cn.beerate.model.entity.stock.t_company_big_news;
 import cn.beerate.model.entity.stock.t_company_survey;
 import cn.beerate.service.CompanySurveyService;
@@ -29,25 +32,22 @@ public class CompanySurveyController {
     @ApiImplicitParams({
             @ApiImplicitParam(value = "股票代码", name = "code", paramType = "query", dataType = "string", required = true),
     })
-    public Message companySurvey(@Param(value = "code")String code){
-        if(StringUtil.isBlank(code)){
-            Message.error("股票代码错误");
+    public Message<CompanySurvey> companySurvey(@Param(value = "code")String code){
+        String aBStock = StockCodeUtil.getABStock(code);
+        if(aBStock==null){
+            return Message.error("股票代码错误");
         }
 
-        Message<t_company_survey> message = companySurveyService.findByCode(code);
-        //如果数据库中未保存
+        Message<String> message = companySurveyService.companySurvey(aBStock);
+        //未抓取到
         if(message.getCode()==Message.Code.ERROR){
-            Message<String> message1 = companySurveyService.companySurvey(code);
-            //未抓取到
-            if(message1.getCode()==Message.Code.ERROR){
-                return message;
-            }
-
-            //json转对象
-            return Message.success(JSONObject.parseObject(message1.getData()));
+            return Message.error("无数据");
         }
 
-        return message;
+        //json转对象
+        JSONObject jsonObject = JSONObject.parseObject(message.getData());
+
+        return Message.success(jsonObject.toJavaObject(CompanySurvey.class));
     }
 
 }
