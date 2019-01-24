@@ -4,7 +4,7 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
-@ApiModel("十大股东列表")
+@ApiModel(description = "十大股东列表")
 @Data
 public class SdgdDetail {
 
