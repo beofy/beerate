@@ -18,30 +18,33 @@ import lombok.Data;
 @ApiModel(description = "公司概况")
 @Data
 public class CompanySurvey {
+
     private Jbzl jbzl;
+
     private Fxxg fxxg;
 
     @ApiModelProperty(value = "股票代码(交易所简称开头)")
-    private String Code;
+    private String code;
 
     @ApiModelProperty(value = "代码类型")
-    private String CodeType;
+    private String codeType;
 
     @ApiModelProperty(value = "股票代码(交易所简称结尾)")
-    private String SecuCode;
+    private String secuCode;
 
     @ApiModelProperty(value = "股票代码")
-    private String SecurityCode;
+    private String securityCode;
 
     @ApiModelProperty(value = "简称")
-    private String SecurityShortName;
+    private String securityShortName;
 
     @ApiModelProperty(value = "证券所代码")
-    private String MarketCode;
+    private String marketCode;
 
     @ApiModelProperty(value = "证券所")
-    private String Market;
+    private String market;
 
     @ApiModelProperty(value = "到期日")
-    private String ExpireTime;
+    private String expireTime;
+
 }
