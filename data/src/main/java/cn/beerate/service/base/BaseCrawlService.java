@@ -19,7 +19,7 @@ public class BaseCrawlService {
 
         log.debug(result);
 
-        //判断数据是否异常
+        //判断数据是否异常.并去除字符串中转义字符
         Object object = JSONObject.parse(result);
 
         //如果是jsonObject，判断是否
@@ -32,7 +32,7 @@ public class BaseCrawlService {
             }
         }
 
-        return Message.success(result);
+        return Message.success((String)object);
     }
 
     /**
