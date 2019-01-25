@@ -114,6 +114,17 @@ public class NewFinanceAnalysisService extends BaseCrawlService {
 
     /**
      * 抓取利润表
+     * <ul style="color:red">
+     *      <li >
+     *          <span>按报告期 -- reportdatetype="0" reporttype="1"</span>
+     *      </li>
+     *      <li>
+     *          <span>按年度 -- reportdatetype="1" reporttype="1"</span>
+     *      </li>
+     *      <li>
+     *          <span>按单季度 -- reportdatetype="0" reporttype="2"</span>
+     *      </li>
+     * </ul>
      * @param companyType companyType
      * @param reportDateType reportDateType
      * @param reportType reportType
@@ -134,6 +145,17 @@ public class NewFinanceAnalysisService extends BaseCrawlService {
 
     /**
      * 抓取利润表
+     * <ul style="color:red">
+     *      <li >
+     *          <span>按报告期 -- reportdatetype="0" reporttype="1"</span>
+     *      </li>
+     *      <li>
+     *          <span>按年度 -- reportdatetype="1" reporttype="1"</span>
+     *      </li>
+     *      <li>
+     *          <span>按单季度 -- reportdatetype="0" reporttype="2"</span>
+     *      </li>
+     * </ul>
      * @param reportDateType reportDateType
      * @param reportType reportType
      * @param endDate endDate
@@ -147,6 +169,17 @@ public class NewFinanceAnalysisService extends BaseCrawlService {
 
     /**
      * 抓取现金流量表
+     * <ul style="color:red">
+     *      <li >
+     *          <span>按报告期 -- reportdatetype="0" reporttype="1"</span>
+     *      </li>
+     *      <li>
+     *          <span>按年度 -- reportdatetype="1" reporttype="1"</span>
+     *      </li>
+     *      <li>
+     *          <span>按单季度 -- reportdatetype="0" reporttype="2"</span>
+     *      </li>
+     * </ul>
      * @param companyType companyType
      * @param reportDateType reportDateType
      * @param reportType reportType
@@ -167,6 +200,17 @@ public class NewFinanceAnalysisService extends BaseCrawlService {
 
     /**
      * 抓取现金流量表
+     * <ul style="color:red">
+     *      <li >
+     *          <span>按报告期 -- reportdatetype="0" reporttype="1"</span>
+     *      </li>
+     *      <li>
+     *          <span>按年度 -- reportdatetype="1" reporttype="1"</span>
+     *      </li>
+     *      <li>
+     *          <span>按单季度 -- reportdatetype="0" reporttype="2"</span>
+     *      </li>
+     * </ul>
      * @param reportDateType reportDateType
      * @param reportType reportType
      * @param endDate endDate
