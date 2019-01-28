@@ -2,6 +2,7 @@ package cn.beerate.service.base;
 
 import cn.beerate.common.Message;
 import cn.beerate.common.util.Crawler;
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -22,6 +23,11 @@ public class BaseCrawlService {
         //判断数据是否异常.并去除字符串中转义字符
         Object object = JSONObject.parse(result);
 
+        //如果是字符串
+        if(!(object instanceof com.alibaba.fastjson.JSON)){
+            return Message.success((String)object);
+        }
+
         //如果是jsonObject，判断是否
         if(object instanceof com.alibaba.fastjson.JSONObject){
             JSONObject jsonObject = ((JSONObject) object);
@@ -32,7 +38,7 @@ public class BaseCrawlService {
             }
         }
 
-        return Message.success((String)object);
+        return Message.success(((JSON) object).toJSONString());
     }
 
     /**
