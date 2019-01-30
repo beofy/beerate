@@ -2,8 +2,10 @@ package cn.beerate.common;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
 
 @ApiModel(description = "响应数据")
+@Data
 public class Message<T> {
 
     @ApiModelProperty(value = "状态码(200：成功,-1：失败)")
@@ -29,9 +31,11 @@ public class Message<T> {
     public static <T> Message<T>  ok(){
         return new Message<T>(Message.Code.SUCCESS,"success");
     }
+
     public static <T> Message<T>  ok(String msg){
         return new Message<T>(Message.Code.SUCCESS,msg);
     }
+
     public static <T> Message<T> success(T data){
         return new Message<T>(Message.Code.SUCCESS,"success",data);
     }
@@ -44,41 +48,7 @@ public class Message<T> {
         return new Message<T>(Message.Code.ERROR,msg);
     }
 
-    public int getCode() {
-        return code;
-    }
-
-    public void setCode(int code) {
-        this.code = code;
-    }
-
-    public String getMsg() {
-        return msg;
-    }
-
-    public void setMsg(String msg) {
-        this.msg = msg;
-    }
-
-    public T getData() {
-        return data;
-    }
-
-    public void setData(T data) {
-        this.data = data;
-    }
-
-    @Override
-    public String toString() {
-        return "Message{" +
-                "code=" + code +
-                ", msg='" + msg + '\'' +
-                ", data=" + data +
-                '}';
-    }
-
     public class Code{
-
         /** 公共成功码200:处理成功 */
         public static final int SUCCESS = 200;
 

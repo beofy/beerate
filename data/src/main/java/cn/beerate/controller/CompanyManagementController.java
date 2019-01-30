@@ -2,8 +2,9 @@ package cn.beerate.controller;
 
 import cn.beerate.common.Message;
 import cn.beerate.common.util.StockCodeUtil;
-import cn.beerate.model.bean.CompanySurvey;
-import cn.beerate.service.CompanySurveyService;
+import cn.beerate.model.bean.CompanyBigNews;
+import cn.beerate.model.bean.CompanyManagement;
+import cn.beerate.service.CompanyManagementService;
 import com.alibaba.fastjson.JSONObject;
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,30 +12,31 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@Api(description = "公司概况")
+
+@Api(description = "公司高管")
 @RestController
 @ApiResponses({
         @ApiResponse(code = Message.Code.SUCCESS,message = "success"),
         @ApiResponse(code = Message.Code.ERROR,message = "error"),
 })
-public class CompanySurveyController {
+public class CompanyManagementController {
 
     @Autowired
-    private CompanySurveyService companySurveyService;
+    private CompanyManagementService companyManagementService;
 
-
-    @GetMapping(value = "/companySurvey")
-    @ApiOperation(value = "根据股票代码获取公司概况", notes = "包含(基本资料 | 发行相关)")
+    @GetMapping(value = "/companyManagement")
+    @ApiOperation(value = "根据股票代码获取公司高管", notes = "包含(高管列表|高管持股变动|管理层简介)")
     @ApiImplicitParams({
             @ApiImplicitParam(value = "股票代码", name = "code", paramType = "query", dataType = "string", required = true),
     })
-    public Message<CompanySurvey> companySurvey(@Param(value = "code")String code){
+    public Message<CompanyManagement> companyManagement(@Param("code") String code){
+        //参数校验
         String aBStock = StockCodeUtil.getABStock(code);
         if(aBStock==null){
             return Message.error("股票代码错误");
         }
 
-        Message<String> message = companySurveyService.companySurvey(aBStock);
+        Message<String> message = companyManagementService.companyManagement(aBStock);
         //未抓取到
         if(message.getCode()==Message.Code.ERROR){
             return Message.error("无数据");
@@ -43,7 +45,6 @@ public class CompanySurveyController {
         //json转对象
         JSONObject jsonObject = JSONObject.parseObject(message.getData());
 
-        return Message.success(jsonObject.toJavaObject(CompanySurvey.class));
+        return Message.success(jsonObject.toJavaObject(CompanyManagement.class));
     }
-
 }

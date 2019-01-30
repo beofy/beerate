@@ -2,8 +2,6 @@ package cn.beerate.service;
 
 import cn.beerate.common.Message;
 import cn.beerate.service.base.BaseCrawlService;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
@@ -14,8 +12,6 @@ import java.util.Map;
  */
 @Component
 public class BonusFinancingService extends BaseCrawlService {
-    private Log log = LogFactory.getLog(BonusFinancingService.class);
-
     private final static String BONUS_FINANCING_AJAX="http://emweb.securities.eastmoney.com/BonusFinancing/BonusFinancingAjax";
     private final static String BONUS_DETAIL_CHART_AJAX="http://emweb.securities.eastmoney.com/BonusFinancing/BonusDetailChartAjax";
 
@@ -26,23 +22,23 @@ public class BonusFinancingService extends BaseCrawlService {
      *
      */
     public Message<String> bonusFinancing(String stockCode){
-        Map<String,String> params = new HashMap<String,String>();
+        Map<String,String> params = new HashMap<>();
         params.put("code",stockCode);
 
-        return super.crawl(this.BONUS_FINANCING_AJAX,params);
+        return super.crawl(BonusFinancingService.BONUS_FINANCING_AJAX,params);
     }
 
     /**
      * 抓取每日分红价格<br>
      * @param stockCode 股票代码
      * @param date 日期
-     * @return
+     * @return Message<String>
      */
     public Message<String> bonusDetailChart(String stockCode,String date){
-        Map<String,String> params = new HashMap<String,String>();
+        Map<String,String> params = new HashMap<>();
         params.put("code",stockCode);
         params.put("date",date);
 
-        return super.crawl(this.BONUS_DETAIL_CHART_AJAX,params);
+        return super.crawl(BonusFinancingService.BONUS_DETAIL_CHART_AJAX,params);
     }
 }

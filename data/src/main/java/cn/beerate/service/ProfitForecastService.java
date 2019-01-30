@@ -2,8 +2,6 @@ package cn.beerate.service;
 
 import cn.beerate.common.Message;
 import cn.beerate.service.base.BaseCrawlService;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -13,8 +11,6 @@ import java.util.Map;
 @Component
 @Transactional
 public class ProfitForecastService extends BaseCrawlService {
-
-    private Log log = LogFactory.getLog(ProfitForecastService.class);
     private final static String URL="http://emweb.securities.eastmoney.com/ProfitForecast/ProfitForecastAjax";
 
     /**
@@ -22,10 +18,10 @@ public class ProfitForecastService extends BaseCrawlService {
      * @param stockCode 股票代码
      */
     public Message<String> profitForecast(String stockCode){
-        Map<String,String> params = new HashMap<String,String>();
+        Map<String,String> params = new HashMap<>();
         params.put("code",stockCode);
 
-        return super.crawl(this.URL,params);
+        return super.crawl(ProfitForecastService.URL,params);
     }
 
 }
