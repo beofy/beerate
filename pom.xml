@@ -175,4 +175,10 @@
         </repository>
     </repositories>
 
+    <!-- 字符集设置 -->
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    </properties>
+
 </project>
