@@ -1,8 +1,6 @@
 package cn.beerate.service;
 
 import cn.beerate.common.Message;
-import cn.beerate.dao.CompanyBigNewsDao;
-import cn.beerate.model.entity.stock.t_company_big_news;
 import cn.beerate.service.base.BaseCrawlService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -14,9 +12,6 @@ import java.util.Map;
 @Component
 @Transactional
 public class CompanyBigNewsService extends BaseCrawlService {
-
-    @Autowired
-    private CompanyBigNewsDao companyBigNewsDao;
 
     private final static String URL = "http://emweb.securities.eastmoney.com/companybignews/CompanyBigNewsAjax";
 
@@ -47,23 +42,4 @@ public class CompanyBigNewsService extends BaseCrawlService {
 
         return super.crawl(CompanyBigNewsService.PLEDGEHOLDER_URL,params);
     }
-
-    /**
-     * 根据股票代码查询
-     * @param stockCode 股票代码
-     */
-    public Message<t_company_big_news> findByCode(String stockCode){
-        t_company_big_news company_big_news = companyBigNewsDao.findByStockCode(stockCode);
-
-        if(company_big_news==null){
-            return Message.error("无数据");
-        }
-
-         return Message.success(company_big_news);
-    }
-
-
-
-
-
 }
