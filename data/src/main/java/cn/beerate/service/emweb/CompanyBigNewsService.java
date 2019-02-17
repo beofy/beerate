@@ -1,8 +1,7 @@
-package cn.beerate.service;
+package cn.beerate.service.emweb;
 
 import cn.beerate.common.Message;
 import cn.beerate.service.base.BaseCrawlService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 

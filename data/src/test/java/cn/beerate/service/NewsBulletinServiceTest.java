@@ -1,5 +1,6 @@
 package cn.beerate.service;
 
+import cn.beerate.service.emweb.NewsBulletinService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +12,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 public class NewsBulletinServiceTest {
 
     @Autowired
-    private  NewsBulletinService bulletinService;
+    private NewsBulletinService bulletinService;
 
     @Test
     public void testNewsBulletin(){

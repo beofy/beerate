@@ -4,7 +4,7 @@ import cn.beerate.common.Message;
 import cn.beerate.common.util.StockCodeUtil;
 import cn.beerate.model.bean.CompanyBigNews;
 import cn.beerate.model.bean.companybignews.Gqzy;
-import cn.beerate.service.CompanyBigNewsService;
+import cn.beerate.service.emweb.CompanyBigNewsService;
 import com.alibaba.fastjson.JSONObject;
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
