@@ -21,12 +21,8 @@ public class BaseCrawlService {
      * @param params 参数
      * @return String
      */
-    protected Object crawl(String url, Map<String,String> params){
-        String result =  Crawler.getInstance().getString(url,params);
-        //log.debug(result);
-
-        //判断数据是否异常.并去除字符串中转义字符
-        return JSON.parse(result);
+    protected String crawl(String url, Map<String,String> params){
+        return Crawler.getInstance().getString(url,params);
     }
 
     /**
@@ -48,8 +44,10 @@ public class BaseCrawlService {
      * @return String
      *
      */
-    public JSON getJsonObject(String url, Map<String,String> params){
-        return (JSONObject) this.crawl(url,params);
+    public JSONObject getJsonObject(String url, Map<String,String> params){
+        String result = this.crawl(url,params);
+
+        return JSONObject.parseObject(result);
     }
 
     /**
