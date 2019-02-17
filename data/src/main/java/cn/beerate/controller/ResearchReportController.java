@@ -3,7 +3,7 @@ package cn.beerate.controller;
 import cn.beerate.common.Message;
 import cn.beerate.common.util.StockCodeUtil;
 import cn.beerate.model.bean.ResearchReport;
-import cn.beerate.service.emweb.ResearchReportService;
+import cn.beerate.service.eastmoney.ResearchReportService;
 import com.alibaba.fastjson.JSONObject;
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;

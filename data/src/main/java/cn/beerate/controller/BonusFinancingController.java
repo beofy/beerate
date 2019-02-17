@@ -4,7 +4,7 @@ import cn.beerate.common.Message;
 import cn.beerate.common.util.DateUtil;
 import cn.beerate.common.util.StockCodeUtil;
 import cn.beerate.model.bean.BonusFinancing;
-import cn.beerate.service.emweb.BonusFinancingService;
+import cn.beerate.service.eastmoney.BonusFinancingService;
 import com.alibaba.fastjson.JSONObject;
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;

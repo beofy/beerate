@@ -1,4 +1,4 @@
-package cn.beerate.service.emweb;
+package cn.beerate.service.eastmoney;
 
 import cn.beerate.common.Message;
 import cn.beerate.service.base.BaseCrawlService;
@@ -10,18 +10,19 @@ import java.util.Map;
 
 @Component
 @Transactional
-public class ProfitForecastService extends BaseCrawlService {
-    private final static String URL="http://emweb.securities.eastmoney.com/ProfitForecast/ProfitForecastAjax";
+public class CoreConceptionService extends BaseCrawlService {
+
+    private final static String URL="http://eastmoney.securities.eastmoney.com/CoreConception/CoreConceptionAjax";
 
     /**
-     * 抓取机构预测
+     * 抓取核心题材
      * @param stockCode 股票代码
      */
-    public Message<String> profitForecast(String stockCode){
+    public Message<String> coreConception(String stockCode){
         Map<String,String> params = new HashMap<>();
         params.put("code",stockCode);
 
-        return super.crawl(ProfitForecastService.URL,params);
+        return super.crawl(CoreConceptionService.URL,params);
     }
 
 }

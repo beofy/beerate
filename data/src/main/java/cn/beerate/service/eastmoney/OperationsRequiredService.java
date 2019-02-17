@@ -1,4 +1,4 @@
-package cn.beerate.service.emweb;
+package cn.beerate.service.eastmoney;
 
 import cn.beerate.common.Message;
 import cn.beerate.service.base.BaseCrawlService;
@@ -14,7 +14,7 @@ import java.util.Map;
 @Component
 @Transactional
 public class OperationsRequiredService extends BaseCrawlService {
-    private final static String URL="http://emweb.securities.eastmoney.com/OperationsRequired/OperationsRequiredAjax";
+    private final static String URL="http://eastmoney.securities.eastmoney.com/OperationsRequired/OperationsRequiredAjax";
 
     /**
      *  操盘必读

@@ -1,4 +1,4 @@
-package cn.beerate.service.emweb;
+package cn.beerate.service.eastmoney;
 
 import cn.beerate.common.Message;
 import cn.beerate.service.base.BaseCrawlService;
@@ -15,7 +15,7 @@ import java.util.Map;
 @Transactional
 public class CapitalOperationService extends BaseCrawlService {
 
-    private final static String CAPITAL_OPERATION_AJAX="http://emweb.securities.eastmoney.com/CapitalOperation/CapitalOperationAjax";
+    private final static String CAPITAL_OPERATION_AJAX="http://eastmoney.securities.eastmoney.com/CapitalOperation/CapitalOperationAjax";
 
     /**
      * 资本运作

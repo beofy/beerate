@@ -1,4 +1,4 @@
-package cn.beerate.service.emweb;
+package cn.beerate.service.eastmoney;
 
 import cn.beerate.common.Message;
 import cn.beerate.service.base.BaseCrawlService;
@@ -14,7 +14,7 @@ import java.util.Map;
 @Component
 @Transactional
 public class CompanyManagementService extends BaseCrawlService {
-    private final static String COMPANY_MANAGEMENT_AJAX="http://emweb.securities.eastmoney.com/CompanyManagement/CompanyManagementAjax";
+    private final static String COMPANY_MANAGEMENT_AJAX="http://eastmoney.securities.eastmoney.com/CompanyManagement/CompanyManagementAjax";
 
     /**
      * 公司高管

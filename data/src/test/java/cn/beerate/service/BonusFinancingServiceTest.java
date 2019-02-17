@@ -1,7 +1,7 @@
 package cn.beerate.service;
 
 import cn.beerate.common.Message;
-import cn.beerate.service.emweb.BonusFinancingService;
+import cn.beerate.service.eastmoney.BonusFinancingService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

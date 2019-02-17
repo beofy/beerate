@@ -1,4 +1,4 @@
-package cn.beerate.service.emweb;
+package cn.beerate.service.eastmoney;
 
 import cn.beerate.common.Message;
 import cn.beerate.service.base.BaseCrawlService;
@@ -16,20 +16,20 @@ import java.util.Map;
 public class NewFinanceAnalysisService extends BaseCrawlService {
 
     /** 财务分析-页面 */
-    private final static String INDEX_URL="http://emweb.securities.eastmoney.com/NewFinanceAnalysis/Index";
+    private final static String INDEX_URL="http://eastmoney.securities.eastmoney.com/NewFinanceAnalysis/Index";
     /** 主要指标 */
-    private final static String MAIN_TARGET_URL="http://emweb.securities.eastmoney.com/NewFinanceAnalysis/MainTargetAjax";
+    private final static String MAIN_TARGET_URL="http://eastmoney.securities.eastmoney.com/NewFinanceAnalysis/MainTargetAjax";
     /** 杜邦分析 */
-    private final static String DUBANG_ANALYSIS_URL="http://emweb.securities.eastmoney.com/NewFinanceAnalysis/DubangAnalysisAjax";
+    private final static String DUBANG_ANALYSIS_URL="http://eastmoney.securities.eastmoney.com/NewFinanceAnalysis/DubangAnalysisAjax";
     /** 资产负载表 */
-    private final static String ZCFZB_URL="http://emweb.securities.eastmoney.com/NewFinanceAnalysis/zcfzbAjax";
+    private final static String ZCFZB_URL="http://eastmoney.securities.eastmoney.com/NewFinanceAnalysis/zcfzbAjax";
     /** 利润表 */
-    private final static String LRB_URL="http://emweb.securities.eastmoney.com/NewFinanceAnalysis/lrbAjax";
+    private final static String LRB_URL="http://eastmoney.securities.eastmoney.com/NewFinanceAnalysis/lrbAjax";
     /** 现金流量表 */
-    private final static String XJLLB_URL="http://emweb.securities.eastmoney.com/NewFinanceAnalysis/xjllbAjax";
+    private final static String XJLLB_URL="http://eastmoney.securities.eastmoney.com/NewFinanceAnalysis/xjllbAjax";
     /** 百分比报表 */
-    private final static String PERCENT_INDEX_URL="http://emweb.securities.eastmoney.com/NewFinanceAnalysis/PercentAjax_Indx";
-    private final static String PERCENT_URL="http://emweb.securities.eastmoney.com/NewFinanceAnalysis/PercentAjax";
+    private final static String PERCENT_INDEX_URL="http://eastmoney.securities.eastmoney.com/NewFinanceAnalysis/PercentAjax_Indx";
+    private final static String PERCENT_URL="http://eastmoney.securities.eastmoney.com/NewFinanceAnalysis/PercentAjax";
 
     /**
      * 抓取主要指标

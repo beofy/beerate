@@ -1,4 +1,4 @@
-package cn.beerate.service.emweb;
+package cn.beerate.service.eastmoney;
 
 import cn.beerate.common.Message;
 import cn.beerate.service.base.BaseCrawlService;
@@ -12,8 +12,8 @@ import java.util.Map;
  */
 @Component
 public class BonusFinancingService extends BaseCrawlService {
-    private final static String BONUS_FINANCING_AJAX="http://emweb.securities.eastmoney.com/BonusFinancing/BonusFinancingAjax";
-    private final static String BONUS_DETAIL_CHART_AJAX="http://emweb.securities.eastmoney.com/BonusFinancing/BonusDetailChartAjax";
+    private final static String BONUS_FINANCING_AJAX="http://eastmoney.securities.eastmoney.com/BonusFinancing/BonusFinancingAjax";
+    private final static String BONUS_DETAIL_CHART_AJAX="http://eastmoney.securities.eastmoney.com/BonusFinancing/BonusDetailChartAjax";
 
     /**
      *  抓取分红融资<br>

@@ -125,7 +125,7 @@ public class Crawler {
 //       String html = Crawler.getInstance().getHtml("http://emweb.securities.eastmoney.com/NewFinanceAnalysis/Index?type=soft&code=SZ000001");
 //       System.out.println(html);
 
-        Map map = Crawler.getInstance().getHidden("http://emweb.securities.eastmoney.com/NewFinanceAnalysis/Index?type=soft&code=SZ000001");
+        Map map = Crawler.getInstance().getHidden("http://eastmoney.securities.eastmoney.com/NewFinanceAnalysis/Index?type=soft&code=SZ000001");
 
 
     }

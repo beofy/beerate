@@ -5,7 +5,7 @@ import cn.beerate.common.util.DateUtil;
 import cn.beerate.common.util.StockCodeUtil;
 import cn.beerate.model.bean.ShareholderResearch;
 import cn.beerate.model.bean.shareholderresearch.Zlcc;
-import cn.beerate.service.emweb.ShareholderResearchService;
+import cn.beerate.service.eastmoney.ShareholderResearchService;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import io.swagger.annotations.*;

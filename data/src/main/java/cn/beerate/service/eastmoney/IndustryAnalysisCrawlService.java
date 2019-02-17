@@ -1,4 +1,4 @@
-package cn.beerate.service.emweb;
+package cn.beerate.service.eastmoney;
 
 import cn.beerate.common.Message;
 import cn.beerate.service.base.BaseCrawlService;
@@ -12,9 +12,9 @@ import java.util.Map;
 @Transactional
 public class IndustryAnalysisCrawlService extends BaseCrawlService {
 
-    private final static String INDEX_URL="http://emweb.securities.eastmoney.com/IndustryAnalysis/Index";
-    private final static String URL ="http://emweb.securities.eastmoney.com/IndustryAnalysis/IndustryAnalysisAjax";
-    private final static String STOCKPERFORMANCE_URL ="http://emweb.securities.eastmoney.com/IndustryAnalysis/StockPerformanceAjax";
+    private final static String INDEX_URL="http://eastmoney.securities.eastmoney.com/IndustryAnalysis/Index";
+    private final static String URL ="http://eastmoney.securities.eastmoney.com/IndustryAnalysis/IndustryAnalysisAjax";
+    private final static String STOCKPERFORMANCE_URL ="http://eastmoney.securities.eastmoney.com/IndustryAnalysis/StockPerformanceAjax";
 
     /**
      * 根据股票代码抓取

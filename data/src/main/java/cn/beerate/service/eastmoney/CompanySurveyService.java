@@ -1,4 +1,4 @@
-package cn.beerate.service.emweb;
+package cn.beerate.service.eastmoney;
 
 
 import cn.beerate.common.Message;
@@ -16,7 +16,7 @@ import java.util.Map;
 @Component
 @Transactional
 public class CompanySurveyService extends BaseCrawlService {
-    private final static String URL="http://emweb.securities.eastmoney.com/companysurvey/CompanySurveyAjax";
+    private final static String URL="http://eastmoney.securities.eastmoney.com/companysurvey/CompanySurveyAjax";
 
     //抓取公司概况
     public Message<String> companySurvey(String stockCode){

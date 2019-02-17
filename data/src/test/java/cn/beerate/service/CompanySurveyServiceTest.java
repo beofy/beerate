@@ -1,6 +1,6 @@
 package cn.beerate.service;
 
-import cn.beerate.service.emweb.CompanySurveyService;
+import cn.beerate.service.eastmoney.CompanySurveyService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

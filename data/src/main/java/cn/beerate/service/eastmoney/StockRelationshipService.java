@@ -1,4 +1,4 @@
-package cn.beerate.service.emweb;
+package cn.beerate.service.eastmoney;
 
 import cn.beerate.common.Message;
 import cn.beerate.service.base.BaseCrawlService;
@@ -15,19 +15,19 @@ import java.util.Map;
 @Transactional
 public class StockRelationshipService extends BaseCrawlService {
     /** 同行业个股排名  */
-    private final static String STOCK_RELATIONSHIP_AJAX="http://emweb.securities.eastmoney.com/StockRelationship/StockRelationshipAjax";
+    private final static String STOCK_RELATIONSHIP_AJAX="http://eastmoney.securities.eastmoney.com/StockRelationship/StockRelationshipAjax";
 
     /** 同概念个股排名-类型 */
-    private final static String GET_CONCEPT_LIST="http://emweb.securities.eastmoney.com/StockRelationship2/GetConceptList";
+    private final static String GET_CONCEPT_LIST="http://eastmoney.securities.eastmoney.com/StockRelationship2/GetConceptList";
 
     /** 同概念个股排名 */
-    private final static String GET_SAME_CONCEPT_STOCK_RANK_LIST= "http://emweb.securities.eastmoney.com/StockRelationship2/GetSameConceptStockRankList";
+    private final static String GET_SAME_CONCEPT_STOCK_RANK_LIST= "http://eastmoney.securities.eastmoney.com/StockRelationship2/GetSameConceptStockRankList";
 
     /** 3 、6 、12日内涨幅最大 */
-    private final static String GET_SANE_CONCEPT_DAY_RANK_INFO="http://emweb.securities.eastmoney.com/StockRelationship2/GetSameConceptDayRankInfo";
+    private final static String GET_SANE_CONCEPT_DAY_RANK_INFO="http://eastmoney.securities.eastmoney.com/StockRelationship2/GetSameConceptDayRankInfo";
 
     /** 同地域个股排名 */
-    private final static String STOCK_RELATIONSHIP_AJAX3="http://emweb.securities.eastmoney.com/StockRelationship3/StockRelationshipAjax";
+    private final static String STOCK_RELATIONSHIP_AJAX3="http://eastmoney.securities.eastmoney.com/StockRelationship3/StockRelationshipAjax";
 
     /**
      * 同概念个股排名

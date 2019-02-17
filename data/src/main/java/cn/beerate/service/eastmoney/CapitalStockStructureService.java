@@ -1,4 +1,4 @@
-package cn.beerate.service.emweb;
+package cn.beerate.service.eastmoney;
 
 import cn.beerate.common.Message;
 import cn.beerate.service.base.BaseCrawlService;
@@ -14,7 +14,7 @@ import java.util.Map;
 @Component
 @Transactional
 public class CapitalStockStructureService extends BaseCrawlService {
-    private final static String CAPITAL_STOCK_STRUCTURE_AJAX="http://emweb.securities.eastmoney.com/CapitalStockStructure/CapitalStockStructureAjax";
+    private final static String CAPITAL_STOCK_STRUCTURE_AJAX="http://eastmoney.securities.eastmoney.com/CapitalStockStructure/CapitalStockStructureAjax";
 
     /**
      * 股本结构

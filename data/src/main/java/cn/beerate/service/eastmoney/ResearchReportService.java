@@ -1,4 +1,4 @@
-package cn.beerate.service.emweb;
+package cn.beerate.service.eastmoney;
 
 import cn.beerate.common.Message;
 import cn.beerate.service.base.BaseCrawlService;
@@ -11,9 +11,9 @@ import java.util.Map;
 @Component
 @Transactional
 public class ResearchReportService extends BaseCrawlService {
-    private final static String INDEX_URL="http://emweb.securities.eastmoney.com/ResearchReport/Index";
+    private final static String INDEX_URL="http://eastmoney.securities.eastmoney.com/ResearchReport/Index";
 
-    private final static String URL="http://emweb.securities.eastmoney.com/ResearchReport/ResearchReportAjax";
+    private final static String URL="http://eastmoney.securities.eastmoney.com/ResearchReport/ResearchReportAjax";
 
     /**
      * 抓取研究报告

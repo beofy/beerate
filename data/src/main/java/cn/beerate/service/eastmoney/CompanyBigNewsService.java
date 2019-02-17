@@ -1,4 +1,4 @@
-package cn.beerate.service.emweb;
+package cn.beerate.service.eastmoney;
 
 import cn.beerate.common.Message;
 import cn.beerate.service.base.BaseCrawlService;
@@ -12,9 +12,9 @@ import java.util.Map;
 @Transactional
 public class CompanyBigNewsService extends BaseCrawlService {
 
-    private final static String URL = "http://emweb.securities.eastmoney.com/companybignews/CompanyBigNewsAjax";
+    private final static String URL = "http://eastmoney.securities.eastmoney.com/companybignews/CompanyBigNewsAjax";
 
-    private final static String PLEDGEHOLDER_URL="http://emweb.securities.eastmoney.com/CompanyBigNews/GetPledgeHolder";
+    private final static String PLEDGEHOLDER_URL="http://eastmoney.securities.eastmoney.com/CompanyBigNews/GetPledgeHolder";
 
     /**
      *  抓取公司大事

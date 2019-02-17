@@ -1,4 +1,4 @@
-package cn.beerate.service.emweb;
+package cn.beerate.service.eastmoney;
 
 import cn.beerate.common.Message;
 import cn.beerate.service.base.BaseCrawlService;
@@ -14,9 +14,9 @@ import java.util.Map;
 @Component
 @Transactional
 public class ShareholderResearchService extends BaseCrawlService {
-    private static final String URL="http://emweb.securities.eastmoney.com/ShareholderResearch/ShareholderResearchAjax";
+    private static final String URL="http://eastmoney.securities.eastmoney.com/ShareholderResearch/ShareholderResearchAjax";
 
-    private static final String POSITION_URL="http://emweb.securities.eastmoney.com/ShareholderResearch/MainPositionsHodlerAjax";
+    private static final String POSITION_URL="http://eastmoney.securities.eastmoney.com/ShareholderResearch/MainPositionsHodlerAjax";
     /**
      *  根据股票代码抓取-股东研究
      *  @param stockCode 股票代码
