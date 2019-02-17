@@ -1,4 +1,4 @@
-package cn.beerate.service;
+package cn.beerate.service.eastmoney;
 
 import cn.beerate.common.Message;
 import cn.beerate.service.eastmoney.NewFinanceAnalysisService;

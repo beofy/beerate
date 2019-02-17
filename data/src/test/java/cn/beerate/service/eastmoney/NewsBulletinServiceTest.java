@@ -1,6 +1,6 @@
-package cn.beerate.service;
+package cn.beerate.service.eastmoney;
 
-import cn.beerate.service.eastmoney.ResearchReportService;
+import cn.beerate.service.eastmoney.NewsBulletinService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,13 +9,13 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("/applicationContext.xml")
-public class ResearchReportServiceTest {
+public class NewsBulletinServiceTest {
 
     @Autowired
-    private ResearchReportService researchReportService;
+    private NewsBulletinService bulletinService;
 
     @Test
-    public void testResearchReport(){
-        researchReportService.researchReport("sz000001");
+    public void testNewsBulletin(){
+        this.bulletinService.newsBulletin("sz000001");
     }
 }

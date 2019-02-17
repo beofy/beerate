@@ -1,6 +1,6 @@
-package cn.beerate.service;
+package cn.beerate.service.eastmoney;
 
-import cn.beerate.service.eastmoney.IndustryAnalysisCrawlService;
+import cn.beerate.service.eastmoney.ProfitForecastService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,14 +9,12 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("/applicationContext.xml")
-public class IndustryAnalysisServiceTest {
-
+public class ProfitForecastServiceTest {
     @Autowired
-    private IndustryAnalysisCrawlService industryAnalysisService;
+    private ProfitForecastService profitForecastService;
 
     @Test
-    public void testIndustryAnalysis(){
-        industryAnalysisService.industryAnalysis("sz000001");
+    public void testProfitForecast(){
+        profitForecastService.profitForecast("sz000001");
     }
-
 }
