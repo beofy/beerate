@@ -12,9 +12,9 @@ import java.util.Map;
 @Transactional
 public class CompanyBigNewsService extends BaseCrawlService {
 
-    private final static String URL = "http://eastmoney.securities.eastmoney.com/companybignews/CompanyBigNewsAjax";
+    private final String URL = "http://emweb.securities.eastmoney.com/companybignews/CompanyBigNewsAjax";
 
-    private final static String PLEDGEHOLDER_URL="http://eastmoney.securities.eastmoney.com/CompanyBigNews/GetPledgeHolder";
+    private final String PLEDGEHOLDER_URL="http://emweb.securities.eastmoney.com/CompanyBigNews/GetPledgeHolder";
 
     /**
      *  抓取公司大事
@@ -25,7 +25,7 @@ public class CompanyBigNewsService extends BaseCrawlService {
         params.put("requesttimes","1");
         params.put("code",stockCode);
 
-        return super.crawl(CompanyBigNewsService.URL, params);
+        return Message.success(super.getText(this.URL,params));
     }
 
     /**
@@ -39,6 +39,6 @@ public class CompanyBigNewsService extends BaseCrawlService {
         params.put("code",code);
         params.put("pageIndex",pageIndex);
 
-        return super.crawl(CompanyBigNewsService.PLEDGEHOLDER_URL,params);
+        return Message.success(super.getText(this.PLEDGEHOLDER_URL,params));
     }
 }

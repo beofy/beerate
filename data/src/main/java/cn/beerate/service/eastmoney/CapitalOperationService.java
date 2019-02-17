@@ -15,7 +15,7 @@ import java.util.Map;
 @Transactional
 public class CapitalOperationService extends BaseCrawlService {
 
-    private final static String CAPITAL_OPERATION_AJAX="http://eastmoney.securities.eastmoney.com/CapitalOperation/CapitalOperationAjax";
+    private final String CAPITAL_OPERATION_AJAX="http://emweb.securities.eastmoney.com/CapitalOperation/CapitalOperationAjax";
 
     /**
      * 资本运作
@@ -50,7 +50,7 @@ public class CapitalOperationService extends BaseCrawlService {
         params.put("orderBy",orderBy);
         params.put("isAsc",isAsc);
 
-        return super.crawl(CapitalOperationService.CAPITAL_OPERATION_AJAX,params);
+        return Message.success(super.getText(this.CAPITAL_OPERATION_AJAX,params));
     }
 
 }

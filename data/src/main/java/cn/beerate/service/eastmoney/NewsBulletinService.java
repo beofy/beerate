@@ -11,7 +11,7 @@ import java.util.Map;
 @Component
 @Transactional
 public class NewsBulletinService extends BaseCrawlService {
-    private final static String URL ="http://eastmoney.securities.eastmoney.com/NewsBulletin/NewsBulletinAjax";
+    private final String URL ="http://emweb.securities.eastmoney.com/NewsBulletin/NewsBulletinAjax";
 
     /**
      * 抓取新闻公告
@@ -21,7 +21,7 @@ public class NewsBulletinService extends BaseCrawlService {
         Map<String,String> params = new HashMap<>();
         params.put("code",stockCode);
 
-        return super.crawl(NewsBulletinService.URL,params);
+        return Message.success(super.getText(this.URL,params));
     }
 
 }

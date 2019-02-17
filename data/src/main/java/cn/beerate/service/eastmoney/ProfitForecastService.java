@@ -11,7 +11,7 @@ import java.util.Map;
 @Component
 @Transactional
 public class ProfitForecastService extends BaseCrawlService {
-    private final static String URL="http://eastmoney.securities.eastmoney.com/ProfitForecast/ProfitForecastAjax";
+    private final String URL="http://emweb.securities.eastmoney.com/ProfitForecast/ProfitForecastAjax";
 
     /**
      * 抓取机构预测
@@ -21,7 +21,7 @@ public class ProfitForecastService extends BaseCrawlService {
         Map<String,String> params = new HashMap<>();
         params.put("code",stockCode);
 
-        return super.crawl(ProfitForecastService.URL,params);
+        return Message.success(super.getText(this.URL,params));
     }
 
 }

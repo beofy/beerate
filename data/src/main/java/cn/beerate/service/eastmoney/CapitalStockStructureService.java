@@ -14,7 +14,7 @@ import java.util.Map;
 @Component
 @Transactional
 public class CapitalStockStructureService extends BaseCrawlService {
-    private final static String CAPITAL_STOCK_STRUCTURE_AJAX="http://eastmoney.securities.eastmoney.com/CapitalStockStructure/CapitalStockStructureAjax";
+    private final String CAPITAL_STOCK_STRUCTURE_AJAX="http://emweb.securities.eastmoney.com/CapitalStockStructure/CapitalStockStructureAjax";
 
     /**
      * 股本结构
@@ -25,6 +25,6 @@ public class CapitalStockStructureService extends BaseCrawlService {
         Map<String,String> params = new HashMap<>();
         params.put("code",code);
 
-        return super.crawl(CapitalStockStructureService.CAPITAL_STOCK_STRUCTURE_AJAX,params);
+        return Message.success(super.getText(this.CAPITAL_STOCK_STRUCTURE_AJAX,params));
     }
 }

@@ -14,9 +14,9 @@ import java.util.Map;
 @Component
 @Transactional
 public class ShareholderResearchService extends BaseCrawlService {
-    private static final String URL="http://eastmoney.securities.eastmoney.com/ShareholderResearch/ShareholderResearchAjax";
+    private final String URL="http://emweb.securities.eastmoney.com/ShareholderResearch/ShareholderResearchAjax";
 
-    private static final String POSITION_URL="http://eastmoney.securities.eastmoney.com/ShareholderResearch/MainPositionsHodlerAjax";
+    private final String POSITION_URL="http://emweb.securities.eastmoney.com/ShareholderResearch/MainPositionsHodlerAjax";
     /**
      *  根据股票代码抓取-股东研究
      *  @param stockCode 股票代码
@@ -25,7 +25,7 @@ public class ShareholderResearchService extends BaseCrawlService {
         Map<String,String> params = new HashMap<>();
         params.put("code",stockCode);
 
-        return super.crawl(ShareholderResearchService.URL,params);
+        return Message.success(super.getText(this.URL,params));
     }
 
     /**
@@ -38,7 +38,7 @@ public class ShareholderResearchService extends BaseCrawlService {
         params.put("date",date);
         params.put("code",stockCode);
 
-        return super.crawl(ShareholderResearchService.POSITION_URL,params);
+        return Message.success(super.getText(this.URL,params));
     }
 
 }

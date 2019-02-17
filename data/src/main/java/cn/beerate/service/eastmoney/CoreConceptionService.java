@@ -12,7 +12,7 @@ import java.util.Map;
 @Transactional
 public class CoreConceptionService extends BaseCrawlService {
 
-    private final static String URL="http://eastmoney.securities.eastmoney.com/CoreConception/CoreConceptionAjax";
+    private final String URL="http://emweb.securities.eastmoney.com/CoreConception/CoreConceptionAjax";
 
     /**
      * 抓取核心题材
@@ -22,7 +22,7 @@ public class CoreConceptionService extends BaseCrawlService {
         Map<String,String> params = new HashMap<>();
         params.put("code",stockCode);
 
-        return super.crawl(CoreConceptionService.URL,params);
+        return Message.success(super.getText(this.URL,params));
     }
 
 }

@@ -14,7 +14,7 @@ import java.util.Map;
 @Component
 @Transactional
 public class CompanyManagementService extends BaseCrawlService {
-    private final static String COMPANY_MANAGEMENT_AJAX="http://eastmoney.securities.eastmoney.com/CompanyManagement/CompanyManagementAjax";
+    private final String COMPANY_MANAGEMENT_AJAX="http://emweb.securities.eastmoney.com/CompanyManagement/CompanyManagementAjax";
 
     /**
      * 公司高管
@@ -24,7 +24,7 @@ public class CompanyManagementService extends BaseCrawlService {
         Map<String,String> params = new HashMap<>();
         params.put("code",code);
 
-        return super.crawl(CompanyManagementService.COMPANY_MANAGEMENT_AJAX,params);
+        return Message.success(super.getText(this.COMPANY_MANAGEMENT_AJAX,params));
     }
 
 }

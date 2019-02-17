@@ -12,9 +12,9 @@ import java.util.Map;
 @Transactional
 public class IndustryAnalysisCrawlService extends BaseCrawlService {
 
-    private final static String INDEX_URL="http://eastmoney.securities.eastmoney.com/IndustryAnalysis/Index";
-    private final static String URL ="http://eastmoney.securities.eastmoney.com/IndustryAnalysis/IndustryAnalysisAjax";
-    private final static String STOCKPERFORMANCE_URL ="http://eastmoney.securities.eastmoney.com/IndustryAnalysis/StockPerformanceAjax";
+    private final String INDEX_URL="http://emweb.securities.eastmoney.com/IndustryAnalysis/Index";
+    private final String URL ="http://emweb.securities.eastmoney.com/IndustryAnalysis/IndustryAnalysisAjax";
+    private final String STOCKPERFORMANCE_URL ="http://emweb.securities.eastmoney.com/IndustryAnalysis/StockPerformanceAjax";
 
     /**
      * 根据股票代码抓取
@@ -23,9 +23,9 @@ public class IndustryAnalysisCrawlService extends BaseCrawlService {
     public Message<String> industryAnalysis(String stockCode){
         Map<String,String> params = new HashMap<>();
         params.put("code",stockCode);
-        params.put("icode",super.getICode(IndustryAnalysisCrawlService.INDEX_URL,stockCode));
+        params.put("icode",super.getICode(this.INDEX_URL,stockCode));
 
-        return  super.crawl(IndustryAnalysisCrawlService.URL,params);
+        return Message.success(super.getText(this.URL,params));
     }
 
     /**
@@ -37,9 +37,7 @@ public class IndustryAnalysisCrawlService extends BaseCrawlService {
         params.put("code",stockCode);
         params.put("month",month);
 
-        return super.crawl(IndustryAnalysisCrawlService.STOCKPERFORMANCE_URL,params);
+        return Message.success(super.getText(this.STOCKPERFORMANCE_URL,params));
     }
-
-
 
 }

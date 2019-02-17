@@ -14,7 +14,7 @@ import java.util.Map;
 @Component
 @Transactional
 public class OperationsRequiredService extends BaseCrawlService {
-    private final static String URL="http://eastmoney.securities.eastmoney.com/OperationsRequired/OperationsRequiredAjax";
+    private final String URL="http://emweb.securities.eastmoney.com/OperationsRequired/OperationsRequiredAjax";
 
     /**
      *  操盘必读
@@ -25,6 +25,6 @@ public class OperationsRequiredService extends BaseCrawlService {
         params.put("times","1");
         params.put("code",stockCode);
 
-        return super.crawl(OperationsRequiredService.URL,params);
+        return Message.success(super.getText(this.URL,params));
     }
 }

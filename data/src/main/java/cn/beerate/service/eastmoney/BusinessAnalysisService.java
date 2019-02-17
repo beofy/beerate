@@ -14,7 +14,7 @@ import java.util.Map;
 @Component
 @Transactional
 public class BusinessAnalysisService extends BaseCrawlService {
-    private final static String URL="http://eastmoney.securities.eastmoney.com/BusinessAnalysis/BusinessAnalysisAjax";
+    private final String URL="http://emweb.securities.eastmoney.com/BusinessAnalysis/BusinessAnalysisAjax";
 
     /**
      * 抓取经营分析
@@ -25,7 +25,7 @@ public class BusinessAnalysisService extends BaseCrawlService {
         Map<String,String> params = new HashMap<>();
         params.put("code",stockCode);
 
-        return super.crawl(BusinessAnalysisService.URL,params);
+        return Message.success(super.getText(this.URL,params));
     }
 
 }

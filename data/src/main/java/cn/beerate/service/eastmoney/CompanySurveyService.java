@@ -16,13 +16,13 @@ import java.util.Map;
 @Component
 @Transactional
 public class CompanySurveyService extends BaseCrawlService {
-    private final static String URL="http://eastmoney.securities.eastmoney.com/companysurvey/CompanySurveyAjax";
+    private final String URL="http://emweb.securities.eastmoney.com/companysurvey/CompanySurveyAjax";
 
     //抓取公司概况
     public Message<String> companySurvey(String stockCode){
         Map<String,String> params = new HashMap<>();
         params.put("code",stockCode);
 
-        return super.crawl(CompanySurveyService.URL,params);
+        return Message.success(super.getText(this.URL,params));
     }
 }

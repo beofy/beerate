@@ -12,8 +12,8 @@ import java.util.Map;
  */
 @Component
 public class BonusFinancingService extends BaseCrawlService {
-    private final static String BONUS_FINANCING_AJAX="http://eastmoney.securities.eastmoney.com/BonusFinancing/BonusFinancingAjax";
-    private final static String BONUS_DETAIL_CHART_AJAX="http://eastmoney.securities.eastmoney.com/BonusFinancing/BonusDetailChartAjax";
+    private final String BONUS_FINANCING_AJAX="http://emweb.securities.eastmoney.com/BonusFinancing/BonusFinancingAjax";
+    private final String BONUS_DETAIL_CHART_AJAX="http://emweb.securities.eastmoney.com/BonusFinancing/BonusDetailChartAjax";
 
     /**
      *  抓取分红融资<br>
@@ -25,7 +25,7 @@ public class BonusFinancingService extends BaseCrawlService {
         Map<String,String> params = new HashMap<>();
         params.put("code",stockCode);
 
-        return super.crawl(BonusFinancingService.BONUS_FINANCING_AJAX,params);
+        return Message.success(super.getText(this.BONUS_FINANCING_AJAX,params)) ;
     }
 
     /**
@@ -39,6 +39,6 @@ public class BonusFinancingService extends BaseCrawlService {
         params.put("code",stockCode);
         params.put("date",date);
 
-        return super.crawl(BonusFinancingService.BONUS_DETAIL_CHART_AJAX,params);
+        return Message.success(super.getText(this.BONUS_DETAIL_CHART_AJAX,params)) ;
     }
 }

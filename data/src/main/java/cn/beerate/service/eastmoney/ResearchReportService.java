@@ -11,9 +11,9 @@ import java.util.Map;
 @Component
 @Transactional
 public class ResearchReportService extends BaseCrawlService {
-    private final static String INDEX_URL="http://eastmoney.securities.eastmoney.com/ResearchReport/Index";
+    private final String INDEX_URL="http://emweb.securities.eastmoney.com/ResearchReport/Index";
 
-    private final static String URL="http://eastmoney.securities.eastmoney.com/ResearchReport/ResearchReportAjax";
+    private final String URL="http://emweb.securities.eastmoney.com/ResearchReport/ResearchReportAjax";
 
     /**
      * 抓取研究报告
@@ -23,9 +23,9 @@ public class ResearchReportService extends BaseCrawlService {
     public Message<String> researchReport(String stockCode){
         Map<String,String> params = new HashMap<>();
         params.put("code",stockCode);
-        params.put("icode",super.getICode(ResearchReportService.INDEX_URL,stockCode));
+        params.put("icode",super.getICode(this.INDEX_URL,stockCode));
 
-        return super.crawl(ResearchReportService.URL,params);
+        return Message.success(super.getText(this.URL,params));
     }
 
 
