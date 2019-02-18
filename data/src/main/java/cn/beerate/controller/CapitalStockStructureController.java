@@ -2,7 +2,7 @@ package cn.beerate.controller;
 
 import cn.beerate.common.Message;
 import cn.beerate.common.util.StockCodeUtil;
-import cn.beerate.model.bean.CapitalStockStructure;
+import cn.beerate.model.bean.eastmoney.CapitalStockStructure;
 import cn.beerate.service.eastmoney.CapitalStockStructureService;
 import com.alibaba.fastjson.JSONObject;
 import io.swagger.annotations.*;

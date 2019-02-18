@@ -3,7 +3,7 @@ package cn.beerate.controller;
 import cn.beerate.common.Message;
 import cn.beerate.common.util.DateUtil;
 import cn.beerate.common.util.StockCodeUtil;
-import cn.beerate.model.bean.BonusFinancing;
+import cn.beerate.model.bean.eastmoney.BonusFinancing;
 import cn.beerate.service.eastmoney.BonusFinancingService;
 import com.alibaba.fastjson.JSONObject;
 import io.swagger.annotations.*;

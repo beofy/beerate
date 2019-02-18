@@ -2,8 +2,8 @@ package cn.beerate.controller;
 
 import cn.beerate.common.Message;
 import cn.beerate.common.util.StockCodeUtil;
-import cn.beerate.model.bean.CompanyBigNews;
-import cn.beerate.model.bean.companybignews.Gqzy;
+import cn.beerate.model.bean.eastmoney.CompanyBigNews;
+import cn.beerate.model.bean.eastmoney.companybignews.Gqzy;
 import cn.beerate.service.eastmoney.CompanyBigNewsService;
 import com.alibaba.fastjson.JSONObject;
 import io.swagger.annotations.*;

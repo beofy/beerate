@@ -2,7 +2,7 @@ package cn.beerate.controller;
 
 import cn.beerate.common.Message;
 import cn.beerate.common.util.StockCodeUtil;
-import cn.beerate.model.bean.newfinanceanalysis.*;
+import cn.beerate.model.bean.eastmoney.newfinanceanalysis.*;
 import cn.beerate.service.eastmoney.NewFinanceAnalysisService;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
