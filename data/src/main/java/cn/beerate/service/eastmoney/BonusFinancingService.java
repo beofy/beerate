@@ -25,7 +25,7 @@ public class BonusFinancingService extends BaseCrawlService {
         Map<String,String> params = new HashMap<>();
         params.put("code",stockCode);
 
-        return Message.success(super.getText(this.BONUS_FINANCING_AJAX,params)) ;
+        return Message.success(super.getJsonString(this.BONUS_FINANCING_AJAX,params)) ;
     }
 
     /**
@@ -39,6 +39,6 @@ public class BonusFinancingService extends BaseCrawlService {
         params.put("code",stockCode);
         params.put("date",date);
 
-        return Message.success(super.getText(this.BONUS_DETAIL_CHART_AJAX,params)) ;
+        return Message.success(super.getJsonString(this.BONUS_DETAIL_CHART_AJAX,params)) ;
     }
 }

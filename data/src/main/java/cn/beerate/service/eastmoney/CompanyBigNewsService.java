@@ -25,7 +25,7 @@ public class CompanyBigNewsService extends BaseCrawlService {
         params.put("requesttimes","1");
         params.put("code",stockCode);
 
-        return Message.success(super.getText(this.URL,params));
+        return Message.success(super.getJsonString(this.URL,params));
     }
 
     /**
@@ -39,6 +39,6 @@ public class CompanyBigNewsService extends BaseCrawlService {
         params.put("code",code);
         params.put("pageIndex",pageIndex);
 
-        return Message.success(super.getText(this.PLEDGEHOLDER_URL,params));
+        return Message.success(super.getJsonString(this.PLEDGEHOLDER_URL,params));
     }
 }

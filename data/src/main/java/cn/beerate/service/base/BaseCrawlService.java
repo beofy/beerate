@@ -6,14 +6,13 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import springfox.documentation.spring.web.json.Json;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class BaseCrawlService {
 
-    private static Log log  = LogFactory.getLog(BaseCrawlService.class);
+    private static Log logger  = LogFactory.getLog(BaseCrawlService.class);
 
     /**
      * 请求数据
@@ -21,7 +20,7 @@ public class BaseCrawlService {
      * @param params 参数
      * @return String
      */
-    protected String crawl(String url, Map<String,String> params){
+    private String request(String url, Map<String,String> params){
         return Crawler.getInstance().getString(url,params);
     }
 
@@ -30,24 +29,44 @@ public class BaseCrawlService {
      * @param url 请求地址
      * @param params 参数
      * @return String
-     *
      */
-    public String getText(String url, Map<String,String> params){
-        Object object =  this.crawl(url,params);
-        return object.toString();
+    protected String getHtml(String url, Map<String,String> params){
+
+        return Crawler.getInstance().getHtml(url,params);
+    }
+
+
+    /**
+     * 获取jsonObject
+     * @param url 请求地址
+     * @param params 参数
+     * @return String
+     */
+    public String getJsonString(String url, Map<String,String> params){
+        try{
+            String text = this.request(url,params);
+            //解析json，并去除转义字符
+            Object o = JSON.parse(text);
+
+            return o.toString();
+        }catch (Exception e){
+            logger.info("json string parse was exception",e);
+
+            return null;
+        }
     }
 
     /**
-     * 获取json
+     * 获取jsonObject
      * @param url 请求地址
      * @param params 参数
      * @return String
      *
      */
     public JSONObject getJsonObject(String url, Map<String,String> params){
-        String result = this.crawl(url,params);
+        String jsonObject = this.getJsonString(url,params);
 
-        return JSONObject.parseObject(result);
+        return JSONObject.parseObject(jsonObject);
     }
 
     /**
@@ -57,8 +76,9 @@ public class BaseCrawlService {
      * @return String
      */
     public JSONArray getJsonArray(String url, Map<String,String> params){
-        Object object = this.crawl(url,params);
-        return (JSONArray) object;
+        String jsonArray = this.getJsonString(url,params);
+
+        return JSONArray.parseArray(jsonArray);
     }
 
     /**

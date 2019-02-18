@@ -21,7 +21,7 @@ public class RecentNewsServices extends BaseCrawlService {
         Map<String,String> params = new HashMap<>();
         params.put("code",code);
 
-        return super.getText(this.URL, params);
+        return super.getHtml(this.URL, params);
     }
 
     /**

@@ -41,7 +41,7 @@ public class NewFinanceAnalysisService extends BaseCrawlService {
         params.put("code",stockCode);
         params.put("type",type);
 
-        return Message.success(super.getText(this.MAIN_TARGET_URL,params));
+        return Message.success(super.getJsonString(this.MAIN_TARGET_URL,params));
     }
 
     /**
@@ -53,7 +53,7 @@ public class NewFinanceAnalysisService extends BaseCrawlService {
         Map<String,String> params = new HashMap<>();
         params.put("code",stockCode);
 
-        return Message.success(super.getText(this.DUBANG_ANALYSIS_URL,params));
+        return Message.success(super.getJsonString(this.DUBANG_ANALYSIS_URL,params));
     }
 
     /**
@@ -84,7 +84,7 @@ public class NewFinanceAnalysisService extends BaseCrawlService {
         params.put("endDate",endDate);//可为空
         params.put("code",stockCode);
 
-        return Message.success(super.getText(this.ZCFZB_URL,params));
+        return Message.success(super.getJsonString(this.ZCFZB_URL,params));
     }
     /**
      * 资产负债表 <br>
@@ -140,7 +140,7 @@ public class NewFinanceAnalysisService extends BaseCrawlService {
         params.put("endDate",endDate);//可为空
         params.put("code",stockCode);
 
-        return Message.success(super.getText(this.LRB_URL,params));
+        return Message.success(super.getJsonString(this.LRB_URL,params));
     }
 
     /**
@@ -195,7 +195,7 @@ public class NewFinanceAnalysisService extends BaseCrawlService {
         params.put("endDate",endDate);//可为空
         params.put("code",stockCode);
 
-        return Message.success(super.getText(this.XJLLB_URL,params));
+        return Message.success(super.getJsonString(this.XJLLB_URL,params));
     }
 
     /**
@@ -235,7 +235,7 @@ public class NewFinanceAnalysisService extends BaseCrawlService {
         params.put("ctype",ctype);
         params.put("type",type);
 
-        return Message.success(super.getText(this.PERCENT_URL,params));
+        return Message.success(super.getJsonString(this.PERCENT_URL,params));
     }
 
     /**
@@ -247,7 +247,7 @@ public class NewFinanceAnalysisService extends BaseCrawlService {
         Map<String,String> params = new HashMap<>();
         params.put("code",stockCode);
 
-        return Message.success(super.getText(this.PERCENT_INDEX_URL,params));
+        return Message.success(super.getJsonString(this.PERCENT_INDEX_URL,params));
     }
 
     /**

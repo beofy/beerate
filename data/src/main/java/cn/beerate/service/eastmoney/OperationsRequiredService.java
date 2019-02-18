@@ -25,6 +25,6 @@ public class OperationsRequiredService extends BaseCrawlService {
         params.put("times","1");
         params.put("code",stockCode);
 
-        return Message.success(super.getText(this.URL,params));
+        return Message.success(super.getJsonString(this.URL,params));
     }
 }

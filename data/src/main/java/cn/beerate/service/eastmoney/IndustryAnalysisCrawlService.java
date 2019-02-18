@@ -25,7 +25,7 @@ public class IndustryAnalysisCrawlService extends BaseCrawlService {
         params.put("code",stockCode);
         params.put("icode",super.getICode(this.INDEX_URL,stockCode));
 
-        return Message.success(super.getText(this.URL,params));
+        return Message.success(super.getJsonString(this.URL,params));
     }
 
     /**
@@ -37,7 +37,7 @@ public class IndustryAnalysisCrawlService extends BaseCrawlService {
         params.put("code",stockCode);
         params.put("month",month);
 
-        return Message.success(super.getText(this.STOCKPERFORMANCE_URL,params));
+        return Message.success(super.getJsonString(this.STOCKPERFORMANCE_URL,params));
     }
 
 }

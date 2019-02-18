@@ -50,7 +50,7 @@ public class CapitalOperationService extends BaseCrawlService {
         params.put("orderBy",orderBy);
         params.put("isAsc",isAsc);
 
-        return Message.success(super.getText(this.CAPITAL_OPERATION_AJAX,params));
+        return Message.success(super.getJsonString(this.CAPITAL_OPERATION_AJAX,params));
     }
 
 }

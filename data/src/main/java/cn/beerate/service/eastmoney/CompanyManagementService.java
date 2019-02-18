@@ -24,7 +24,7 @@ public class CompanyManagementService extends BaseCrawlService {
         Map<String,String> params = new HashMap<>();
         params.put("code",code);
 
-        return Message.success(super.getText(this.COMPANY_MANAGEMENT_AJAX,params));
+        return Message.success(super.getJsonString(this.COMPANY_MANAGEMENT_AJAX,params));
     }
 
 }

@@ -25,6 +25,6 @@ public class CapitalStockStructureService extends BaseCrawlService {
         Map<String,String> params = new HashMap<>();
         params.put("code",code);
 
-        return Message.success(super.getText(this.CAPITAL_STOCK_STRUCTURE_AJAX,params));
+        return Message.success(super.getJsonString(this.CAPITAL_STOCK_STRUCTURE_AJAX,params));
     }
 }

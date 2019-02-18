@@ -23,6 +23,6 @@ public class CompanySurveyService extends BaseCrawlService {
         Map<String,String> params = new HashMap<>();
         params.put("code",stockCode);
 
-        return Message.success(super.getText(this.URL,params));
+        return Message.success(super.getJsonString(this.URL,params));
     }
 }

@@ -42,7 +42,7 @@ public class StockRelationshipService extends BaseCrawlService {
         params.put("orderBy",orderBy);
         params.put("isAsc",isAsc);
 
-        return Message.success(super.getText(this.STOCK_RELATIONSHIP_AJAX,params));
+        return Message.success(super.getJsonString(this.STOCK_RELATIONSHIP_AJAX,params));
     }
 
     /**
@@ -57,7 +57,7 @@ public class StockRelationshipService extends BaseCrawlService {
         params.put("orderBy",orderBy);
         params.put("isAsc",isAsc);
 
-        return Message.success(super.getText(this.GET_CONCEPT_LIST,params));
+        return Message.success(super.getJsonString(this.GET_CONCEPT_LIST,params));
     }
 
 
@@ -76,7 +76,7 @@ public class StockRelationshipService extends BaseCrawlService {
         params.put("typeId",typeId);
         params.put("isAsc",isAsc);
 
-        return Message.success(super.getText(this.GET_SAME_CONCEPT_STOCK_RANK_LIST,params));
+        return Message.success(super.getJsonString(this.GET_SAME_CONCEPT_STOCK_RANK_LIST,params));
     }
 
     /**
@@ -90,7 +90,7 @@ public class StockRelationshipService extends BaseCrawlService {
         params.put("code",code);
         params.put("typeId",typeId);
 
-        return Message.success(super.getText(this.GET_SANE_CONCEPT_DAY_RANK_INFO,params));
+        return Message.success(super.getJsonString(this.GET_SANE_CONCEPT_DAY_RANK_INFO,params));
     }
 
     /**
@@ -106,6 +106,6 @@ public class StockRelationshipService extends BaseCrawlService {
         params.put("orderBy",orderBy);
         params.put("isAsc",isAsc);
 
-        return Message.success(super.getText(this.STOCK_RELATIONSHIP_AJAX3,params));
+        return Message.success(super.getJsonString(this.STOCK_RELATIONSHIP_AJAX3,params));
     }
 }

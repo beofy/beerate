@@ -25,7 +25,7 @@ public class ShareholderResearchService extends BaseCrawlService {
         Map<String,String> params = new HashMap<>();
         params.put("code",stockCode);
 
-        return Message.success(super.getText(this.URL,params));
+        return Message.success(super.getJsonString(this.URL,params));
     }
 
     /**
@@ -38,7 +38,7 @@ public class ShareholderResearchService extends BaseCrawlService {
         params.put("date",date);
         params.put("code",stockCode);
 
-        return Message.success(super.getText(this.URL,params));
+        return Message.success(super.getJsonString(this.URL,params));
     }
 
 }
