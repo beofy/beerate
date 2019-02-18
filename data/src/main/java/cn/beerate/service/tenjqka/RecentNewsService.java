@@ -13,7 +13,7 @@ import java.util.Map;
  * 最新动态
  */
 @Component
-public class RecentNewsServices extends BaseCrawlService {
+public class RecentNewsService extends BaseCrawlService {
     private final String URL="http://basic.10jqka.com.cn";
 
 

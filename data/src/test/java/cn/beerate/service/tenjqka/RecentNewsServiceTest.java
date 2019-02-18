@@ -8,14 +8,14 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("/applicationContext.xml")
-public class RecentNewsServicesTest {
+public class RecentNewsServiceTest {
 
     @Autowired
-    private RecentNewsServices recentNewsServices;
+    private RecentNewsService recentNewsService;
 
     @Test
     public void testProfile(){
-         recentNewsServices.profile("300603");
+         recentNewsService.profile("300603");
     }
 
 }
