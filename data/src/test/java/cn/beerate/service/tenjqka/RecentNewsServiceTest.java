@@ -18,4 +18,9 @@ public class RecentNewsServiceTest {
          recentNewsService.profile("300603");
     }
 
+    @Test
+    public void testPointNew(){
+        recentNewsService.pointNew("300603");
+    }
+
 }

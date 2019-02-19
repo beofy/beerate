@@ -6,6 +6,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.jsoup.nodes.Document;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -25,16 +26,20 @@ public class BaseCrawlService {
     }
 
     /**
-     * 获取字符串
+     * 获取页面html字符
      * @param url 请求地址
      * @param params 参数
      * @return String
      */
     protected String getHtml(String url, Map<String,String> params){
 
-        return Crawler.getInstance().getHtml(url,params);
+        return this.getDocument(url,params).outerHtml();
     }
 
+    protected Document getDocument(String url, Map<String,String> params){
+
+        return Crawler.getInstance().getDocument(url,params);
+    }
 
     /**
      * 获取jsonObject

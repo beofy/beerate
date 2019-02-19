@@ -9,9 +9,7 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
+import java.util.*;
 
 public class Crawler {
     private Log log = LogFactory.getLog(Crawler.class);
@@ -66,8 +64,8 @@ public class Crawler {
 
     /**
      * 获取html页面内容
-     * @param url
-     * @return
+     * @param url url
+     * @return String
      */
     public String getHtml(String url){
         return this.getDocument(url,null).outerHtml();
@@ -75,8 +73,8 @@ public class Crawler {
 
     /**
      * 获取html页面内容
-     * @param url
-     * @param params
+     * @param url url
+     * @param params 参数
      * @return String
      */
     public String getHtml(String url,Map<String,String> params){
@@ -85,15 +83,24 @@ public class Crawler {
 
     /**
      * 获取所有的隐藏区域元素
-     * @param url
-     * @param params
-     * @return
+     * @param url url
+     * @param params 参数
+     * @return Map<String,String>
      */
     public Map<String,String> getHidden(String url, Map<String,String> params){
         Document document=  this.getDocument(url,params);
+
+        return  this.getHidden(document);
+    }
+
+    /**
+     * 获取所有的隐藏区域元素
+     * @param document 页面元素
+     * @return Map<String,String>
+     */
+    public Map<String,String> getHidden(Document document){
         //所有隐藏域元素
         Elements input_hiddens = document.select("input[type=hidden]");
-
         Iterator<Element> iterator = input_hiddens.iterator();
 
         Map<String,String> map  = new HashMap<String,String>();
@@ -106,28 +113,41 @@ public class Crawler {
         }
         return map;
     }
+
     /**
      * 获取所有的隐藏区域元素
-     * @param url
-     * @return
+     * @param url url
+     * @return Map<String,String>
      */
     public Map<String,String> getHidden(String url){
        return this.getHidden(url,null);
     }
 
-
-    public static void main(String[] args) {
-//        Map<String,String> params = new HashMap<String,String>();
-//        params.put("code","SZ000001");
-//        String result = Crawler.getInstance().getString("http://emweb.securities.eastmoney.com/ShareholderResearch/ShareholderResearchAjax",params);
-//        System.out.println(result);
-
-//       String html = Crawler.getInstance().getHtml("http://emweb.securities.eastmoney.com/NewFinanceAnalysis/Index?type=soft&code=SZ000001");
-//       System.out.println(html);
-
-        Map map = Crawler.getInstance().getHidden("http://eastmoney.securities.eastmoney.com/NewFinanceAnalysis/Index?type=soft&code=SZ000001");
-
-
+    /**
+     * 获取元素内所有的标签名
+     * @param element 元素节点
+     * @return Set<String>
+     */
+    public Set<String> getTagNames(Element element){
+        Set<String> set = new HashSet<>();
+        if(element.children().size()==0){
+            return null;
+        } else{
+           Iterator<Element> elementIterator = element.children().iterator();
+           while(elementIterator.hasNext()){
+               Element element1 = elementIterator.next();
+               Set<String> set1 = getTagNames(element1);
+               if(set1!=null){
+                   for (String str :set1) {
+                       set.add(str);
+                   }
+               }
+               //当前元素标签名
+               String tagName = element1.tagName();
+               set.add(tagName);
+           }
+           return set;
+        }
     }
 
 }
