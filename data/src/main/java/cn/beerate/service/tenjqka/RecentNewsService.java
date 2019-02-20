@@ -1,7 +1,6 @@
 package cn.beerate.service.tenjqka;
 
 import cn.beerate.common.Message;
-import cn.beerate.common.util.Crawler;
 import cn.beerate.model.bean.tenjqka.Profile;
 import cn.beerate.service.base.BaseCrawlService;
 import org.jsoup.nodes.Document;
@@ -9,8 +8,6 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.springframework.stereotype.Component;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 import java.util.Iterator;
 
 
@@ -32,75 +29,87 @@ public class RecentNewsService extends BaseCrawlService {
      */
     public Message<Profile> profile(String code){
         Document document = this.getDocument(code);
-
         Element body = document.body();
-        Elements elementsA =  body.getElementsByTag("a");
-        Elements elementsSpan =  body.getElementsByTag("span");
-        Elements elementsDiv =  body.getElementsByTag("div");
+        Elements profileTables= body.select("#profile table.m_table.m_table_db");
+        Element table1 = profileTables.first();
+        Element table2 = profileTables.last();
 
         //主营业务
-        String zyyw=elementsA.eq(36).attr("title");
+        String zyyw=table1.select("tbody>tr").eq(0).select("td").eq(0).select("span").eq(1).first().text();
         //所属行业
-        String sshy=elementsSpan.eq(7).text();
+        String sshy=table1.select("tbody>tr").eq(0).select("td").eq(1).select("span").eq(1).first().text();
         //概念强排名弱
-        String gnqrpm=elementsDiv.eq(34).text();
+        String gnqrpm=table1.select("tbody>tr").eq(1).select("td").eq(0).select("div").eq(1).first().text();
+        //财务分析
+        String cwfx=null;
+        if(table1.select("tbody>tr").eq(1).select("td").size()>1){
+            cwfx = table1.select("tbody>tr").eq(1).select("td").eq(1).select("div").eq(1).first().text();
+        }
+
 
         //市盈率(动态)
-        String dtsyl=elementsSpan.eq(9).text();
+        String dtsyl=table2.selectFirst("tbody").children().select("tr").eq(0).select("td").eq(0).select("span").eq(1).text();
         //每股收益
-        String mgsy=elementsSpan.eq(11).text();
+        String mgsy=table2.selectFirst("tbody").children().select("tr").eq(0).select("td").eq(1).select("span").eq(1).text();
         //每股资本公积金
-        String mgzbgjj=elementsSpan.eq(18).text();
+        String mgzbgjj=table2.selectFirst("tbody").children().select("tr").eq(0).select("td").eq(2).select("span").eq(1).text();
         //分类
-        String fl=elementsSpan.eq(25).text();
+        String fl=table2.selectFirst("tbody").children().select("tr").eq(0).select("td").eq(3).select("span").eq(1).text();
 
         //市盈率(静态)
-        String jtsyl=elementsSpan.eq(27).text();
+        String jtsyl=table2.selectFirst("tbody").children().select("tr").eq(1).select("td").eq(0).select("span").eq(1).text();
         //营业收入
-        String yysr=elementsSpan.eq(29).text();
+        String yysr=table2.selectFirst("tbody").children().select("tr").eq(1).select("td").eq(1).select("span").eq(1).text();
         //每股未分配利润
-        String mgwfplr=elementsSpan.eq(36).text();
+        String mgwfplr=table2.selectFirst("tbody").children().select("tr").eq(1).select("td").eq(2).select("span").eq(1).text();
         //总股本
-        String zgb=elementsSpan.eq(43).text();
+        String zgb=table2.selectFirst("tbody").children().select("tr").eq(1).select("td").eq(3).select("span").eq(1).text();
 
         //市净率
-        String sjl=elementsSpan.eq(45).text();
+        String sjl=table2.selectFirst("tbody").children().select("tr").eq(2).select("td").eq(0).select("span").eq(1).text();
         //净利润
-        String jlr=elementsSpan.eq(47).text();
+        String jlr=table2.selectFirst("tbody").children().select("tr").eq(2).select("td").eq(1).select("span").eq(1).text();
         //每股经营现金流
-        String xjl=elementsSpan.eq(54).text();
+        String xjl=table2.selectFirst("tbody").children().select("tr").eq(2).select("td").eq(2).select("span").eq(1).text();
         //总市值
-        String zsz=elementsSpan.eq(61).text();
+        String zsz=table2.selectFirst("tbody").children().select("tr").eq(2).select("td").eq(3).select("span").eq(1).text();
 
         //每股净资产
-        String mgjzc=elementsSpan.eq(63).text();
+        String mgjzc=table2.selectFirst("tbody").children().select("tr").eq(3).select("td").eq(0).select("span").eq(1).text();
         //毛利率
-        String mlr=elementsSpan.eq(70).text();
+        String mlr=table2.selectFirst("tbody").children().select("tr").eq(3).select("td").eq(1).select("span").eq(1).text();
         //净资产收益率
-        String jzcsyl=elementsSpan.eq(77).text();
+        String jzcsyl=table2.selectFirst("tbody").children().select("tr").eq(3).select("td").eq(2).select("span").eq(1).text();
         //流通A股
-        String ltAg=elementsSpan.eq(84).text();
+        String ltAg=table2.selectFirst("tbody").children().select("tr").eq(3).select("td").eq(3).select("span").eq(1).text();
 
         //最新解禁
-        String zxjj=elementsSpan.eq(87).text();
+        String zxjj=null;
         //解禁股份类型
-        String jjgflx=elementsSpan.eq(89).text();
+        String jjgflx=null;
         //解禁数量
-        String jjsl=elementsSpan.eq(91).text();
+        String jjsl=null;
         //占总股本比例
-        String zzgbbl=elementsSpan.eq(95).text();
+        String zzgbbl=null;
+        if(table2.select("tbody>tr").size()>5){
+            zxjj=table2.selectFirst("tbody").children().last().previousElementSibling().select("td").eq(0).first().children().eq(1).text();
+            jjgflx=table2.selectFirst("tbody").children().last().previousElementSibling().select("td").eq(1).select("span").eq(1).text();
+            jjsl=table2.selectFirst("tbody").children().last().previousElementSibling().select("td").eq(2).select("span").eq(1).text();
+            zzgbbl=table2.selectFirst("tbody").children().last().previousElementSibling().children().eq(3).first().children().eq(1).text();
+        }
 
         //更新日期
-        String gxsj=elementsSpan.eq(98).text();
+        String gxsj=table2.selectFirst("tbody").children().last().select("td").eq(0).select("span").eq(1).text();
         //总质押股份数量
-        String zzygfsl=elementsSpan.eq(100).text();
+        String zzygfsl=table2.selectFirst("tbody").children().last().select("td").eq(1).select("span").eq(1).text();
         //质押股份占A股总股本比
-        String zygfzAgzgbz=elementsSpan.eq(104).text();
+        String zygfzAgzgbz=table2.selectFirst("tbody").children().last().children().eq(2).select("span").eq(1).text();
 
         Profile profile = new Profile();
         profile.setZyyw(zyyw);
         profile.setSshy(sshy);
         profile.setGnqrpm(gnqrpm);
+        profile.setCwfx(cwfx);
 
         profile.setDtsyl(dtsyl);
         profile.setMgsy(mgsy);
@@ -131,7 +140,9 @@ public class RecentNewsService extends BaseCrawlService {
         profile.setZzygfsl(zzygfsl);
         profile.setZygfzAgzgbz(zygfzAgzgbz);
 
+        System.out.println(profile);
         return Message.success(profile);
+
     }
 
     /**

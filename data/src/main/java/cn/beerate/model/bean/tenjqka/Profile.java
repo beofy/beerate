@@ -11,8 +11,10 @@ public class Profile {
     private String zyyw;
     @ApiModelProperty("所属行业")
     private String sshy;
-     @ApiModelProperty("概念强排名弱")
+    @ApiModelProperty("概念强排名弱")
     private String gnqrpm;
+    @ApiModelProperty("财务分析")
+    private String cwfx;
 
     @ApiModelProperty("市盈率(动态)")
     private String dtsyl;
