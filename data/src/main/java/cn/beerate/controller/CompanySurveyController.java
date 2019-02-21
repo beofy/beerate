@@ -2,8 +2,8 @@ package cn.beerate.controller;
 
 import cn.beerate.common.Message;
 import cn.beerate.common.util.StockCodeUtil;
-import cn.beerate.model.bean.CompanySurvey;
-import cn.beerate.service.CompanySurveyService;
+import cn.beerate.model.bean.eastmoney.CompanySurvey;
+import cn.beerate.service.eastmoney.CompanySurveyService;
 import com.alibaba.fastjson.JSONObject;
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;

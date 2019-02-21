@@ -1,44 +1,89 @@
 package cn.beerate.service.base;
 
-import cn.beerate.common.Message;
 import cn.beerate.common.util.Crawler;
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.jsoup.nodes.Document;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class BaseCrawlService {
 
-    private static Log log  = LogFactory.getLog(BaseCrawlService.class);
+    private static Log logger  = LogFactory.getLog(BaseCrawlService.class);
 
-    //错误代码
-    protected Message<String> crawl(String url, Map<String,String> params){
-        String result =  Crawler.getInstance().getString(url,params);
+    /**
+     * 请求数据
+     * @param url 请求地址
+     * @param params 参数
+     * @return String
+     */
+    private String request(String url, Map<String,String> params){
+        return Crawler.getInstance().getString(url,params);
+    }
 
-        log.debug(result);
+    /**
+     * 获取页面html字符
+     * @param url 请求地址
+     * @param params 参数
+     * @return String
+     */
+    protected String getHtml(String url, Map<String,String> params){
 
-        //判断数据是否异常.并去除字符串中转义字符
-        Object object = JSONObject.parse(result);
+        return this.getDocument(url,params).outerHtml();
+    }
 
-        //如果是字符串
-        if(!(object instanceof com.alibaba.fastjson.JSON)){
-            return Message.success((String)object);
+    protected Document getDocument(String url, Map<String,String> params){
+
+        return Crawler.getInstance().getDocument(url,params);
+    }
+
+    /**
+     * 获取jsonObject
+     * @param url 请求地址
+     * @param params 参数
+     * @return String
+     */
+    public String getJsonString(String url, Map<String,String> params){
+        try{
+            String text = this.request(url,params);
+            //解析json，并去除转义字符
+            Object o = JSON.parse(text);
+
+            return o.toString();
+        }catch (Exception e){
+            logger.info("json string parse was exception",e);
+
+            return null;
         }
+    }
 
-        //如果是jsonObject，判断是否
-        if(object instanceof com.alibaba.fastjson.JSONObject){
-            JSONObject jsonObject = ((JSONObject) object);
-            if(jsonObject.getIntValue("status")==Message.Code.ERROR){
-                Message<String> message = Message.error(jsonObject.getString("message"));
-                message.setData(result);
-                return message;
-            }
-        }
+    /**
+     * 获取jsonObject
+     * @param url 请求地址
+     * @param params 参数
+     * @return String
+     *
+     */
+    public JSONObject getJsonObject(String url, Map<String,String> params){
+        String jsonObject = this.getJsonString(url,params);
 
-        return Message.success(((JSON) object).toJSONString());
+        return JSONObject.parseObject(jsonObject);
+    }
+
+    /**
+     * 获取jsonArray
+     * @param url 请求地址
+     * @param params 参数
+     * @return String
+     */
+    public JSONArray getJsonArray(String url, Map<String,String> params){
+        String jsonArray = this.getJsonString(url,params);
+
+        return JSONArray.parseArray(jsonArray);
     }
 
     /**

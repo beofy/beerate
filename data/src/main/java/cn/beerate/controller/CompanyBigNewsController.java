@@ -2,9 +2,9 @@ package cn.beerate.controller;
 
 import cn.beerate.common.Message;
 import cn.beerate.common.util.StockCodeUtil;
-import cn.beerate.model.bean.CompanyBigNews;
-import cn.beerate.model.bean.companybignews.Gqzy;
-import cn.beerate.service.CompanyBigNewsService;
+import cn.beerate.model.bean.eastmoney.CompanyBigNews;
+import cn.beerate.model.bean.eastmoney.companybignews.Gqzy;
+import cn.beerate.service.eastmoney.CompanyBigNewsService;
 import com.alibaba.fastjson.JSONObject;
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +28,7 @@ public class CompanyBigNewsController {
     @GetMapping(value = "/companyBigNews")
     @ApiOperation(value = "根据股票代码获取公司大事", notes = "包含(大事提醒|重大事项|限售解禁|十大股东持股变动|高管持股变动|龙虎榜单|大宗交易|融资融券)")
     @ApiImplicitParams({
-            @ApiImplicitParam(value = "股票代码", name = "code", paramType = "path", dataType = "string", required = true),
+            @ApiImplicitParam(value = "股票代码", name = "code", paramType = "query", dataType = "string", required = true),
     })
     public Message<CompanyBigNews> companyBigNews(@Param(value = "code") String code){
         String aBStock = StockCodeUtil.getABStock(code);

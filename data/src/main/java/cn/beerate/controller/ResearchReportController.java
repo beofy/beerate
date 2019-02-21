@@ -2,12 +2,10 @@ package cn.beerate.controller;
 
 import cn.beerate.common.Message;
 import cn.beerate.common.util.StockCodeUtil;
-import cn.beerate.model.bean.ResearchReport;
-import cn.beerate.model.bean.companybignews.Gqzy;
-import cn.beerate.service.ResearchReportService;
+import cn.beerate.model.bean.eastmoney.ResearchReport;
+import cn.beerate.service.eastmoney.ResearchReportService;
 import com.alibaba.fastjson.JSONObject;
 import io.swagger.annotations.*;
-import org.jsoup.helper.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.GetMapping;
