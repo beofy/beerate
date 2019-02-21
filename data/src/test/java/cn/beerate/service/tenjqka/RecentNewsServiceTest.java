@@ -8,6 +8,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.List;
+import java.util.Set;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("/applicationContext.xml")
@@ -20,14 +21,13 @@ public class RecentNewsServiceTest {
     public void testProfile(){
          //recentNewsService.profile("300603");
 
-        List<String> stockCodes =  StockCodeUtil.getStockCode();
+        Set<String> stockCodes =  StockCodeUtil.getStockCode();
         for (String s:stockCodes) {
             try {
                 recentNewsService.profile(StockCodeUtil.getNumberStockCode(s));
             }catch (Exception e){
                 System.out.println(e.getMessage()+",股票代码："+s);
             }
-
         }
 
     }
