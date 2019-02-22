@@ -84,20 +84,18 @@ public class DisclosureService {
         DynamicCrawler dynamicCrawler = DynamicCrawler.getInstance();
         HtmlPage homePage = dynamicCrawler.getHomePage(url);
 
+        //点击公告搜索按钮
+        dynamicCrawler.executeJavaScript("javascript:document.getElementsByClassName('sub-more page-more-filter')[0].click();");
+
         //获取数据总条数
         String strTotals = Jsoup.parse(homePage.asXml()).body().selectFirst("div.page-action-info-search").text().replace(" ","");
-        int pageTotals  =Integer.parseInt(strTotals.substring(1,strTotals.length()-1));
+        String pageTotals = strTotals.replaceAll("\\D","");
 
         //获取最后一页数
         String currPageStr = Jsoup.parse(homePage.asXml()).body().select("li.page-tabs-list.active").last().text();
         int currPage = Integer.parseInt(currPageStr);
         logger.info("获取数据总条数:" +pageTotals+",总页数："+currPage);
 
-        //获取该股票公告条数
-        long disclosureCount = stockDisclosureDao.count();
-
-        //点击公告搜索按钮
-        dynamicCrawler.executeJavaScript("javascript:document.getElementsByClassName('sub-more page-more-filter')[0].click();");
         //跳转至最后一页
         dynamicCrawler.executeJavaScript(" document.getElementsByClassName('page-tabs-list sub-end')[1].click();");
 
