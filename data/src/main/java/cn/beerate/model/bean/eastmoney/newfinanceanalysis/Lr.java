@@ -7,7 +7,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 public class Lr {
+
     @ApiModelProperty("日期")
+    private String date;
+
+    @ApiModelProperty("营业收入")
     private String yysr;
 
     @ApiModelProperty("营业成本")
@@ -111,4 +115,5 @@ public class Lr {
 
     @ApiModelProperty("净利润占比")
     private String jlrzb;
+
 }
