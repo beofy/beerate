@@ -176,7 +176,7 @@ public class NewFinanceAnalysisController {
             endDate="";
         }
 
-        Message<String> message =    newFinanceAnalysisService.xjllb(reportDateType,reportType,endDate,aBStock);
+        Message<String> message =  newFinanceAnalysisService.xjllb(reportDateType,reportType,endDate,aBStock);
         //未抓取到
         if(message.getCode()==Message.Code.ERROR){
             return Message.error("无数据");
@@ -186,5 +186,30 @@ public class NewFinanceAnalysisController {
         JSONArray jsonArray = JSONArray.parseArray(message.getData());
 
         return Message.success(jsonArray.toJavaList(Xjllb.class));
+    }
+
+    @GetMapping(value = "/percent")
+    @ApiOperation(value = "根据股票代码获取百分比表", notes = "type 0-按报告期 | 1-按年度 | 2-按单季度")
+    @ApiImplicitParams({
+            @ApiImplicitParam(value = "股票代码", name = "code", paramType = "query", dataType = "string", required = true),
+            @ApiImplicitParam(value = "类型", name = "type", paramType = "query", dataType = "string", required = true),
+    })
+    public Message<Zb> percentIndex(String code,String type){
+        //参数校验
+        String aBStock = StockCodeUtil.getABStock(code);
+        if(aBStock==null){
+            return Message.error("股票代码错误");
+        }
+
+        Message<String> message =   newFinanceAnalysisService.percent(aBStock,type);
+        //未抓取到
+        if(message.getCode()==Message.Code.ERROR){
+            return Message.error("无数据");
+        }
+
+        //json转对象
+        JSONObject jsonObject = JSONObject.parseObject(message.getData());
+
+        return Message.success(jsonObject.toJavaObject(Zb.class));
     }
 }

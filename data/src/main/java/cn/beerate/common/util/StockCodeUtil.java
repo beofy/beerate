@@ -1,7 +1,9 @@
 package cn.beerate.common.util;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * 股票代码工具类
@@ -55,11 +57,11 @@ public class StockCodeUtil {
      * 获取所有股票代码(证券交易所简称开头(例如:SZ SH)
      * @return
      */
-    public static List<String> getStockCode(){
+    public static Set<String> getStockCode(){
         //股票打头
         final String[] CODE_START={"sz000","sz002","sz300","sh600","sh601","sh603"};
 
-        List<String> stockCodeList = new ArrayList<String>();
+        Set<String> stockCodeList = new HashSet<>();
         for(String start: CODE_START){
             //0-999
             for (int i = 0; i <1000 ; i++) {
