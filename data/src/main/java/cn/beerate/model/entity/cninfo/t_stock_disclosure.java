@@ -1,4 +1,4 @@
-package cn.beerate.model.entity;
+package cn.beerate.model.entity.cninfo;
 
 import cn.beerate.model.Model;
 import lombok.Data;
