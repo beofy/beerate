@@ -1,32 +1,44 @@
 package cn.beerate.service.cninfo;
 
+import cn.beerate.common.util.Crawler;
+import cn.beerate.common.util.DateUtil;
 import cn.beerate.common.util.DynamicCrawler;
 import cn.beerate.common.util.StockCodeUtil;
+import cn.beerate.dao.cninfo.StockAnnouncementDao;
 import cn.beerate.dao.cninfo.StockDisclosureDao;
-import cn.beerate.model.entity.t_stock_disclosure;
+import cn.beerate.model.bean.cninfo.AnnouncementsBean;
+import cn.beerate.model.entity.cninfo.t_stock_announcement;
+import cn.beerate.model.entity.cninfo.t_stock_disclosure;
+import cn.beerate.service.base.BaseCrawlService;
+import com.alibaba.fastjson.JSONObject;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Transactional;
 
-import java.net.URL;
+import java.io.IOException;
+import java.lang.reflect.Array;
 import java.util.*;
+import java.util.logging.Logger;
 
 /**
  * 巨潮公告
  */
 @Component
-public class DisclosureService {
+public class DisclosureService extends BaseCrawlService {
 
     private Log logger = LogFactory.getLog(DisclosureService.class);
 
     @Autowired
     private StockDisclosureDao stockDisclosureDao;
+
+    @Autowired
+    private StockAnnouncementDao stockAnnouncementDao;
 
     /** PDF公告地址 */
     private  final String PDF_URL="http://static.cninfo.com.cn/finalpage/{announcementTime}/{announcementId}.PDF";
@@ -44,7 +56,7 @@ public class DisclosureService {
      * @param code 股票代码
      * @return String
      */
-    public String getUrl(String code){
+    private String getUrl(String code){
         //深交所
         if(code.matches("^(000|002|300)[\\d]{3}$"))
             return this.TEMPLATE_URL.replace("{plate}","szse").replace("{stockCode}",code);
@@ -63,7 +75,7 @@ public class DisclosureService {
      * @param code 股票代码
      * @return String
      */
-    public String getPlateByStockCode(String code){
+    private String getPlateByStockCode(String code){
         //深交所
         if(code.matches("^(000|002|300)[\\d]{3}$"))
             return "szse";
@@ -76,9 +88,11 @@ public class DisclosureService {
     }
 
     /**
-     * 获取该股票号所有公告
+     * 保存该股票号所有公告<br>
+     * htmlunit模拟浏览器行为，效率非常慢，但方法通用
      * @param code 股票代码
      */
+    @Deprecated
     public void getCurrDisclosures(String code){
         String url = getUrl(code);
         DynamicCrawler dynamicCrawler = DynamicCrawler.getInstance();
@@ -86,6 +100,8 @@ public class DisclosureService {
 
         //点击公告搜索按钮
         dynamicCrawler.executeJavaScript("javascript:document.getElementsByClassName('sub-more page-more-filter')[0].click();");
+        //跳转至最后一页
+        dynamicCrawler.executeJavaScript("javascript:document.getElementsByClassName('page-tabs-list sub-end')[1].click();");
 
         //获取数据总条数
         String strTotals = Jsoup.parse(homePage.asXml()).body().selectFirst("div.page-action-info-search").text().replace(" ","");
@@ -96,8 +112,14 @@ public class DisclosureService {
         int currPage = Integer.parseInt(currPageStr);
         logger.info("获取数据总条数:" +pageTotals+",总页数："+currPage);
 
-        //跳转至最后一页
-        dynamicCrawler.executeJavaScript(" document.getElementsByClassName('page-tabs-list sub-end')[1].click();");
+        //查询已存数据
+        String[] announcementIdArr= stockDisclosureDao.getAllannouncementId(code);
+        Map<String,String> announcementIdMap = new HashMap<>();
+        if(announcementIdArr.length!=0) {
+            for (String s : announcementIdArr) {
+                announcementIdMap.put(s,"");
+            }
+        }
 
         //从最后一页保存
         for (int i = 1; i <= currPage; i++){
@@ -137,11 +159,14 @@ public class DisclosureService {
                 stockDisclosure.setPdf_url(map.get("pdf_url"));
                 stockDisclosure.setAnnouncementContent(map.get("announcementContent"));
 
-                //存入集合
-                stockDisclosureList.add(stockDisclosure);
+                //判断当前数据时候存在
+                if(announcementIdMap.get(announcementId)==null){
+                    //存入集合
+                    stockDisclosureList.add(stockDisclosure);
+                }
             }
 
-            //保存当前页数据
+            //保存当前页数据，此处没有事务，直接保存数据
             stockDisclosureDao.saveAll(stockDisclosureList);
 
             //上一页
@@ -157,7 +182,6 @@ public class DisclosureService {
      * @param detail_url 详情页地址
      * @return Map<String,String>
      */
-
     public Map<String,String> getPdfOrCentent(String detail_url){
         Map<String,String> map = new HashMap<>();
         map.put("pdf_url","");
@@ -187,7 +211,9 @@ public class DisclosureService {
            logger.error("打开获取详情页",e);
         }finally {
             //关闭client
-            dynamicCrawler.getWebClient().close();
+            if(dynamicCrawler!=null){
+                dynamicCrawler.getWebClient().close();
+            }
         }
 
         return map;
@@ -196,9 +222,124 @@ public class DisclosureService {
     /**
      * 批量更新公告数据
      */
+    @Deprecated
     public void updateDisclosure(){
         for (String code1 : StockCodeUtil.getStockCode()) {
-            String munberCode = StockCodeUtil.getNumberStockCode(code1);
+            String numberCode = StockCodeUtil.getNumberStockCode(code1);
+            getCurrDisclosures(numberCode);
+        }
+    }
+
+    /**
+     * 根据api接口获取股票号所有公告数据<br/>
+     * @param currPage 当前页
+     * @param searchkey ,如下：<br/>
+     * 年报 - category_ndbg_szsh<br/>
+     * 半年报 - category_bndbg_szsh<br/>
+     * 一季报 - category_yjdbg_szsh<br/>
+     * 三季报 - category_sjdbg_szsh<br/>
+     * 业绩预告 - category_yjygjxz_szsh<br/>
+     * 权益分派 - category_qyfpxzcs_szsh<br/>
+     * 董事会 - category_dshgg_szsh<br/>
+     * 监事会 - category_jshgg_szsh<br/>
+     * 股东大会 - category_gddh_szsh<br/>
+     * 日常经营 - category_rcjy_szsh<br/>
+     * 公司治理 - category_gszl_szsh<br/>
+     * 中介报告 - category_zj_szsh<br/>
+     * 首发 - category_sf_szsh<br/>
+     * 增发 - category_zf_szsh<br/>
+     * 股权激励 - category_gqjl_szsh<br/>
+     * 配股 - category_pg_szsh<br/>
+     * 解禁 - category_jj_szsh<br/>
+     * 债券 - category_zq_szsh<br/>
+     * 其他融资 - category_qtrz_szsh<br/>
+     * 股权变动 - category_gqbd_szsh<br/>
+     * 补充更正 - category_bcgz_szsh<br/>
+     * 澄清致歉 - category_cqdq_szsh<br/>
+     * 风险提示 - category_fxts_szsh<br/>
+     * 特别处理和退市 - category_tbclts_szsh<br/>
+     * 使用：多字段中间用;分割
+     * @param code 股票代码
+     */
+    public List<t_stock_announcement> getCurrDisclosuresByApi(String code, int currPage, String searchkey, String beginDate, String endDate){
+        String url = "http://www.cninfo.com.cn/new/hisAnnouncement/query";
+
+        //header参数
+        Map<String,String> header = new HashMap<>();
+        header.put("Content-Type","application/x-www-form-urlencoded");
+
+        //参数
+        Map<String,String> data = new HashMap<>();
+        data.put("pageNum",String.valueOf(currPage));
+        data.put("pageSize","30");
+        data.put("tabName","fulltext");
+        data.put("column",getPlateByStockCode(code));
+        data.put("stock",code);
+        data.put("searchkey",searchkey);
+        data.put("secid","");
+        data.put("plate","");
+        data.put("category","");
+        data.put("seDate",beginDate+" ~ "+endDate);
+        Document document = null;
+        try {
+            document = Crawler.getInstance().getConnect(url).data(data)
+                    .headers(header)
+                    .ignoreContentType(true)
+                    .post();
+        } catch (IOException e) {
+           logger.error("巨潮api接口获取公告数据异常",e);
+        }
+
+        //没有数据
+        if(document==null){
+            return new ArrayList<>();
+        }
+
+        int nextPage = currPage + 1;
+        AnnouncementsBean announcementsBean = JSONObject.parseObject(document.text()).toJavaObject(AnnouncementsBean.class);
+
+        //没有下一页数据
+        if(!announcementsBean.isHasMore()){
+           return announcementsBean.getAnnouncements();
+        }else{
+            List<t_stock_announcement> stockAnnouncementList = getCurrDisclosuresByApi(code,nextPage,searchkey,beginDate,endDate);
+            announcementsBean.getAnnouncements().forEach(stockAnnouncement -> { stockAnnouncementList.add(stockAnnouncement);});
+            return stockAnnouncementList;
+        }
+    }
+
+    /**
+     * 批量更新公告数据
+     */
+    public void updateDisclosureByApi(){
+        for (String code1 : StockCodeUtil.getStockCode()) {
+            String numberCode = StockCodeUtil.getNumberStockCode(code1);
+            String[] announcementIdArr = stockAnnouncementDao.getAllannouncementId(numberCode);
+            List<t_stock_announcement> stockAnnouncementList = getCurrDisclosuresByApi(numberCode,1,"","2000-01-01", DateUtil.dateToString(new Date(),"yyyy-MM-dd"));
+
+            //没有新出公告
+            if(announcementIdArr.length==stockAnnouncementList.size()){
+                logger.info("股票代码："+numberCode+"，没有新出公告");
+            }else{
+                //将announcementId保存为map的key
+                Map<String,String> announcementIdMap = new HashMap<>();
+                for (String s : announcementIdArr) {
+                    announcementIdMap.put(s,"");
+                }
+
+                //新出的公告
+                List<t_stock_announcement> stockAnnouncementList1 = new ArrayList<>();
+                stockAnnouncementList.forEach(stockAnnouncement -> {
+                   String announcementId = announcementIdMap.get(stockAnnouncement.getAnnouncementId());
+                   if(announcementId==null){
+                       stockAnnouncementList1.add(stockAnnouncement);
+                   }
+                });
+
+                //保存新出的公告，此处没事事务直接保存数据库
+                stockAnnouncementDao.saveAll(stockAnnouncementList1);
+                logger.info("股票代码："+numberCode+"，新出公告已更新");
+            }
         }
     }
 }
