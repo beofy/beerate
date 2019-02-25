@@ -231,6 +231,44 @@ public class DisclosureService extends BaseCrawlService {
     }
 
     /**
+     * 获取第几页公告数据<br/>
+     * 参数详情： {@link DisclosureService#getCurrDisclosuresByApi(java.lang.String, int, java.lang.String, java.lang.String, java.lang.String)}
+     * @return AnnouncementsBean
+     */
+    public AnnouncementsBean getFirstAnnouncementsBean(String code, int currPage, String searchkey, String beginDate, String endDate){
+        String url = "http://www.cninfo.com.cn/new/hisAnnouncement/query";
+
+        //header参数
+        Map<String,String> header = new HashMap<>();
+        header.put("Content-Type","application/x-www-form-urlencoded");
+
+        //参数
+        Map<String,String> data = new HashMap<>();
+        data.put("pageNum",String.valueOf(currPage));
+        data.put("pageSize","30");
+        data.put("tabName","fulltext");
+        data.put("column",getPlateByStockCode(code));
+        data.put("stock",code);
+        data.put("searchkey",searchkey);
+        data.put("secid","");
+        data.put("plate","");
+        data.put("category","");
+        data.put("seDate",beginDate+" ~ "+endDate);
+        Document document = null;
+        try {
+            document = Crawler.getInstance().getConnect(url).data(data)
+                    .headers(header)
+                    .ignoreContentType(true)
+                    .post();
+        } catch (IOException e) {
+            logger.error("巨潮api接口获取公告数据异常",e);
+            return null;
+        }
+
+        return JSONObject.parseObject(document.text()).toJavaObject(AnnouncementsBean.class);
+    }
+
+    /**
      * 根据api接口获取股票号所有公告数据<br/>
      * @param currPage 当前页
      * @param searchkey ,如下：<br/>
@@ -262,42 +300,9 @@ public class DisclosureService extends BaseCrawlService {
      * @param code 股票代码
      */
     public List<t_stock_announcement> getCurrDisclosuresByApi(String code, int currPage, String searchkey, String beginDate, String endDate){
-        String url = "http://www.cninfo.com.cn/new/hisAnnouncement/query";
-
-        //header参数
-        Map<String,String> header = new HashMap<>();
-        header.put("Content-Type","application/x-www-form-urlencoded");
-
-        //参数
-        Map<String,String> data = new HashMap<>();
-        data.put("pageNum",String.valueOf(currPage));
-        data.put("pageSize","30");
-        data.put("tabName","fulltext");
-        data.put("column",getPlateByStockCode(code));
-        data.put("stock",code);
-        data.put("searchkey",searchkey);
-        data.put("secid","");
-        data.put("plate","");
-        data.put("category","");
-        data.put("seDate",beginDate+" ~ "+endDate);
-        Document document = null;
-        try {
-            document = Crawler.getInstance().getConnect(url).data(data)
-                    .headers(header)
-                    .ignoreContentType(true)
-                    .post();
-        } catch (IOException e) {
-           logger.error("巨潮api接口获取公告数据异常",e);
-        }
-
-        //没有数据
-        if(document==null){
-            return new ArrayList<>();
-        }
+        AnnouncementsBean announcementsBean = getFirstAnnouncementsBean(code,currPage,searchkey, beginDate,endDate);
 
         int nextPage = currPage + 1;
-        AnnouncementsBean announcementsBean = JSONObject.parseObject(document.text()).toJavaObject(AnnouncementsBean.class);
-
         //没有下一页数据
         if(!announcementsBean.isHasMore()){
            return announcementsBean.getAnnouncements();
@@ -315,10 +320,10 @@ public class DisclosureService extends BaseCrawlService {
         for (String code1 : StockCodeUtil.getStockCode()) {
             String numberCode = StockCodeUtil.getNumberStockCode(code1);
             String[] announcementIdArr = stockAnnouncementDao.getAllannouncementId(numberCode);
-            List<t_stock_announcement> stockAnnouncementList = getCurrDisclosuresByApi(numberCode,1,"","2000-01-01", DateUtil.dateToString(new Date(),"yyyy-MM-dd"));
+            AnnouncementsBean announcementsBean = getFirstAnnouncementsBean(numberCode,1,"","2000-01-01", DateUtil.dateToString(new Date(),"yyyy-MM-dd"));
 
             //没有新出公告
-            if(announcementIdArr.length==stockAnnouncementList.size()){
+            if(announcementIdArr.length==announcementsBean.getTotalRecordNum()){
                 logger.info("股票代码："+numberCode+"，没有新出公告");
             }else{
                 //将announcementId保存为map的key
@@ -327,6 +332,7 @@ public class DisclosureService extends BaseCrawlService {
                     announcementIdMap.put(s,"");
                 }
 
+                List<t_stock_announcement> stockAnnouncementList =getCurrDisclosuresByApi(numberCode,1,"","2000-01-01", DateUtil.dateToString(new Date(),"yyyy-MM-dd"));
                 //新出的公告
                 List<t_stock_announcement> stockAnnouncementList1 = new ArrayList<>();
                 stockAnnouncementList.forEach(stockAnnouncement -> {
@@ -336,7 +342,7 @@ public class DisclosureService extends BaseCrawlService {
                    }
                 });
 
-                //保存新出的公告，此处没事事务直接保存数据库
+                //保存新出的公告，此处没事务,直接保存数据库
                 stockAnnouncementDao.saveAll(stockAnnouncementList1);
                 logger.info("股票代码："+numberCode+"，新出公告已更新");
             }
