@@ -53,6 +53,14 @@
             <version>2.1.3.RELEASE</version>
         </dependency>
 
+        <!-- 包含支持UI模版（Velocity，FreeMarker，JasperReports），邮件服务，脚本服务(JRuby)， 缓存Cache（EHCache），任务计划Scheduling（uartz）方面的类。
+          外部依赖spring-context, (spring-jdbc, Velocity, FreeMarker, JasperReports, BSH, Groovy, JRuby, Quartz, EHCache) -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context-support</artifactId>
+            <version>5.1.3.RELEASE</version>
+        </dependency>
+
         <!-- mysql连接驱动包 -->
         <dependency>
             <groupId>mysql</groupId>
