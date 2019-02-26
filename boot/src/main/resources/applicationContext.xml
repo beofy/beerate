@@ -4,12 +4,12 @@
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:jpa="http://www.springframework.org/schema/data/jpa"
        xmlns:tx="http://www.springframework.org/schema/tx"
-       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:task="http://www.springframework.org/schema/task"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
        http://www.springframework.org/schema/context  http://www.springframework.org/schema/context/spring-context.xsd
        http://www.springframework.org/schema/data/jpa  http://www.springframework.org/schema/data/jpa/spring-jpa.xsd
        http://www.springframework.org/schema/tx    http://www.springframework.org/schema/tx/spring-tx.xsd
-       http://www.springframework.org/schema/aop   http://www.springframework.org/schema/aop/spring-aop.xsd
+       http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd
 ">
     <context:annotation-config/>
     <!-- 扫描service包下所有使用注解的类型 -->
@@ -20,20 +20,6 @@
 
     <!-- 数据源 -->
     <bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig"  >
-        <!--poolName属性自定义即可-->
-        <!--<property name="poolName" value="springHikariCP" />-->
-        <!--<property name="dataSourceClassName" value="${jdbc.driver}" />-->
-        <!--&lt;!&ndash; 最大连接池数量 &ndash;&gt;-->
-        <!--<property name="maximumPoolSize" value="20"/>-->
-
-        <!--<property name="dataSourceProperties">-->
-            <!--<props>-->
-                <!--<prop key="url">${jdbc.url}</prop>-->
-                <!--<prop key="user">${jdbc.username}</prop>-->
-                <!--<prop key="password">${jdbc.password}</prop>-->
-            <!--</props>-->
-        <!--</property>-->
-
         <property name="driverClassName" value="${jdbc.driver}" />
         <property name="jdbcUrl" value="${jdbc.url}" />
         <property name="username" value="${jdbc.username}" />
@@ -68,7 +54,7 @@
             <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
                 <property name="generateDdl" value="true" />
                 <property name="database" value="MYSQL" />
-                <property name="databasePlatform" value="org.hibernate.dialect.MySQL5InnoDBDialect" />
+                <property name="databasePlatform" value="org.hibernate.dialect.MySQL57Dialect" />
                 <property name="showSql" value="false" />
             </bean>
         </property>
@@ -84,7 +70,7 @@
                 <entry key="hibernate.bytecode.use_reflection_optimizer" value="true" />
                 <entry key="hibernate.cache.use_second_level_cache" value="false" />
                 <entry key="hibernate.cache.use_query_cache" value="false" />
-                <entry key="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect"/>
+                <entry key="hibernate.dialect" value="org.hibernate.dialect.MySQL57Dialect"/>
                 <entry key="hibernate.ejb.naming_strategy" value="org.hibernate.cfg.ImprovedNamingStrategy"/>
                 <entry key="hibernate.cache.provider_class" value="org.hibernate.cache.NoCacheProvider"/>
                 <entry key="hibernate.show_sql" value="false"/>
@@ -105,28 +91,6 @@
     <!-- dao -->
     <jpa:repositories base-package="cn.beerate.dao" repository-impl-postfix="Dao" entity-manager-factory-ref="entityManagerFactory" transaction-manager-ref="transactionManager" />
 
-
-
-    <!--&lt;!&ndash; 事务 &ndash;&gt;-->
-    <!--<tx:advice id="txAdvice" transaction-manager="transactionManager">-->
-        <!--<tx:attributes>-->
-            <!--<tx:method name="*" />-->
-            <!--<tx:method name="get*" read-only="true" />-->
-            <!--<tx:method name="find*" read-only="true" />-->
-            <!--<tx:method name="select*" read-only="true" />-->
-            <!--<tx:method name="delete*" propagation="REQUIRED" />-->
-            <!--<tx:method name="update*" propagation="REQUIRED" />-->
-            <!--<tx:method name="add*" propagation="REQUIRED" />-->
-            <!--<tx:method name="insert*" propagation="REQUIRED" />-->
-        <!--</tx:attributes>-->
-    <!--</tx:advice>-->
-
-    <!-- 事务入口 -->
-    <!--<aop:config>-->
-        <!--<aop:pointcut id="allServiceMethod" expression="execution(* your service implements package.*.*(..))" />-->
-        <!--<aop:advisor pointcut-ref="allServiceMethod" advice-ref="txAdvice" />-->
-    <!--</aop:config>-->
-
     <!-- 系统参数 -->
     <context:property-placeholder location="classpath:security.properties" ignore-unresolvable="true" system-properties-mode="NEVER"/>
 
@@ -135,5 +99,13 @@
         <property name="publicKey" value="${security.publicKey}"/>
         <property name="md5Key" value="${security.md5Key}"/>
     </bean>
+
+    <!--  ==========================任务调度配置==========================  -->
+    <!--  扫描任务调度所在包 -->
+    <context:component-scan base-package="cn.beerate.task" />
+    <!--开启这个配置，spring才能识别@Scheduled注解  -->
+    <task:annotation-driven scheduler="taskScheduler" mode="proxy"/>
+    <task:scheduler id="taskScheduler" pool-size="10" />
+    <!--  ==========================任务调度配置==========================  -->
 
 </beans>
