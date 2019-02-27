@@ -24,8 +24,13 @@ public class StockResearchReportServiceTest {
 
     @Test
     public void testStockResearchReport(){
-        Message<List<GGSR>> listMessage = stockResearchReportService.stockResearchReport("50","1","000001");
+        Message<List<GGSR>> listMessage = stockResearchReportService.stockResearchReport("50","1","000001","0","0");
 
         System.out.println(listMessage);
+    }
+
+    @Test
+    public void testIndustryResearchReport(){
+        stockResearchReportService.industryResearchReport("50","1");
     }
 }
