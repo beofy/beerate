@@ -13,7 +13,7 @@ import java.util.Map;
 
 public class BaseCrawlService {
 
-    private static Log logger  = LogFactory.getLog(BaseCrawlService.class);
+    private final static Log logger  = LogFactory.getLog(BaseCrawlService.class);
 
     /**
      * 请求数据
