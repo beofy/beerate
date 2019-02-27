@@ -262,10 +262,23 @@ public class DisclosureService extends BaseCrawlService {
                     .post();
         } catch (IOException e) {
             logger.error("巨潮api接口获取公告数据异常",e);
-            return null;
+            AnnouncementsBean announcementsBean = new AnnouncementsBean();
+            announcementsBean.setAnnouncements(new ArrayList<>());
+            announcementsBean.setHasMore(false);
+            return announcementsBean;
         }
 
-        return JSONObject.parseObject(document.text()).toJavaObject(AnnouncementsBean.class);
+        try {
+            String result = document.text();
+            JSONObject jsonObject = JSONObject.parseObject(result);
+            return jsonObject.toJavaObject(AnnouncementsBean.class);
+        } catch (Exception e) {
+            logger.error("数据转换json异常:result",e);
+            AnnouncementsBean announcementsBean = new AnnouncementsBean();
+            announcementsBean.setAnnouncements(new ArrayList<>());
+            announcementsBean.setHasMore(false);
+            return announcementsBean;
+        }
     }
 
     /**
