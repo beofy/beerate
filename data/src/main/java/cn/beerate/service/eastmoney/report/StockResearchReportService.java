@@ -33,8 +33,8 @@ public class StockResearchReportService extends BaseCrawlService {
         params.put("ps",pageSize);
         params.put("p",currPage);
         params.put("code",code);
-        params.put("mkt","");
-        params.put("stat","");
+        params.put("mkt",mkt);
+        params.put("stat",stat);
         //作用未知
         //params.put("cmd","");
         try{
