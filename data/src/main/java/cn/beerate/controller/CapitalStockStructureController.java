@@ -2,8 +2,8 @@ package cn.beerate.controller;
 
 import cn.beerate.common.Message;
 import cn.beerate.common.util.StockCodeUtil;
-import cn.beerate.model.bean.eastmoney.CapitalStockStructure;
-import cn.beerate.service.eastmoney.CapitalStockStructureService;
+import cn.beerate.model.bean.eastmoney.f10.CapitalStockStructure;
+import cn.beerate.service.eastmoney.f10.CapitalStockStructureService;
 import com.alibaba.fastjson.JSONObject;
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;

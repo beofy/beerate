@@ -1,6 +1,6 @@
 package cn.beerate.service.eastmoney;
 
-import cn.beerate.service.eastmoney.ResearchReportService;
+import cn.beerate.service.eastmoney.f10.ResearchReportService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

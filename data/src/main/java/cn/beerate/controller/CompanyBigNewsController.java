@@ -2,9 +2,9 @@ package cn.beerate.controller;
 
 import cn.beerate.common.Message;
 import cn.beerate.common.util.StockCodeUtil;
-import cn.beerate.model.bean.eastmoney.CompanyBigNews;
-import cn.beerate.model.bean.eastmoney.companybignews.Gqzy;
-import cn.beerate.service.eastmoney.CompanyBigNewsService;
+import cn.beerate.model.bean.eastmoney.f10.CompanyBigNews;
+import cn.beerate.model.bean.eastmoney.f10.companybignews.Gqzy;
+import cn.beerate.service.eastmoney.f10.CompanyBigNewsService;
 import com.alibaba.fastjson.JSONObject;
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
