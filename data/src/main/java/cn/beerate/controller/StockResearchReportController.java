@@ -43,7 +43,7 @@ public class StockResearchReportController {
        return stockResearchReportService.stockResearchReport(pageSize,currPage,code,mkt,stat);
     }
     @GetMapping(value = "industryReport")
-    @ApiOperation(value = "根据股票代码获取个股研报",notes = "个股研报")
+    @ApiOperation(value = "根据股票代码获取行业研报",notes = "个股研报")
     @ApiImplicitParams({
             @ApiImplicitParam(value = "每页条数", name = "pageSize", paramType = "query", dataType = "string", required = true),
             @ApiImplicitParam(value = "当前页数", name = "currPage", paramType = "query", dataType = "string", required = true),
