@@ -33,11 +33,12 @@ public class StockResearchReportController {
             @ApiImplicitParam(value = "股票代码", name = "code", paramType = "query", dataType = "string")
     })
     public Message<List<GGSR>> shareholderResearch(@Param("pageSize") String pageSize,@Param("currPage") String currPage,@Param("code") String code){
-       if(!StockCodeUtil.isStockCode(code)){
-           Message.error("股票代码错误");
-       }
-       if(code==null){
+       if(code==null||code.isEmpty()){
            code="";
+       }else{
+           if(!StockCodeUtil.isStockCode(code)){
+               return Message.error("股票代码错误");
+           }
        }
 
        return stockResearchReportService.stockResearchReport(pageSize,currPage,code);
