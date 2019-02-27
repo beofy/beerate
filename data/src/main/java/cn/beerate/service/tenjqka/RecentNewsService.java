@@ -39,13 +39,12 @@ public class RecentNewsService extends BaseCrawlService {
         //所属行业
         String sshy=table1.select("tbody>tr").eq(0).select("td").eq(1).select("span").eq(1).first().text();
         //概念强排名弱
-        String gnqrpm=table1.select("tbody>tr").eq(1).select("td").eq(0).select("div").eq(1).first().text();
+        String gnqrpm=table1.select("tbody>tr").eq(1).select("td").eq(0).select("div.f14.newconcept").eq(0).text();
         //财务分析
         String cwfx=null;
         if(table1.select("tbody>tr").eq(1).select("td").size()>1){
             cwfx = table1.select("tbody>tr").eq(1).select("td").eq(1).select("div").eq(1).first().text();
         }
-
 
         //市盈率(动态)
         String dtsyl=table2.selectFirst("tbody").children().select("tr").eq(0).select("td").eq(0).select("span").eq(1).text();
