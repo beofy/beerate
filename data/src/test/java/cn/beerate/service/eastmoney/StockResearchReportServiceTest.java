@@ -2,10 +2,7 @@ package cn.beerate.service.eastmoney;
 
 import cn.beerate.common.Message;
 import cn.beerate.model.bean.eastmoney.report.GGSR;
-import cn.beerate.service.base.BaseCrawlService;
 import cn.beerate.service.eastmoney.report.StockResearchReportService;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +28,8 @@ public class StockResearchReportServiceTest {
 
     @Test
     public void testIndustryResearchReport(){
-        stockResearchReportService.industryResearchReport("50","1");
+       Message message =stockResearchReportService.industryResearchReport("50","1","","0","0");
+
+       System.out.println(message);
     }
 }
