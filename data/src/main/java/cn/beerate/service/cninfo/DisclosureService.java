@@ -232,7 +232,37 @@ public class DisclosureService extends BaseCrawlService {
 
     /**
      * 获取第几页公告数据<br/>
-     * 参数详情： {@link DisclosureService#getCurrDisclosuresByApi(java.lang.String, int,int, java.lang.String, java.lang.String, java.lang.String)}
+     * @param code 股票代码
+     * @param currPage 当前页
+     * @param pageSize 每页条数
+     * @param searchkey  查询条件如下：<br/>
+     * 年报 - category_ndbg_szsh<br/>
+     * 半年报 - category_bndbg_szsh<br/>
+     * 一季报 - category_yjdbg_szsh<br/>
+     * 三季报 - category_sjdbg_szsh<br/>
+     * 业绩预告 - category_yjygjxz_szsh<br/>
+     * 权益分派 - category_qyfpxzcs_szsh<br/>
+     * 董事会 - category_dshgg_szsh<br/>
+     * 监事会 - category_jshgg_szsh<br/>
+     * 股东大会 - category_gddh_szsh<br/>
+     * 日常经营 - category_rcjy_szsh<br/>
+     * 公司治理 - category_gszl_szsh<br/>
+     * 中介报告 - category_zj_szsh<br/>
+     * 首发 - category_sf_szsh<br/>
+     * 增发 - category_zf_szsh<br/>
+     * 股权激励 - category_gqjl_szsh<br/>
+     * 配股 - category_pg_szsh<br/>
+     * 解禁 - category_jj_szsh<br/>
+     * 债券 - category_zq_szsh<br/>
+     * 其他融资 - category_qtrz_szsh<br/>
+     * 股权变动 - category_gqbd_szsh<br/>
+     * 补充更正 - category_bcgz_szsh<br/>
+     * 澄清致歉 - category_cqdq_szsh<br/>
+     * 风险提示 - category_fxts_szsh<br/>
+     * 特别处理和退市 - category_tbclts_szsh<br/>
+     * 使用：多字段中间用;分割
+     * @param beginDate 开始时间
+     * @param endDate 结束时间
      * @return AnnouncementsBean
      */
     public AnnouncementsBean getFirstAnnouncementsBean(String code, int currPage,int pageSize, String searchkey, String beginDate, String endDate){
@@ -283,47 +313,31 @@ public class DisclosureService extends BaseCrawlService {
 
     /**
      * 根据api接口获取股票号所有公告数据<br/>
-     * @param currPage 当前页
-     * @param searchkey ,如下：<br/>
-     * 年报 - category_ndbg_szsh<br/>
-     * 半年报 - category_bndbg_szsh<br/>
-     * 一季报 - category_yjdbg_szsh<br/>
-     * 三季报 - category_sjdbg_szsh<br/>
-     * 业绩预告 - category_yjygjxz_szsh<br/>
-     * 权益分派 - category_qyfpxzcs_szsh<br/>
-     * 董事会 - category_dshgg_szsh<br/>
-     * 监事会 - category_jshgg_szsh<br/>
-     * 股东大会 - category_gddh_szsh<br/>
-     * 日常经营 - category_rcjy_szsh<br/>
-     * 公司治理 - category_gszl_szsh<br/>
-     * 中介报告 - category_zj_szsh<br/>
-     * 首发 - category_sf_szsh<br/>
-     * 增发 - category_zf_szsh<br/>
-     * 股权激励 - category_gqjl_szsh<br/>
-     * 配股 - category_pg_szsh<br/>
-     * 解禁 - category_jj_szsh<br/>
-     * 债券 - category_zq_szsh<br/>
-     * 其他融资 - category_qtrz_szsh<br/>
-     * 股权变动 - category_gqbd_szsh<br/>
-     * 补充更正 - category_bcgz_szsh<br/>
-     * 澄清致歉 - category_cqdq_szsh<br/>
-     * 风险提示 - category_fxts_szsh<br/>
-     * 特别处理和退市 - category_tbclts_szsh<br/>
-     * 使用：多字段中间用;分割
-     * @param code 股票代码
      */
-    public List<t_stock_announcement> getCurrDisclosuresByApi(String code, int currPage,int pageSize ,String searchkey, String beginDate, String endDate){
+    public List<t_stock_announcement> getCurrDisclosuresByApi(String code, int currPage,int pageSize ,String searchkey, String beginDate, String endDate, Map<String,String> announcementIdMap){
         AnnouncementsBean announcementsBean = getFirstAnnouncementsBean(code,currPage,pageSize,searchkey, beginDate,endDate);
+
+        //查询的公告，默认按照最新时间靠前，从时间靠前依次往后判断，当已存数据的announcementIdMap(该股票号的所有announcementId)能取到时,则返回(退出递归)
+        for (t_stock_announcement announcement : announcementsBean.getAnnouncements()) {
+            //已存的announcementId
+            String announcementId = announcementIdMap.get(announcement.getAnnouncementId());
+            if(announcementId==""){
+                //设置没有下一页数据
+                announcementsBean.setHasMore(false);
+                return announcementsBean.getAnnouncements();
+            }
+        }
 
         int nextPage = currPage + 1;
         //没有下一页数据
         if(!announcementsBean.isHasMore()){
            return announcementsBean.getAnnouncements();
         }else{
-            List<t_stock_announcement> stockAnnouncementList = getCurrDisclosuresByApi(code,nextPage,pageSize,searchkey,beginDate,endDate);
+            List<t_stock_announcement> stockAnnouncementList = getCurrDisclosuresByApi(code,nextPage,pageSize,searchkey,beginDate,endDate, announcementIdMap);
             announcementsBean.getAnnouncements().forEach(stockAnnouncement -> { stockAnnouncementList.add(stockAnnouncement);});
             return stockAnnouncementList;
         }
+
     }
 
     /**
@@ -345,8 +359,9 @@ public class DisclosureService extends BaseCrawlService {
                     announcementIdMap.put(s,"");
                 }
 
-                List<t_stock_announcement> stockAnnouncementList =getCurrDisclosuresByApi(numberCode,1,30,"","2000-01-01", DateUtil.dateToString(new Date(),"yyyy-MM-dd"));
                 //新出的公告
+                List<t_stock_announcement> stockAnnouncementList =getCurrDisclosuresByApi(numberCode,1,30,"","2000-01-01", DateUtil.dateToString(new Date(),"yyyy-MM-dd"),announcementIdMap);
+
                 List<t_stock_announcement> stockAnnouncementList1 = new ArrayList<>();
                 stockAnnouncementList.forEach(stockAnnouncement -> {
                    String announcementId = announcementIdMap.get(stockAnnouncement.getAnnouncementId());
