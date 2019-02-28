@@ -24,7 +24,7 @@ public class DisclosureServiceTest {
 
     @Test
     public void testGetCurrDisclosuresByApi(){
-        disclosureService.getCurrDisclosuresByApi("000001",1,"","2000-01-01","2019-02-25");
+        disclosureService.getCurrDisclosuresByApi("000001",1,30,"","2000-01-01","2019-02-25",null);
     }
 
     @Test
