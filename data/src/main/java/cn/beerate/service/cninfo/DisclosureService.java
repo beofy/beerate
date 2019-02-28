@@ -232,10 +232,10 @@ public class DisclosureService extends BaseCrawlService {
 
     /**
      * 获取第几页公告数据<br/>
-     * 参数详情： {@link DisclosureService#getCurrDisclosuresByApi(java.lang.String, int, java.lang.String, java.lang.String, java.lang.String)}
+     * 参数详情： {@link DisclosureService#getCurrDisclosuresByApi(java.lang.String, int,int, java.lang.String, java.lang.String, java.lang.String)}
      * @return AnnouncementsBean
      */
-    public AnnouncementsBean getFirstAnnouncementsBean(String code, int currPage, String searchkey, String beginDate, String endDate){
+    public AnnouncementsBean getFirstAnnouncementsBean(String code, int currPage,int pageSize, String searchkey, String beginDate, String endDate){
         String url = "http://www.cninfo.com.cn/new/hisAnnouncement/query";
 
         //header参数
@@ -245,7 +245,7 @@ public class DisclosureService extends BaseCrawlService {
         //参数
         Map<String,String> data = new HashMap<>();
         data.put("pageNum",String.valueOf(currPage));
-        data.put("pageSize","30");
+        data.put("pageSize",String.valueOf(pageSize));
         data.put("tabName","fulltext");
         data.put("column",getPlateByStockCode(code));
         data.put("stock",code);
@@ -312,15 +312,15 @@ public class DisclosureService extends BaseCrawlService {
      * 使用：多字段中间用;分割
      * @param code 股票代码
      */
-    public List<t_stock_announcement> getCurrDisclosuresByApi(String code, int currPage, String searchkey, String beginDate, String endDate){
-        AnnouncementsBean announcementsBean = getFirstAnnouncementsBean(code,currPage,searchkey, beginDate,endDate);
+    public List<t_stock_announcement> getCurrDisclosuresByApi(String code, int currPage,int pageSize ,String searchkey, String beginDate, String endDate){
+        AnnouncementsBean announcementsBean = getFirstAnnouncementsBean(code,currPage,pageSize,searchkey, beginDate,endDate);
 
         int nextPage = currPage + 1;
         //没有下一页数据
         if(!announcementsBean.isHasMore()){
            return announcementsBean.getAnnouncements();
         }else{
-            List<t_stock_announcement> stockAnnouncementList = getCurrDisclosuresByApi(code,nextPage,searchkey,beginDate,endDate);
+            List<t_stock_announcement> stockAnnouncementList = getCurrDisclosuresByApi(code,nextPage,pageSize,searchkey,beginDate,endDate);
             announcementsBean.getAnnouncements().forEach(stockAnnouncement -> { stockAnnouncementList.add(stockAnnouncement);});
             return stockAnnouncementList;
         }
@@ -333,7 +333,7 @@ public class DisclosureService extends BaseCrawlService {
         for (String code1 : StockCodeUtil.getStockCode()) {
             String numberCode = StockCodeUtil.getNumberStockCode(code1);
             String[] announcementIdArr = stockAnnouncementDao.getAllannouncementId(numberCode);
-            AnnouncementsBean announcementsBean = getFirstAnnouncementsBean(numberCode,1,"","2000-01-01", DateUtil.dateToString(new Date(),"yyyy-MM-dd"));
+            AnnouncementsBean announcementsBean = getFirstAnnouncementsBean(numberCode,1,30,"","2000-01-01", DateUtil.dateToString(new Date(),"yyyy-MM-dd"));
 
             //没有新出公告
             if(announcementIdArr.length==announcementsBean.getTotalRecordNum()){
@@ -345,7 +345,7 @@ public class DisclosureService extends BaseCrawlService {
                     announcementIdMap.put(s,"");
                 }
 
-                List<t_stock_announcement> stockAnnouncementList =getCurrDisclosuresByApi(numberCode,1,"","2000-01-01", DateUtil.dateToString(new Date(),"yyyy-MM-dd"));
+                List<t_stock_announcement> stockAnnouncementList =getCurrDisclosuresByApi(numberCode,1,30,"","2000-01-01", DateUtil.dateToString(new Date(),"yyyy-MM-dd"));
                 //新出的公告
                 List<t_stock_announcement> stockAnnouncementList1 = new ArrayList<>();
                 stockAnnouncementList.forEach(stockAnnouncement -> {
