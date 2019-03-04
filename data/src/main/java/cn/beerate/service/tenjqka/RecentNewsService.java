@@ -139,7 +139,6 @@ public class RecentNewsService extends BaseCrawlService {
         profile.setZzygfsl(zzygfsl);
         profile.setZygfzAgzgbz(zygfzAgzgbz);
 
-        System.out.println(profile);
         return Message.success(profile);
 
     }
