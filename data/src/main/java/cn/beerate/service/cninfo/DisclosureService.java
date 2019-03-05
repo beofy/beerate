@@ -10,6 +10,7 @@ import cn.beerate.model.bean.cninfo.AnnouncementsBean;
 import cn.beerate.model.entity.cninfo.t_stock_announcement;
 import cn.beerate.model.entity.cninfo.t_stock_disclosure;
 import cn.beerate.service.base.BaseCrawlService;
+import com.alibaba.fastjson.JSONException;
 import com.alibaba.fastjson.JSONObject;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import org.apache.commons.logging.Log;
@@ -302,7 +303,7 @@ public class DisclosureService extends BaseCrawlService {
             String result = document.text();
             JSONObject jsonObject = JSONObject.parseObject(result);
             return jsonObject.toJavaObject(AnnouncementsBean.class);
-        } catch (Exception e) {
+        } catch (JSONException e) {
             logger.error("数据转换json异常:result",e);
             AnnouncementsBean announcementsBean = new AnnouncementsBean();
             announcementsBean.setAnnouncements(new ArrayList<>());
