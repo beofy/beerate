@@ -48,6 +48,16 @@ public class Message<T> {
         return new Message<T>(Message.Code.ERROR,msg);
     }
 
+    public boolean isError(){
+
+        return this.code==Code.ERROR;
+    }
+
+    public boolean isSuccess(){
+
+        return this.code==Code.SUCCESS;
+    }
+
     public class Code{
         /** 公共成功码200:处理成功 */
         public static final int SUCCESS = 200;
