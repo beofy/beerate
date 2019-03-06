@@ -28,24 +28,24 @@ public class Message<T> {
         this.data = data;
     }
 
-    public static <T> Message<T>  ok(){
-        return new Message<T>(Message.Code.SUCCESS,"success");
+    public static Message<String> ok(){
+        return new Message<>(Message.Code.SUCCESS,"success");
     }
 
-    public static <T> Message<T>  ok(String msg){
-        return new Message<T>(Message.Code.SUCCESS,msg);
+    public static Message<String> ok(String msg){
+        return new Message<>(Message.Code.SUCCESS,msg);
     }
 
     public static <T> Message<T> success(T data){
-        return new Message<T>(Message.Code.SUCCESS,"success",data);
+        return new Message<>(Message.Code.SUCCESS,"success",data);
     }
 
     public static <T> Message<T> error(){
-        return new Message<T>(Message.Code.ERROR,"error");
+        return new Message<>(Message.Code.ERROR,"error");
     }
 
     public static <T> Message<T> error(String msg){
-        return new Message<T>(Message.Code.ERROR,msg);
+        return new Message<>(Message.Code.ERROR,msg);
     }
 
     public boolean isError(){
