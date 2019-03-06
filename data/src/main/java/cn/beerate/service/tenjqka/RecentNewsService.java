@@ -2,7 +2,7 @@ package cn.beerate.service.tenjqka;
 
 import cn.beerate.common.Message;
 import cn.beerate.model.bean.tenjqka.Profile;
-import cn.beerate.service.base.BaseCrawlService;
+import cn.beerate.service.BaseCrawlService;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;

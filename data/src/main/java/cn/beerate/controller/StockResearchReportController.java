@@ -1,5 +1,6 @@
 package cn.beerate.controller;
 
+import cn.beerate.common.Constants.StatusCode;
 import cn.beerate.common.Message;
 import cn.beerate.common.util.StockCodeUtil;
 import cn.beerate.model.bean.eastmoney.report.GGSR;
@@ -15,12 +16,15 @@ import java.util.List;
 @Api(description = "机构研究报告中心")
 @RestController
 @ApiResponses({
-        @ApiResponse(code = Message.Code.SUCCESS,message = "success"),
-        @ApiResponse(code = Message.Code.ERROR,message = "error"),
+        @ApiResponse(code = StatusCode.SUCCESS,message = "success"),
+        @ApiResponse(code = StatusCode.ERROR,message = "error"),
 })
 public class StockResearchReportController {
-    @Autowired
     private StockResearchReportService stockResearchReportService;
+
+    public StockResearchReportController(StockResearchReportService stockResearchReportService) {
+        this.stockResearchReportService = stockResearchReportService;
+    }
 
     @GetMapping(value = "stockReport")
     @ApiOperation(value = "根据股票代码获取个股研报",notes = "个股研报")

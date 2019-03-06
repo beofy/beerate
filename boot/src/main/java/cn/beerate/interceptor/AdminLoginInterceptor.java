@@ -1,6 +1,7 @@
 package cn.beerate.interceptor;
 
 import cn.beerate.common.Constants.SessionKey;
+import cn.beerate.common.Constants.StatusCode;
 import cn.beerate.common.Message;
 import com.alibaba.fastjson.JSONObject;
 import org.springframework.web.cors.CorsUtils;
@@ -34,7 +35,7 @@ public class AdminLoginInterceptor implements HandlerInterceptor {
         if(session==null||session.getAttribute(SessionKey.BACK_+session.getId())==null){
             PrintWriter writer = response.getWriter();
             Message message = Message.error("未登录");
-            message.setCode(Message.Code.NOT_LOGIN);
+            message.setCode(StatusCode.NOT_LOGIN);
             writer.write(JSONObject.toJSONString(message));
             writer.close();
 

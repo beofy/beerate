@@ -1,11 +1,11 @@
 package cn.beerate.controller;
 
+import cn.beerate.common.Constants.StatusCode;
 import cn.beerate.common.Message;
 import cn.beerate.common.util.StockCodeUtil;
 import cn.beerate.model.bean.cninfo.AnnouncementsBean;
 import cn.beerate.service.cninfo.DisclosureService;
 import io.swagger.annotations.*;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -13,13 +13,16 @@ import org.springframework.web.bind.annotation.RestController;
 @Api(description = "巨潮资讯")
 @RestController
 @ApiResponses({
-        @ApiResponse(code = Message.Code.SUCCESS,message = "success"),
-        @ApiResponse(code = Message.Code.ERROR,message = "error"),
+        @ApiResponse(code = StatusCode.SUCCESS,message = "success"),
+        @ApiResponse(code = StatusCode.ERROR,message = "error"),
 })
 public class DisclosureController {
 
-    @Autowired
     private DisclosureService disclosureService;
+
+    public DisclosureController(DisclosureService disclosureService) {
+        this.disclosureService = disclosureService;
+    }
 
     @GetMapping(value = "getAnnouncements")
     @ApiOperation(value = "根据股票代码公司公告", notes = "公司公告")

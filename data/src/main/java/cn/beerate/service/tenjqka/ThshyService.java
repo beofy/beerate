@@ -4,7 +4,7 @@ import cn.beerate.common.util.DynamicCrawler;
 import cn.beerate.common.util.StringUtils;
 import cn.beerate.model.bean.tenjqka.DetailThshy;
 import cn.beerate.model.bean.tenjqka.Thshy;
-import cn.beerate.service.base.BaseCrawlService;
+import cn.beerate.service.BaseCrawlService;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;

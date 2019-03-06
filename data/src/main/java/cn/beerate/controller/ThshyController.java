@@ -1,12 +1,11 @@
 package cn.beerate.controller;
 
+import cn.beerate.common.Constants.StatusCode;
 import cn.beerate.common.Message;
-import cn.beerate.model.bean.eastmoney.report.GGSR;
 import cn.beerate.model.bean.tenjqka.DetailThshy;
 import cn.beerate.model.bean.tenjqka.Thshy;
 import cn.beerate.service.tenjqka.ThshyService;
 import io.swagger.annotations.*;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,13 +15,16 @@ import java.util.List;
 @Api(description = "同花顺行业")
 @RestController
 @ApiResponses({
-        @ApiResponse(code = Message.Code.SUCCESS,message = "success"),
-        @ApiResponse(code = Message.Code.ERROR,message = "error"),
+        @ApiResponse(code = StatusCode.SUCCESS,message = "success"),
+        @ApiResponse(code = StatusCode.ERROR,message = "error"),
 })
 public class ThshyController {
 
-    @Autowired
     private ThshyService thshyService;
+
+    public ThshyController(ThshyService thshyService) {
+        this.thshyService = thshyService;
+    }
 
     @GetMapping(value = "indexThshy")
     @ApiOperation(value = "获取同花顺行业表",notes = "同花顺行业表")

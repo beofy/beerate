@@ -1,11 +1,16 @@
 /**
   * Copyright 2019 bejson.com 
   */
-package cn.beerate.model.bean.eastmoney.f10.companysurvey;
+package cn.beerate.model.entity.eastmoney.f10.companysurvey;
 
+import cn.beerate.model.Model;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 
 /**
  * Auto-generated: 2019-01-24 11:17:10
@@ -15,7 +20,8 @@ import lombok.Data;
  */
 @ApiModel(description = "基本资料")
 @Data
-public class Jbzl {
+@Entity
+public class t_eastmoney_jbzl extends Model {
     @ApiModelProperty(value = "公司名称")
     private String gsmc;
 
@@ -120,4 +126,8 @@ public class Jbzl {
 
     @ApiModelProperty(value = "经营范围")
     private String jyfw;
+
+    @OneToOne(optional = false)
+    @JoinColumn(name = "companysurvey_id",unique = true)
+    private t_eastmoney_companysurvey companysurvey;
 }

@@ -1,13 +1,16 @@
 /**
   * Copyright 2019 bejson.com 
   */
-package cn.beerate.model.bean.eastmoney.f10;
+package cn.beerate.model.entity.eastmoney.f10.companysurvey;
 
-import cn.beerate.model.bean.eastmoney.f10.companysurvey.Fxxg;
-import cn.beerate.model.bean.eastmoney.f10.companysurvey.Jbzl;
+import cn.beerate.model.Model;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 
 /**
  * Auto-generated: 2019-01-24 11:17:10
@@ -17,12 +20,8 @@ import lombok.Data;
  */
 @ApiModel(description = "公司概况")
 @Data
-public class CompanySurvey {
-
-    private Jbzl jbzl;
-
-    private Fxxg fxxg;
-
+@Entity
+public class t_eastmoney_companysurvey extends Model {
     @ApiModelProperty(value = "股票代码(交易所简称开头)")
     private String code;
 
@@ -47,4 +46,11 @@ public class CompanySurvey {
     @ApiModelProperty(value = "到期日")
     private String expireTime;
 
+    @OneToOne(optional = false)
+    @JoinColumn(name = "jbzl_id",unique = true)
+    private t_eastmoney_jbzl jbzl;
+
+    @OneToOne(optional = false)
+    @JoinColumn(name = "fxxg_id",unique = true)
+    private t_eastmoney_fxxg fxxg;
 }

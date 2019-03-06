@@ -1,5 +1,6 @@
 package cn.beerate.controller;
 
+import cn.beerate.common.Constants.StatusCode;
 import cn.beerate.common.Message;
 import cn.beerate.common.util.StockCodeUtil;
 import cn.beerate.model.bean.eastmoney.f10.newfinanceanalysis.*;
@@ -7,7 +8,6 @@ import cn.beerate.service.eastmoney.f10.NewFinanceAnalysisService;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import io.swagger.annotations.*;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,13 +17,16 @@ import java.util.List;
 @Api(description = "财务分析")
 @RestController
 @ApiResponses({
-        @ApiResponse(code = Message.Code.SUCCESS,message = "success"),
-        @ApiResponse(code = Message.Code.ERROR,message = "error"),
+        @ApiResponse(code = StatusCode.SUCCESS,message = "success"),
+        @ApiResponse(code = StatusCode.ERROR,message = "error"),
 })
 public class NewFinanceAnalysisController {
 
-    @Autowired
     private NewFinanceAnalysisService newFinanceAnalysisService;
+
+    public NewFinanceAnalysisController(NewFinanceAnalysisService newFinanceAnalysisService) {
+        this.newFinanceAnalysisService = newFinanceAnalysisService;
+    }
 
     @GetMapping("/mainTarget")
     @ApiOperation(value = "根据股票代码获取主要指标", notes = "主要指标")
@@ -50,7 +53,7 @@ public class NewFinanceAnalysisController {
 
         Message<String> message = newFinanceAnalysisService.mainTarget(type,aBStock);
         //未抓取到
-        if(message.getCode()==Message.Code.ERROR){
+        if(message.fail()){
             return Message.error("无数据");
         }
 
@@ -75,7 +78,7 @@ public class NewFinanceAnalysisController {
 
         Message<String> message =   newFinanceAnalysisService.dubangAnalysis(aBStock);
         //未抓取到
-        if(message.getCode()==Message.Code.ERROR){
+        if(message.fail()){
             return Message.error("无数据");
         }
 
@@ -110,7 +113,7 @@ public class NewFinanceAnalysisController {
 
         Message<String> message =   newFinanceAnalysisService.zcfzb(reportDateType,reportType,endDate,aBStock);
         //未抓取到
-        if(message.getCode()==Message.Code.ERROR){
+        if(message.fail()){
             return Message.error("无数据");
         }
 
@@ -144,7 +147,7 @@ public class NewFinanceAnalysisController {
 
         Message<String> message =   newFinanceAnalysisService.lrb(reportDateType,reportType,endDate,aBStock);
         //未抓取到
-        if(message.getCode()==Message.Code.ERROR){
+        if(message.fail()){
             return Message.error("无数据");
         }
 
@@ -178,7 +181,7 @@ public class NewFinanceAnalysisController {
 
         Message<String> message =  newFinanceAnalysisService.xjllb(reportDateType,reportType,endDate,aBStock);
         //未抓取到
-        if(message.getCode()==Message.Code.ERROR){
+        if(message.fail()){
             return Message.error("无数据");
         }
 
@@ -203,7 +206,7 @@ public class NewFinanceAnalysisController {
 
         Message<String> message =   newFinanceAnalysisService.percent(aBStock,type);
         //未抓取到
-        if(message.getCode()==Message.Code.ERROR){
+        if(message.fail()){
             return Message.error("无数据");
         }
 

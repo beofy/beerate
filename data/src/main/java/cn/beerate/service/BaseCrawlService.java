@@ -1,4 +1,4 @@
-package cn.beerate.service.base;
+package cn.beerate.service;
 
 import cn.beerate.common.util.Crawler;
 import com.alibaba.fastjson.JSON;
@@ -47,7 +47,7 @@ public class BaseCrawlService {
      * @param params 参数
      * @return String
      */
-    public String getJsonString(String url, Map<String,String> params){
+    protected String getJsonString(String url, Map<String,String> params){
         try{
             String text = this.request(url,params);
             //解析json，并去除转义字符
@@ -68,7 +68,7 @@ public class BaseCrawlService {
      * @return String
      *
      */
-    public JSONObject getJsonObject(String url, Map<String,String> params){
+    protected JSONObject getJsonObject(String url, Map<String,String> params){
         String jsonObject = this.getJsonString(url,params);
 
         return JSONObject.parseObject(jsonObject);
@@ -80,7 +80,7 @@ public class BaseCrawlService {
      * @param params 参数
      * @return String
      */
-    public JSONArray getJsonArray(String url, Map<String,String> params){
+    protected JSONArray getJsonArray(String url, Map<String,String> params){
         String jsonArray = this.getJsonString(url,params);
 
         return JSONArray.parseArray(jsonArray);

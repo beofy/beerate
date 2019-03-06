@@ -34,7 +34,7 @@ public class AdminController {
         Message<t_admin> message = adminService.login(account,password);
 
         //登录失败
-        if(message.getCode()==Message.Code.ERROR){
+        if(message.fail()){
             return message;
         }
 

@@ -1,5 +1,6 @@
 package cn.beerate.controller;
 
+import cn.beerate.common.Constants.StatusCode;
 import cn.beerate.common.Message;
 import cn.beerate.common.util.DateUtil;
 import cn.beerate.common.util.StockCodeUtil;
@@ -7,7 +8,6 @@ import cn.beerate.model.bean.eastmoney.f10.BonusFinancing;
 import cn.beerate.service.eastmoney.f10.BonusFinancingService;
 import com.alibaba.fastjson.JSONObject;
 import io.swagger.annotations.*;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,12 +17,15 @@ import java.util.List;
 @Api(description = "分红融资")
 @RestController
 @ApiResponses({
-        @ApiResponse(code = Message.Code.SUCCESS,message = "success"),
-        @ApiResponse(code = Message.Code.ERROR,message = "error"),
+        @ApiResponse(code = StatusCode.SUCCESS,message = "success"),
+        @ApiResponse(code = StatusCode.ERROR,message = "error"),
 })
 public class BonusFinancingController {
-    @Autowired
     private BonusFinancingService bonusFinancingService;
+
+    public BonusFinancingController(BonusFinancingService bonusFinancingService){
+        this.bonusFinancingService=bonusFinancingService;
+    }
 
     @GetMapping(value = "/bonusFinancing")
     @ApiOperation(value = "根据股票代码获取分红融资", notes = "包含(分红影响 |历年分红融资|增发明细|配股明细)")
@@ -38,7 +41,7 @@ public class BonusFinancingController {
 
         Message<String> message = bonusFinancingService.bonusFinancing(aBStock);
         //未抓取到
-        if(message.getCode()==Message.Code.ERROR){
+        if(message.getCode()==StatusCode.ERROR){
             return Message.error("无数据");
         }
 
@@ -66,7 +69,7 @@ public class BonusFinancingController {
 
         Message<String> message = bonusFinancingService.bonusDetailChart(aBStock,date);
         //未抓取到
-        if(message.getCode()==Message.Code.ERROR){
+        if(message.getCode()==StatusCode.ERROR){
             return Message.error("无数据");
         }
         List<String> stringList =  JSONObject.parseArray(message.getData()).toJavaList(String.class);

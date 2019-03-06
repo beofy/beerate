@@ -2,7 +2,7 @@ package cn.beerate.service.eastmoney.report;
 
 import cn.beerate.common.Message;
 import cn.beerate.model.bean.eastmoney.report.GGSR;
-import cn.beerate.service.base.BaseCrawlService;
+import cn.beerate.service.BaseCrawlService;
 import com.alibaba.fastjson.JSONArray;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;

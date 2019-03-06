@@ -1,10 +1,15 @@
 /**
   * Copyright 2019 bejson.com 
   */
-package cn.beerate.model.bean.eastmoney.f10.companysurvey;
+package cn.beerate.model.entity.eastmoney.f10.companysurvey;
+import cn.beerate.model.Model;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 
 
 /**
@@ -15,7 +20,8 @@ import lombok.Data;
  */
 @ApiModel(description = "发行相关")
 @Data
-public class Fxxg {
+@Entity
+public class t_eastmoney_fxxg extends Model {
     @ApiModelProperty(value = "成立日期")
     private String clrq;
 
@@ -66,4 +72,8 @@ public class Fxxg {
     
     @ApiModelProperty(value = "定价中签率")
     private String djzql;
+
+    @OneToOne(optional = false)
+    @JoinColumn(name = "companysurvey_id",unique = true)
+    private t_eastmoney_companysurvey companysurvey;
 }

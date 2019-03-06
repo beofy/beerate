@@ -9,7 +9,7 @@ import cn.beerate.dao.cninfo.StockDisclosureDao;
 import cn.beerate.model.bean.cninfo.AnnouncementsBean;
 import cn.beerate.model.entity.cninfo.t_stock_announcement;
 import cn.beerate.model.entity.cninfo.t_stock_disclosure;
-import cn.beerate.service.base.BaseCrawlService;
+import cn.beerate.service.BaseCrawlService;
 import com.alibaba.fastjson.JSONException;
 import com.alibaba.fastjson.JSONObject;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
@@ -23,9 +23,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.*;
-import java.util.logging.Logger;
 
 /**
  * 巨潮公告
