@@ -44,13 +44,30 @@ public class CompanySurveyService extends EastMoneyService {
         List<t_eastmoney_companysurvey> companysurveyList = new ArrayList<>();
         for (String code : StockCodeUtil.getStockCode()) {
             Message<t_eastmoney_companysurvey> companysurveyMessage = companySurvey(code);
+
+            //查询数据是否存在
+            t_eastmoney_companysurvey companysurvey =companySurveyDao.findByCodeOrderByCreateTimeAsc(code);
             if(!companysurveyMessage.fail()){
-                t_eastmoney_companysurvey companysurvey= companysurveyMessage.getData();
-                //因为使用级联批量保存,此处设置从一
-                companysurvey.getFxxg().setCompanysurvey(companysurvey);
-                companysurvey.getJbzl().setCompanysurvey(companysurvey);
-                companysurveyList.add(companysurvey);
+                if(companysurvey==null){
+                    companysurvey= companysurveyMessage.getData();
+
+                    //因为使用级联批量保存,此处设置从一
+                    companysurvey.getFxxg().setCompanysurvey(companysurvey);
+                    companysurvey.getJbzl().setCompanysurvey(companysurvey);
+                    companysurveyList.add(companysurvey);
+                }else{
+                    t_eastmoney_companysurvey companysurvey1 = companysurveyMessage.getData();
+                    companysurvey1.setId(companysurvey.getId());
+                    companysurvey1.getFxxg().setId(companysurvey.getFxxg().getId());
+                    companysurvey1.getJbzl().setId(companysurvey.getJbzl().getId());
+
+                    //因为使用级联批量保存,此处设置从一
+                    companysurvey1.getFxxg().setCompanysurvey(companysurvey);
+                    companysurvey1.getJbzl().setCompanysurvey(companysurvey);
+                    companysurveyList.add(companysurvey);
+                }
             }
+
             //此处批量级联保存，每次保存一千条，并清空list
             if(companysurveyList.size()==1000){
                 companySurveyDao.saveAll(companysurveyList);

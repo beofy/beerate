@@ -14,6 +14,7 @@ import javax.persistence.*;
 @Entity
 public class t_eastmoney_companysurvey extends Model {
     @ApiModelProperty(value = "股票代码(交易所简称开头)")
+    @Column(unique = true)
     private String code;
 
     @ApiModelProperty(value = "代码类型")
