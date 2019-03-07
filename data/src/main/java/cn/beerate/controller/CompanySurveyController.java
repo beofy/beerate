@@ -35,6 +35,12 @@ public class CompanySurveyController {
             return Message.error("股票代码错误");
         }
 
+        //从数据库查询
+        Message<t_eastmoney_companysurvey> message = companySurveyService.findCompanysurveyByStockCode(aBStock);
+        if(!message.fail()){
+            return message;
+        }
+
         return companySurveyService.companySurvey(aBStock);
     }
 

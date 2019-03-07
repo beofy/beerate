@@ -19,4 +19,9 @@ public class CompanySurveyServiceTest {
         companySurveyService.companySurvey("sz000001");
     }
 
+    @Test
+    public void testUpdateCompanySurveys(){
+        companySurveyService.updateCompanySurveys();
+    }
+
 }

@@ -1,25 +1,18 @@
-/**
-  * Copyright 2019 bejson.com 
-  */
 package cn.beerate.model.entity.eastmoney.f10.companysurvey;
 import cn.beerate.model.Model;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
-
-/**
- * Auto-generated: 2019-01-24 11:17:10
- *
- * @author bejson.com (i@bejson.com)
- * @website http://www.bejson.com/java2pojo/
- */
 @ApiModel(description = "发行相关")
-@Data
+@Setter
+@Getter
 @Entity
 public class t_eastmoney_fxxg extends Model {
     @ApiModelProperty(value = "成立日期")
