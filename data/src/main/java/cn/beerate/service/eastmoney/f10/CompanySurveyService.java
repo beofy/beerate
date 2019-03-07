@@ -64,7 +64,7 @@ public class CompanySurveyService extends EastMoneyService {
      * @param stockCode 股票代码
      */
     public Message<t_eastmoney_companysurvey> findCompanysurveyByStockCode(String stockCode){
-       t_eastmoney_companysurvey companysurvey = companySurveyDao.findByCode(stockCode);
+       t_eastmoney_companysurvey companysurvey = companySurveyDao.findByCodeOrderByCreateTimeAsc(stockCode);
        if(companysurvey==null){
          return Message.error("未查询到该股票数据");
        }

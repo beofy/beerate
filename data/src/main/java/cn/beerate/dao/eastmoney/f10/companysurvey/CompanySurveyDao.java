@@ -10,8 +10,7 @@ public interface CompanySurveyDao extends JpaRepository<t_eastmoney_companysurve
     /**
      * 根据股票代码查询
      * @param code 股票代码
-     * @return t_eastmoney_companysurvey
      */
-    t_eastmoney_companysurvey findByCode(String code);
+    t_eastmoney_companysurvey findByCodeOrderByCreateTimeAsc(String code);
 
 }
