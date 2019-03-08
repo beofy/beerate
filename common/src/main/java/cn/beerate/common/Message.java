@@ -1,5 +1,6 @@
 package cn.beerate.common;
 
+import cn.beerate.common.Constants.StatusCode;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -28,43 +29,27 @@ public class Message<T> {
         this.data = data;
     }
 
-    public static <T> Message<T>  ok(){
-        return new Message<T>(Message.Code.SUCCESS,"success");
+    public static Message<String> ok(){
+        return new Message<>(StatusCode.SUCCESS,"success");
     }
 
-    public static <T> Message<T>  ok(String msg){
-        return new Message<T>(Message.Code.SUCCESS,msg);
+    public static Message<String> ok(String msg){
+        return new Message<>(StatusCode.SUCCESS,msg);
     }
 
     public static <T> Message<T> success(T data){
-        return new Message<T>(Message.Code.SUCCESS,"success",data);
+        return new Message<>(StatusCode.SUCCESS,"success",data);
     }
 
     public static <T> Message<T> error(){
-        return new Message<T>(Message.Code.ERROR,"error");
+        return new Message<>(StatusCode.ERROR,"error");
     }
 
     public static <T> Message<T> error(String msg){
-        return new Message<T>(Message.Code.ERROR,msg);
+        return new Message<>(StatusCode.ERROR,msg);
     }
 
-    public class Code{
-        /** 公共成功码200:处理成功 */
-        public static final int SUCCESS = 200;
-
-        /** 公共错误码 -1:处理失败 */
-        public static final int ERROR = -1;
-
-        /** 公共错误码-404:未找到资源() */
-        public static final int ERROR_404 = -404;
-
-        /** 公共错误码-500:程序错误 */
-        public static final int ERROR_500 = -500;
-
-        /** 拦截标识-100:登录拦截 */
-        public static final int NOT_LOGIN = -100;
-
-        /** 登录超时*/
-        public static final int  LOGIN_TIME_OUT = -102;
+    public boolean fail(){
+        return this.code==StatusCode.ERROR;
     }
 }

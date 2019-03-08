@@ -1,6 +1,6 @@
 package cn.beerate.service.eastmoney;
 
-import cn.beerate.service.eastmoney.CompanySurveyService;
+import cn.beerate.service.eastmoney.f10.CompanySurveyService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +17,11 @@ public class CompanySurveyServiceTest {
     @Test
     public void testCompanySurvey(){
         companySurveyService.companySurvey("sz000001");
+    }
+
+    @Test
+    public void testUpdateCompanySurveys(){
+        companySurveyService.updateCompanySurveys();
     }
 
 }

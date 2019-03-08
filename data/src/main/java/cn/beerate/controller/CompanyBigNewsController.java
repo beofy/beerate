@@ -1,13 +1,13 @@
 package cn.beerate.controller;
 
+import cn.beerate.common.Constants.StatusCode;
 import cn.beerate.common.Message;
 import cn.beerate.common.util.StockCodeUtil;
-import cn.beerate.model.bean.eastmoney.CompanyBigNews;
-import cn.beerate.model.bean.eastmoney.companybignews.Gqzy;
-import cn.beerate.service.eastmoney.CompanyBigNewsService;
+import cn.beerate.model.bean.eastmoney.f10.CompanyBigNews;
+import cn.beerate.model.bean.eastmoney.f10.companybignews.Gqzy;
+import cn.beerate.service.eastmoney.f10.CompanyBigNewsService;
 import com.alibaba.fastjson.JSONObject;
 import io.swagger.annotations.*;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,13 +17,16 @@ import java.util.List;
 @Api(description = "公司大事")
 @RestController
 @ApiResponses({
-        @ApiResponse(code = Message.Code.SUCCESS,message = "success"),
-        @ApiResponse(code = Message.Code.ERROR,message = "error"),
+        @ApiResponse(code = StatusCode.SUCCESS,message = "success"),
+        @ApiResponse(code = StatusCode.ERROR,message = "error"),
 })
 public class CompanyBigNewsController {
 
-    @Autowired
     private CompanyBigNewsService bigNewsService;
+
+    public CompanyBigNewsController(CompanyBigNewsService bigNewsService) {
+        this.bigNewsService = bigNewsService;
+    }
 
     @GetMapping(value = "/companyBigNews")
     @ApiOperation(value = "根据股票代码获取公司大事", notes = "包含(大事提醒|重大事项|限售解禁|十大股东持股变动|高管持股变动|龙虎榜单|大宗交易|融资融券)")
@@ -38,7 +41,7 @@ public class CompanyBigNewsController {
 
         Message<String> message = bigNewsService.companyBigNews(aBStock);
         //未抓取到
-        if(message.getCode()==Message.Code.ERROR){
+        if(message.fail()){
            return Message.error("无数据");
         }
 
@@ -61,7 +64,7 @@ public class CompanyBigNewsController {
         }
 
         Message<String> message = bigNewsService.getPledgeHolder(aBStock,index);
-        if(message.getCode()==Message.Code.ERROR){
+        if(message.fail()){
             return Message.error("无数据");
         }
 

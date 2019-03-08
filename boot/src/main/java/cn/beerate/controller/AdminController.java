@@ -34,7 +34,7 @@ public class AdminController {
         Message<t_admin> message = adminService.login(account,password);
 
         //登录失败
-        if(message.getCode()==Message.Code.ERROR){
+        if(message.fail()){
             return message;
         }
 
@@ -43,7 +43,7 @@ public class AdminController {
         session.setAttribute(SessionKey.BACK_+session.getId(),message.getData());
         log.info(" has created by user login session : ["+session.getId()+"] ");
 
-        return Message.success("登录成功");
+        return Message.ok("登录成功");
     }
 
     @RequestMapping(value = "/loginOut")

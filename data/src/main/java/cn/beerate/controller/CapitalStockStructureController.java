@@ -1,9 +1,10 @@
 package cn.beerate.controller;
 
+import cn.beerate.common.Constants.StatusCode;
 import cn.beerate.common.Message;
 import cn.beerate.common.util.StockCodeUtil;
-import cn.beerate.model.bean.eastmoney.CapitalStockStructure;
-import cn.beerate.service.eastmoney.CapitalStockStructureService;
+import cn.beerate.model.bean.eastmoney.f10.CapitalStockStructure;
+import cn.beerate.service.eastmoney.f10.CapitalStockStructureService;
 import com.alibaba.fastjson.JSONObject;
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,13 +15,16 @@ import org.springframework.web.bind.annotation.RestController;
 @Api(description = "股本结构")
 @RestController
 @ApiResponses({
-        @ApiResponse(code = Message.Code.SUCCESS,message = "success"),
-        @ApiResponse(code = Message.Code.ERROR,message = "error"),
+        @ApiResponse(code = StatusCode.SUCCESS,message = "success"),
+        @ApiResponse(code = StatusCode.ERROR,message = "error"),
 })
 public class CapitalStockStructureController {
 
-    @Autowired
     private CapitalStockStructureService capitalStockStructureService;
+
+    public CapitalStockStructureController(CapitalStockStructureService capitalStockStructureService) {
+        this.capitalStockStructureService = capitalStockStructureService;
+    }
 
     @GetMapping(value = "/capitalStockStructure")
     @ApiOperation(value = "根据股票代码获取股本结构", notes = "包含(限售解禁| 股本结构| 历年股本变动| 股本构成)")
@@ -36,7 +40,7 @@ public class CapitalStockStructureController {
 
         Message<String> message = capitalStockStructureService.capitalStockStructure(aBStock);
         //未抓取到
-        if(message.getCode()==Message.Code.ERROR){
+        if(message.fail()){
             return Message.error("无数据");
         }
 

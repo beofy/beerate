@@ -1,12 +1,12 @@
 package cn.beerate.controller;
 
+import cn.beerate.common.Constants.StatusCode;
 import cn.beerate.common.Message;
 import cn.beerate.common.util.StockCodeUtil;
-import cn.beerate.model.bean.eastmoney.BusinessAnalysis;
-import cn.beerate.service.eastmoney.BusinessAnalysisService;
+import cn.beerate.model.bean.eastmoney.f10.BusinessAnalysis;
+import cn.beerate.service.eastmoney.f10.BusinessAnalysisService;
 import com.alibaba.fastjson.JSONObject;
 import io.swagger.annotations.*;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -14,13 +14,15 @@ import org.springframework.web.bind.annotation.RestController;
 @Api(description = "经营分析")
 @RestController
 @ApiResponses({
-        @ApiResponse(code = Message.Code.SUCCESS,message = "success"),
-        @ApiResponse(code = Message.Code.ERROR,message = "error"),
+        @ApiResponse(code = StatusCode.SUCCESS,message = "success"),
+        @ApiResponse(code = StatusCode.ERROR,message = "error"),
 })
 public class BusinessAnalysisController {
-
-    @Autowired
     private BusinessAnalysisService businessAnalysisService;
+
+    public BusinessAnalysisController(BusinessAnalysisService businessAnalysisService){
+        this.businessAnalysisService=businessAnalysisService;
+    }
 
     @GetMapping("/businessAnalysis")
     @ApiOperation(value = "根据股票代码获取经营分析", notes = "包含(主营范围 | 主营构成分析 | 经营评述)")
@@ -36,7 +38,7 @@ public class BusinessAnalysisController {
 
         Message<String> message = businessAnalysisService.businessAnalysis(aBStock);
         //未抓取到
-        if(message.getCode()==Message.Code.ERROR){
+        if(message.fail()){
             return Message.error("无数据");
         }
 
