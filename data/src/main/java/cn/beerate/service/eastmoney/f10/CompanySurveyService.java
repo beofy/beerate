@@ -15,7 +15,6 @@ import java.util.*;
  * 公司概况
  */
 @Component
-@Transactional(readOnly = true)
 public class CompanySurveyService extends EastMoneyService {
 
     private CompanySurveyDao companySurveyDao;
@@ -39,7 +38,6 @@ public class CompanySurveyService extends EastMoneyService {
     /**
      * 更新所有公司概况
      */
-    @Transactional
     public void updateCompanySurveys(){
         List<t_eastmoney_companysurvey> companysurveyList = new ArrayList<>();
         for (String code : StockCodeUtil.getStockCode()) {
@@ -48,27 +46,41 @@ public class CompanySurveyService extends EastMoneyService {
             //查询数据是否存在
             t_eastmoney_companysurvey companysurvey =companySurveyDao.findByCodeOrderByCreateTimeAsc(code);
             if(!companysurveyMessage.fail()){
+                Date now = new Date();
                 if(companysurvey==null){
+                    //设置主一
                     companysurvey= companysurveyMessage.getData();
+                    companysurvey.setCreateTime(now);
 
                     //因为使用级联批量保存,此处设置从一
                     companysurvey.getFxxg().setCompanysurvey(companysurvey);
+                    companysurvey.getFxxg().setCreateTime(now);
                     companysurvey.getJbzl().setCompanysurvey(companysurvey);
+                    companysurvey.getJbzl().setCreateTime(now);
                     companysurveyList.add(companysurvey);
                 }else{
-                    t_eastmoney_companysurvey companysurvey1 = companysurveyMessage.getData();
-                    companysurvey1.setId(companysurvey.getId());
-                    companysurvey1.getFxxg().setId(companysurvey.getFxxg().getId());
-                    companysurvey1.getJbzl().setId(companysurvey.getJbzl().getId());
+                    t_eastmoney_companysurvey companysurveyUpdate = companysurveyMessage.getData();
+
+                    companysurveyUpdate.setId(companysurvey.getId());
+                    companysurveyUpdate.setCreateTime(companysurvey.getCreateTime());//创建时间
+                    companysurveyUpdate.setUpdateTime(now);//更新时间
+
+                    companysurveyUpdate.getFxxg().setId(companysurvey.getFxxg().getId());
+                    companysurveyUpdate.getFxxg().setCreateTime(companysurvey.getCreateTime());//创建时间
+                    companysurveyUpdate.getFxxg().setUpdateTime(now);//更新时间
+
+                    companysurveyUpdate.getJbzl().setId(companysurvey.getJbzl().getId());
+                    companysurveyUpdate.getJbzl().setCreateTime(companysurvey.getCreateTime());//创建时间
+                    companysurveyUpdate.getJbzl().setUpdateTime(now);//更新时间
 
                     //因为使用级联批量保存,此处设置从一
-                    companysurvey1.getFxxg().setCompanysurvey(companysurvey);
-                    companysurvey1.getJbzl().setCompanysurvey(companysurvey);
-                    companysurveyList.add(companysurvey);
+                    companysurveyUpdate.getFxxg().setCompanysurvey(companysurvey);
+                    companysurveyUpdate.getJbzl().setCompanysurvey(companysurvey);
+                    companysurveyList.add(companysurveyUpdate);
                 }
             }
 
-            //此处批量级联保存，每次保存一千条，并清空list
+            //此处无事务，批量级联保存，每次保存一千条，并清空list
             if(companysurveyList.size()==1000){
                 companySurveyDao.saveAll(companysurveyList);
                 companysurveyList.clear();
