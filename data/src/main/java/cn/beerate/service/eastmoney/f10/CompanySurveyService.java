@@ -7,7 +7,6 @@ import cn.beerate.dao.eastmoney.f10.companysurvey.CompanySurveyDao;
 import cn.beerate.model.entity.eastmoney.f10.companysurvey.t_eastmoney_companysurvey;
 import cn.beerate.service.EastMoneyService;
 import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
 
@@ -46,21 +45,18 @@ public class CompanySurveyService extends EastMoneyService {
             //查询数据是否存在
             t_eastmoney_companysurvey companysurvey =companySurveyDao.findByCodeOrderByCreateTimeAsc(code);
             if(!companysurveyMessage.fail()){
-                Date now = new Date();
                 if(companysurvey==null){
                     //设置主一
                     companysurvey= companysurveyMessage.getData();
-                    companysurvey.setCreateTime(now);
 
                     //因为使用级联批量保存,此处设置从一
                     companysurvey.getFxxg().setCompanysurvey(companysurvey);
-                    companysurvey.getFxxg().setCreateTime(now);
                     companysurvey.getJbzl().setCompanysurvey(companysurvey);
-                    companysurvey.getJbzl().setCreateTime(now);
                     companysurveyList.add(companysurvey);
                 }else{
                     t_eastmoney_companysurvey companysurveyUpdate = companysurveyMessage.getData();
 
+                    Date now = new Date();
                     companysurveyUpdate.setId(companysurvey.getId());
                     companysurveyUpdate.setCreateTime(companysurvey.getCreateTime());//创建时间
                     companysurveyUpdate.setUpdateTime(now);//更新时间
