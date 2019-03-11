@@ -37,15 +37,12 @@ public class CompanyManagementController {
             return Message.error("股票代码错误");
         }
 
-        Message<String> message = companyManagementService.companyManagement(aBStock);
-        //未抓取到
-        if(message.fail()){
-            return Message.error("无数据");
+        //从数据库获取
+        Message<CompanyManagement> message = companyManagementService.findCompanyManagementByStockCode(aBStock);
+        if(!message.fail()){
+            return message;
         }
 
-        //json转对象
-        JSONObject jsonObject = JSONObject.parseObject(message.getData());
-
-        return Message.success(jsonObject.toJavaObject(CompanyManagement.class));
+        return companyManagementService.companyManagement(aBStock);
     }
 }
