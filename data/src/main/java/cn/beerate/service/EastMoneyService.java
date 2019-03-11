@@ -5,11 +5,15 @@ import cn.beerate.common.util.StockCodeUtil;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import java.util.List;
 import java.util.Map;
 
 public class EastMoneyService extends BaseCrawlService{
+
+    private final static Log logger = LogFactory.getLog(EastMoneyService.class);
 
     protected IEastMoneyService eastMoneyService;
 
@@ -54,7 +58,13 @@ public class EastMoneyService extends BaseCrawlService{
 
     public void updateAllStockCodesData() {
         for (String s : StockCodeUtil.getStockCode()) {
-            eastMoneyService.updateByStockCodes(s);
+            try {
+                eastMoneyService.updateByStockCodes(s);
+            }catch (Exception e){
+                logger.info("更新股票数据异常，代码：["+s+"],原因："+e.getMessage());
+                logger.info(e.getMessage(),e);
+                logger.info("更新下一个股票数据");
+            }
         }
     }
 
