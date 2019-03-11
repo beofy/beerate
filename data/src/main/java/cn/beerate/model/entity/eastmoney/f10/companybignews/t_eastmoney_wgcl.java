@@ -1,20 +1,22 @@
-/**
-  * Copyright 2019 bejson.com 
-  */
-package cn.beerate.model.bean.eastmoney.f10.companybignews;
+package cn.beerate.model.entity.eastmoney.f10.companybignews;
+import cn.beerate.model.Model;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-/**
- * Auto-generated: 2019-01-22 17:37:49
- *
- * @author bejson.com (i@bejson.com)
- * @website http://www.bejson.com/java2pojo/
- */
+import javax.persistence.Column;
+import javax.persistence.Entity;
+
 @ApiModel(description = "违规处理")
-@Data
-public class Wgcl {
+@Setter
+@Getter
+@Entity
+public class t_eastmoney_wgcl  extends Model {
+
+    @ApiModelProperty(value = "股票代码")
+    private String code;
+
     @ApiModelProperty(value = "公告日期")
     private String ggrq;
 
@@ -25,12 +27,14 @@ public class Wgcl {
     private String cfdx;
 
     @ApiModelProperty(value = "违规行为")
+    @Column(columnDefinition = "TEXT")
     private String wgxw;
 
     @ApiModelProperty(value = "处分类型")
     private String cflx;
 
     @ApiModelProperty(value = "处分措施")
+    @Column(columnDefinition = "TEXT")
     private String cfcs;
 
     @ApiModelProperty(value = "处理人")
@@ -38,4 +42,5 @@ public class Wgcl {
 
     @ApiModelProperty(value = "处罚金额(万元)")
     private String cfje;
+
 }

@@ -1,25 +1,28 @@
-/**
-  * Copyright 2019 bejson.com 
-  */
-package cn.beerate.model.bean.eastmoney.f10.companybignews;
+package cn.beerate.model.entity.eastmoney.f10.companybignews;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
+import javax.persistence.*;
+import java.util.Date;
 import java.util.List;
 
-/**
- * Auto-generated: 2019-01-22 17:37:49
- *
- * @author bejson.com (i@bejson.com)
- * @website http://www.bejson.com/java2pojo/
- */
 @ApiModel(description = "龙虎榜单")
-@Data
-public class Lhbd {
-    private List<Group_mr> group_mr;
+@Setter
+@Getter
+@Entity
+public class t_eastmoney_lhbd {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long lhbd_id;
 
-    private List<Group_mc> group_mc;
+    private Date createTime = new Date();
+
+    private Date updateTime;
+
+    @ApiModelProperty(value = "股票代码")
+    private String code;
 
     @ApiModelProperty(value = "id")
     private String id;
@@ -44,4 +47,10 @@ public class Lhbd {
 
     @ApiModelProperty(value = "卖出总计占金额比")
     private String mczjzjeb;
+
+    @OneToMany(mappedBy = "lhbd",cascade = {CascadeType.PERSIST,CascadeType.REMOVE})
+    private List<t_eastmoney_group_mr> group_mr;
+
+    @OneToMany(mappedBy = "lhbd",cascade = {CascadeType.PERSIST,CascadeType.REMOVE})
+    private List<t_eastmoney_group_mc> group_mc;
 }

@@ -1,20 +1,22 @@
-/**
-  * Copyright 2019 bejson.com 
-  */
-package cn.beerate.model.bean.eastmoney.f10.companybignews;
+package cn.beerate.model.entity.eastmoney.f10.companybignews;
+import cn.beerate.model.Model;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-/**
- * Auto-generated: 2019-01-22 17:37:49
- *
- * @author bejson.com (i@bejson.com)
- * @website http://www.bejson.com/java2pojo/
- */
+import javax.persistence.Column;
+import javax.persistence.Entity;
+
 @ApiModel(description = "诉讼仲裁")
-@Data
-public class Sszc {
+@Setter
+@Getter
+@Entity
+public class t_eastmoney_sszc  extends Model {
+
+    @ApiModelProperty(value = "股票代码")
+    private String code;
+
     @ApiModelProperty(value = "公告日期")
     private String ggrq;
 
@@ -22,6 +24,7 @@ public class Sszc {
     private String ajmc;
 
     @ApiModelProperty(value = "案件简介")
+    @Column(columnDefinition = "TEXT")
     private String ajjj;
 
     @ApiModelProperty(value = "原告方")
@@ -49,6 +52,7 @@ public class Sszc {
     private String yspjrq;
 
     @ApiModelProperty(value = "一审_判决内容")
+    @Column(columnDefinition = "TEXT")
     private String yspjnr;
 
     @ApiModelProperty(value = "一审_是否上诉")
@@ -63,9 +67,12 @@ public class Sszc {
     @ApiModelProperty(value = "二审_判决日期")
     private String espjrq;
 
-    @ApiModelProperty(value = "一审_判决内容")
+    @ApiModelProperty(value = "二审_判决内容")
+    @Column(columnDefinition = "TEXT")
     private String espjnr;
 
     @ApiModelProperty(value = "执行情况")
+    @Column(columnDefinition = "TEXT")
     private String zxqk;
+
 }

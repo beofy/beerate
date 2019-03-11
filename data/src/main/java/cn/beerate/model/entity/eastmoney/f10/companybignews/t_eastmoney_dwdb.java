@@ -1,20 +1,23 @@
-/**
-  * Copyright 2019 bejson.com 
-  */
-package cn.beerate.model.bean.eastmoney.f10.companybignews;
+package cn.beerate.model.entity.eastmoney.f10.companybignews;
+import cn.beerate.model.Model;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-/**
- * Auto-generated: 2019-01-22 17:37:49
- *
- * @author bejson.com (i@bejson.com)
- * @website http://www.bejson.com/java2pojo/
- */
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import java.io.Serializable;
+
 @ApiModel(description = "对外担保")
-@Data
-public class Dwdb {
+@Setter
+@Getter
+@Entity
+public class t_eastmoney_dwdb extends Model{
+
+    @ApiModelProperty(value = "股票代码")
+    private String code;
+
     @ApiModelProperty(value = "公告日期")
     private String ggrq;
 
@@ -52,6 +55,7 @@ public class Dwdb {
     private String jyrq;
 
     @ApiModelProperty(value = "担保事件说明")
+    @Column(columnDefinition = "TEXT")
     private String dbsjsm;
 
     @ApiModelProperty(value = "报告期")
@@ -59,4 +63,5 @@ public class Dwdb {
 
     @ApiModelProperty(value = "报告期类别")
     private String bgqlb;
+
 }

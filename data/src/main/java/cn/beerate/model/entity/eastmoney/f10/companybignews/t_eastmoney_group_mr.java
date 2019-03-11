@@ -1,21 +1,21 @@
-/**
-  * Copyright 2019 bejson.com 
-  */
-package cn.beerate.model.bean.eastmoney.f10.companybignews;
+package cn.beerate.model.entity.eastmoney.f10.companybignews;
 
+import cn.beerate.model.Model;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-/**
- * Auto-generated: 2019-01-22 17:37:49
- *
- * @author bejson.com (i@bejson.com)
- * @website http://www.bejson.com/java2pojo/
- */
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
 @ApiModel(description = "买入营业部")
-@Data
-public class Group_mr {
+@Setter
+@Getter
+@Entity
+public class t_eastmoney_group_mr  extends Model {
 
     @ApiModelProperty(value = "营业部名称")
     private String yybmc;
@@ -31,4 +31,8 @@ public class Group_mr {
 
     @ApiModelProperty(value = "卖出占金额比(%)")
     private String zjeb_mc;
+
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "lhbd_id")
+    private t_eastmoney_lhbd lhbd;
 }

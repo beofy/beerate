@@ -1,20 +1,21 @@
-/**
-  * Copyright 2019 bejson.com 
-  */
-package cn.beerate.model.bean.eastmoney.f10.companybignews;
+package cn.beerate.model.entity.eastmoney.f10.companybignews;
+import cn.beerate.model.Model;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-/**
- * Auto-generated: 2019-01-22 17:37:49
- *
- * @author bejson.com (i@bejson.com)
- * @website http://www.bejson.com/java2pojo/
- */
+import javax.persistence.Entity;
+
 @ApiModel(description = "融资融券")
-@Data
-public class Rzrq {
+@Setter
+@Getter
+@Entity
+public class t_eastmoney_rzrq  extends Model {
+
+    @ApiModelProperty(value = "股票代码")
+    private String code;
+
     @ApiModelProperty(value = "时间")
     private String sj;
 
@@ -35,4 +36,5 @@ public class Rzrq {
 
     @ApiModelProperty(value = "融券余额(元)")
     private String rqye;
+
 }
