@@ -76,7 +76,7 @@ public class CompanyBigNewsService extends EastMoneyService  implements IEastMon
      * @param code 股票代码
      */
     public Message<CompanyBigNews> findCompanyBigNewsByStockCode(String code){
-        /**
+        /*
          * 注：该方法采用懒加载策略，默认控制层一关闭hibernate session会话，
          * 当控制返回Message 转化为json数据时会默认调用get方式触发延时加载，出现on seesion异常
          * 解决方法将当前Controller绑定session
