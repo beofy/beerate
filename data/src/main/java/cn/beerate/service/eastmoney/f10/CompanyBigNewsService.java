@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Map;
 
 @Component
-@Transactional
+@Transactional(readOnly = true)
 public class CompanyBigNewsService extends EastMoneyService  implements IEastMoneyService {
     private DwdbDao dwdbDao;
     private DzjyDao dzjyDao;

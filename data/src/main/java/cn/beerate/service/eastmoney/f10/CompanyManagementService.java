@@ -16,7 +16,7 @@ import java.util.Map;
  * 公司高管
  */
 @Component
-@Transactional
+@Transactional(readOnly = true)
 public class CompanyManagementService extends EastMoneyService implements IEastMoneyService {
 
     private RptManagerDao rptManagerDao;
@@ -52,8 +52,6 @@ public class CompanyManagementService extends EastMoneyService implements IEastM
 
         return Message.success(companyManagement);
     }
-
-
 
     /**
      * 根据股票代码更新数据

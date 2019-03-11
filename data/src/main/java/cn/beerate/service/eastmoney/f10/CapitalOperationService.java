@@ -12,7 +12,7 @@ import java.util.Map;
  * 资本运作
  */
 @Component
-@Transactional
+@Transactional(readOnly = true)
 public class CapitalOperationService extends BaseCrawlService {
 
     private final String CAPITAL_OPERATION_AJAX="http://emweb.securities.eastmoney.com/CapitalOperation/CapitalOperationAjax";

@@ -33,7 +33,6 @@ public class CompanyBigNewsController {
     @ApiImplicitParams({
             @ApiImplicitParam(value = "股票代码", name = "code", paramType = "query", dataType = "string", required = true),
     })
-    @Transactional
     public Message<CompanyBigNews> companyBigNews(@Param(value = "code") String code){
         String aBStock = StockCodeUtil.getABStock(code);
         if(aBStock==null){

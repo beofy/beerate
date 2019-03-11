@@ -69,7 +69,7 @@
                 <property name="generateDdl" value="true" />
                 <property name="database" value="MYSQL" />
                 <property name="databasePlatform" value="org.hibernate.dialect.MySQL5InnoDBDialect" />
-                <property name="showSql" value="false" />
+                <property name="showSql" value="true" />
             </bean>
         </property>
         <property name="jpaDialect">
@@ -87,7 +87,7 @@
                 <entry key="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect"/>
                 <entry key="hibernate.ejb.naming_strategy" value="org.hibernate.cfg.ImprovedNamingStrategy"/>
                 <entry key="hibernate.cache.provider_class" value="org.hibernate.cache.NoCacheProvider"/>
-                <entry key="hibernate.show_sql" value="false"/>
+                <entry key="hibernate.show_sql" value="true"/>
                 <entry key="hibernate.format_sql" value="false"/>
                 <entry key="hibernate.hbm2ddl.auto" value="update"/>
             </map>

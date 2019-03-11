@@ -12,7 +12,7 @@ import java.util.Map;
  * 股本结构
  */
 @Component
-@Transactional
+@Transactional(readOnly = true)
 public class CapitalStockStructureService extends BaseCrawlService {
     private final String CAPITAL_STOCK_STRUCTURE_AJAX="http://emweb.securities.eastmoney.com/CapitalStockStructure/CapitalStockStructureAjax";
 

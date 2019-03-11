@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Component
-@Transactional
+@Transactional(readOnly = true)
 public class ResearchReportService extends BaseCrawlService {
     private final String INDEX_URL="http://emweb.securities.eastmoney.com/ResearchReport/Index";
 

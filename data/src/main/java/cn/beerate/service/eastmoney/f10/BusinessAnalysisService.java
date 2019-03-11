@@ -12,7 +12,7 @@ import java.util.Map;
  * 经营分析
  */
 @Component
-@Transactional
+@Transactional(readOnly = true)
 public class BusinessAnalysisService extends BaseCrawlService {
     private final String URL="http://emweb.securities.eastmoney.com/BusinessAnalysis/BusinessAnalysisAjax";
 

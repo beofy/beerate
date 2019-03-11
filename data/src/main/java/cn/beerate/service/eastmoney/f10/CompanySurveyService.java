@@ -15,6 +15,7 @@ import java.util.*;
  * 公司概况
  */
 @Component
+@Transactional(readOnly = true)
 public class CompanySurveyService extends EastMoneyService implements IEastMoneyService {
 
     private CompanySurveyDao companySurveyDao;
