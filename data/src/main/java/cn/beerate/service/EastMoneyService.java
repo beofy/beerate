@@ -1,15 +1,17 @@
 package cn.beerate.service;
 
 import cn.beerate.common.Message;
+import cn.beerate.common.util.StockCodeUtil;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import springfox.documentation.spring.web.json.Json;
 
 import java.util.List;
 import java.util.Map;
 
-public class EastMoneyService extends BaseCrawlService {
+public class EastMoneyService extends BaseCrawlService{
+
+    protected IEastMoneyService eastMoneyService;
 
     public <T> Message<T> getBean(Class<T> tClass,String url, Map<String,String> params){
         JSONObject jsonObject = super.getJsonObject(url,params);
@@ -49,4 +51,11 @@ public class EastMoneyService extends BaseCrawlService {
 
         return  Message.ok();
     }
+
+    public void updateAllStockCodesData() {
+        for (String s : StockCodeUtil.getStockCode()) {
+            eastMoneyService.updateByStockCodes(s);
+        }
+    }
+
 }
