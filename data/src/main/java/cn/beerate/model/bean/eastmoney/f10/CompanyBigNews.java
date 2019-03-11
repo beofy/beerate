@@ -1,33 +1,38 @@
-/**
-  * Copyright 2019 bejson.com 
-  */
 package cn.beerate.model.bean.eastmoney.f10;
-import cn.beerate.model.bean.eastmoney.f10.companybignews.*;
+import cn.beerate.model.Model;
+import cn.beerate.model.entity.eastmoney.f10.companybignews.*;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
+import javax.persistence.Entity;
 import java.util.List;
 
-/**
- * Auto-generated: 2019-01-22 17:37:49
- *
- * @author bejson.com (i@bejson.com)
- * @website http://www.bejson.com/java2pojo/
- */
 @ApiModel(description = "公司大事")
-@Data
-public class CompanyBigNews {
+@Setter
+@Getter
+public class CompanyBigNews{
     @ApiModelProperty(value = "大事提醒")
     private List<String> dstx;
-    private List<Gqzy> gqzy;
-    private List<Dwdb> dwdb;
-    private List<Sszc> sszc;
-    private List<Wgcl> wgcl;
-    private List<Xsjj> xsjj;
-    private List<Sdgdcgbd> sdgdcgbd;
-    private List<Ggcgbd> ggcgbd;
-    private List<Dzjy> dzjy;
-    private List<Rzrq> rzrq;
-    private List<Lhbd> lhbd;
+
+    private List<t_eastmoney_gqzy> gqzy;
+
+    private List<t_eastmoney_dwdb> dwdb;
+
+    private List<t_eastmoney_sszc> sszc;
+
+    private List<t_eastmoney_wgcl> wgcl;
+
+    private List<t_eastmoney_xsjj> xsjj;
+
+    private List<t_eastmoney_sdgdcgbd> sdgdcgbd;
+
+    private List<t_eastmoney_ggcgbd> ggcgbd;
+
+    private List<t_eastmoney_dzjy> dzjy;
+
+    private List<t_eastmoney_rzrq> rzrq;
+
+    private List<t_eastmoney_lhbd> lhbd;
 }

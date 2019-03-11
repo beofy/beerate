@@ -2,6 +2,7 @@ package cn.beerate.task;
 
 import cn.beerate.controller.CompanySurveyController;
 import cn.beerate.service.cninfo.DisclosureService;
+import cn.beerate.service.eastmoney.f10.CompanyBigNewsService;
 import cn.beerate.service.eastmoney.f10.CompanySurveyService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -15,7 +16,7 @@ public class updateDisclosureByApiTask {
 
     private DisclosureService disclosureService;
     private CompanySurveyService companySurveyService;
-
+    private CompanyBigNewsService companyBigNewsService;
     public updateDisclosureByApiTask(DisclosureService disclosureService, CompanySurveyService companySurveyService) {
         this.disclosureService = disclosureService;
         this.companySurveyService = companySurveyService;
@@ -37,9 +38,16 @@ public class updateDisclosureByApiTask {
      */
     @Scheduled(cron = "0 30 10 * * ?")
     public void updateCompanySurveys(){
-        logger.info("------------------开始定时任务：公司概况------------------");
-        companySurveyService.updateCompanySurveys();
-        logger.info("------------------结束定时任务：公司概况------------------");
+        logger.info("------------------开始定时任务：更新公司概况------------------");
+        companySurveyService.updateAllStockCodesData();
+        logger.info("------------------结束定时任务：更新公司概况------------------");
+    }
+
+    @Scheduled(cron = "0 30 10 * * ?")
+    public void companyBigNewsService(){
+        logger.info("------------------开始定时任务：更新公司大事数据------------------");
+        companyBigNewsService.updateAllStockCodesData();
+        logger.info("------------------结束定时任务：更新公司大事数据------------------");
     }
 
 }

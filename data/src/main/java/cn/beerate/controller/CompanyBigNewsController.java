@@ -4,11 +4,11 @@ import cn.beerate.common.Constants.StatusCode;
 import cn.beerate.common.Message;
 import cn.beerate.common.util.StockCodeUtil;
 import cn.beerate.model.bean.eastmoney.f10.CompanyBigNews;
-import cn.beerate.model.bean.eastmoney.f10.companybignews.Gqzy;
+import cn.beerate.model.entity.eastmoney.f10.companybignews.t_eastmoney_gqzy;
 import cn.beerate.service.eastmoney.f10.CompanyBigNewsService;
-import com.alibaba.fastjson.JSONObject;
 import io.swagger.annotations.*;
 import org.springframework.data.repository.query.Param;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -33,22 +33,20 @@ public class CompanyBigNewsController {
     @ApiImplicitParams({
             @ApiImplicitParam(value = "股票代码", name = "code", paramType = "query", dataType = "string", required = true),
     })
+    @Transactional
     public Message<CompanyBigNews> companyBigNews(@Param(value = "code") String code){
         String aBStock = StockCodeUtil.getABStock(code);
         if(aBStock==null){
             return Message.error("股票代码错误");
         }
 
-        Message<String> message = bigNewsService.companyBigNews(aBStock);
-        //未抓取到
-        if(message.fail()){
-           return Message.error("无数据");
+        //从数据查询
+        Message<CompanyBigNews> message =  bigNewsService.findCompanyBigNewsByStockCode(aBStock);
+        if (!message.fail()){
+            return message;
         }
 
-        //json转对象
-        JSONObject jsonObject = JSONObject.parseObject(message.getData());
-
-        return Message.success(jsonObject.toJavaObject(CompanyBigNews.class));
+        return bigNewsService.companyBigNews(aBStock);
     }
 
     @GetMapping(value = "/getPledgeHolder")
@@ -57,17 +55,12 @@ public class CompanyBigNewsController {
             @ApiImplicitParam(value = "股票代码", name = "code", paramType = "query", dataType = "string", required = true),
             @ApiImplicitParam(value = "页数", name = "index", paramType = "query", dataType = "string", required = true),
     })
-    public Message<List<Gqzy>> getPledgeHolder(@Param(value = "code") String code,@Param(value = "index") String index){
+    public Message<List<t_eastmoney_gqzy>> getPledgeHolder(@Param(value = "code") String code, @Param(value = "index") String index){
         String aBStock = StockCodeUtil.getABStock(code);
         if(aBStock==null){
             return Message.error("股票代码错误");
         }
 
-        Message<String> message = bigNewsService.getPledgeHolder(aBStock,index);
-        if(message.fail()){
-            return Message.error("无数据");
-        }
-
-        return Message.success(JSONObject.parseArray(message.getData()).toJavaList(Gqzy.class));
+       return bigNewsService.getPledgeHolder(aBStock,index);
     }
 }
