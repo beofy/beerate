@@ -73,7 +73,7 @@
                 <entry key="hibernate.dialect" value="org.hibernate.dialect.MySQL57Dialect"/>
                 <entry key="hibernate.ejb.naming_strategy" value="org.hibernate.cfg.ImprovedNamingStrategy"/>
                 <entry key="hibernate.cache.provider_class" value="org.hibernate.cache.NoCacheProvider"/>
-                <entry key="hibernate.show_sql" value="true"/>
+                <entry key="hibernate.show_sql" value="false"/>
                 <entry key="hibernate.format_sql" value="false"/>
                 <entry key="hibernate.hbm2ddl.auto" value="update"/>
             </map>
