@@ -12,7 +12,7 @@ import java.util.Map;
  *  操盘必读
  */
 @Component
-@Transactional
+@Transactional(readOnly = true)
 public class OperationsRequiredService extends BaseCrawlService {
     private final String URL="http://emweb.securities.eastmoney.com/OperationsRequired/OperationsRequiredAjax";
 

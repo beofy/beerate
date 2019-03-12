@@ -2,7 +2,7 @@
   * Copyright 2019 bejson.com 
   */
 package cn.beerate.model.bean.eastmoney.f10;
-import cn.beerate.model.bean.eastmoney.f10.companybignews.Xsjj;
+import cn.beerate.model.entity.eastmoney.f10.companybignews.t_eastmoney_xsjj;
 import cn.beerate.model.bean.eastmoney.f10.shareholderresearch.*;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -30,7 +30,7 @@ public class ShareholderResearch {
 
     private List<Sdgdcgbd> sdgdcgbd;
 
-    private List<Xsjj> xsjj;
+    private List<t_eastmoney_xsjj> xsjj;
 
     private List<Sdltgd_chart> sdltgd_chart;
 

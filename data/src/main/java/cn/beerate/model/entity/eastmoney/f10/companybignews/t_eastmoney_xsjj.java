@@ -1,20 +1,21 @@
-/**
-  * Copyright 2019 bejson.com 
-  */
-package cn.beerate.model.bean.eastmoney.f10.capitalstockstructure;
+package cn.beerate.model.entity.eastmoney.f10.companybignews;
+import cn.beerate.model.Model;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-/**
- * Auto-generated: 2019-01-23 17:32:21
- *
- * @author bejson.com (i@bejson.com)
- * @website http://www.bejson.com/java2pojo/
- */
-@Data
+import javax.persistence.Entity;
+
 @ApiModel(description = "限售解禁")
-public class RptRestrictedBanList {
+@Setter
+@Getter
+@Entity
+public class t_eastmoney_xsjj  extends Model {
+
+    @ApiModelProperty(value = "股票代码")
+    private String code;
+
     @ApiModelProperty(value = "解禁时间")
     private String jjsj;
 
@@ -22,11 +23,12 @@ public class RptRestrictedBanList {
     private String jjsl;
 
     @ApiModelProperty(value = "解禁股占总股本比例")
-    private String jjzgbl;
+    private String jjgzzgbbl;
 
     @ApiModelProperty(value = "解禁股占流通股本比例")
-    private String jjltbl;
+    private String jjgzltgbbl;
 
     @ApiModelProperty(value = "股票类型")
     private String gplx;
+
 }

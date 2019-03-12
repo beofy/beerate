@@ -1,20 +1,21 @@
-/**
-  * Copyright 2019 bejson.com 
-  */
-package cn.beerate.model.bean.eastmoney.f10.companymanagement;
+package cn.beerate.model.entity.eastmoney.f10.companymanagement;
+import cn.beerate.model.Model;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-/**
- * Auto-generated: 2019-01-24 11:1:15
- *
- * @author bejson.com (i@bejson.com)
- * @website http://www.bejson.com/java2pojo/
- */
+import javax.persistence.Entity;
+
 @ApiModel(description = "高管持股变动")
-@Data
-public class RptShareHeldChangeList {
+@Setter
+@Getter
+@Entity
+public class t_eastmoney_rpt_shareheld_change extends Model {
+
+    @ApiModelProperty(value = "股票代码")
+    private String code;
+
     @ApiModelProperty(value = "日期")
     private String rq;
 

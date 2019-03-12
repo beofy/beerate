@@ -38,16 +38,13 @@ public class CapitalStockStructureController {
             return Message.error("股票代码错误");
         }
 
-        Message<String> message = capitalStockStructureService.capitalStockStructure(aBStock);
-        //未抓取到
-        if(message.fail()){
-            return Message.error("无数据");
+        //从数据库查询
+        Message<CapitalStockStructure> message = capitalStockStructureService.findCapitalStockStructureByStockCode(aBStock);
+        if(!message.fail()){
+            return message;
         }
 
-        //json转对象
-        JSONObject jsonObject = JSONObject.parseObject(message.getData());
-
-        return Message.success(jsonObject.toJavaObject(CapitalStockStructure.class));
+        return capitalStockStructureService.capitalStockStructure(aBStock);
     }
 
 }

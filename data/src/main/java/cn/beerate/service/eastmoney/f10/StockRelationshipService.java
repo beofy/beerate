@@ -12,7 +12,7 @@ import java.util.Map;
  * 关联个股
  */
 @Component
-@Transactional
+@Transactional(readOnly = true)
 public class StockRelationshipService extends BaseCrawlService {
     /** 同行业个股排名  */
     private final String STOCK_RELATIONSHIP_AJAX="http://emweb.securities.eastmoney.com/StockRelationship/StockRelationshipAjax";

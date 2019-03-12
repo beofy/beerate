@@ -14,6 +14,7 @@ import javax.persistence.*;
 @Entity
 public class t_eastmoney_companysurvey extends Model {
     @ApiModelProperty(value = "股票代码(交易所简称开头)")
+    @Column(unique = true)
     private String code;
 
     @ApiModelProperty(value = "代码类型")
@@ -37,12 +38,10 @@ public class t_eastmoney_companysurvey extends Model {
     @ApiModelProperty(value = "到期日")
     private String expireTime;
 
-    @OneToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "jbzl_id",unique = true)
+    @OneToOne(mappedBy = "companysurvey",cascade = {CascadeType.PERSIST,CascadeType.MERGE})
     private t_eastmoney_jbzl jbzl;
 
-    @OneToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "fxxg_id",unique = true)
+    @OneToOne(mappedBy = "companysurvey",cascade = {CascadeType.PERSIST,CascadeType.MERGE})
     private t_eastmoney_fxxg fxxg;
 
 }

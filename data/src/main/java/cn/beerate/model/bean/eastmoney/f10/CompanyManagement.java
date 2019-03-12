@@ -1,23 +1,14 @@
-/**
-  * Copyright 2019 bejson.com 
-  */
 package cn.beerate.model.bean.eastmoney.f10;
-import cn.beerate.model.bean.eastmoney.f10.companymanagement.RptManagerList;
-import cn.beerate.model.bean.eastmoney.f10.companymanagement.RptShareHeldChangeList;
+import cn.beerate.model.entity.eastmoney.f10.companymanagement.t_eastmoney_rpt_manager;
+import cn.beerate.model.entity.eastmoney.f10.companymanagement.t_eastmoney_rpt_shareheld_change;
 import io.swagger.annotations.ApiModel;
 import lombok.Data;
 
 import java.util.List;
 
-/**
- * Auto-generated: 2019-01-24 11:1:15
- *
- * @author bejson.com (i@bejson.com)
- * @website http://www.bejson.com/java2pojo/
- */
 @ApiModel(description = "公司高管")
 @Data
 public class CompanyManagement {
-    private List<RptManagerList> RptManagerList;
-    private List<RptShareHeldChangeList> RptShareHeldChangeList;
+    private List<t_eastmoney_rpt_manager> RptManagerList;
+    private List<t_eastmoney_rpt_shareheld_change> RptShareHeldChangeList;
 }

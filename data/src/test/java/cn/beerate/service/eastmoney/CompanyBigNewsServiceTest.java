@@ -17,4 +17,8 @@ public class CompanyBigNewsServiceTest {
     public void testCompanyBigNews(){
         bigNewsService.companyBigNews("sz000001");
     }
+    @Test
+    public void testUpdateCompanyBigNews(){
+        bigNewsService.updateAllStockCodesData();
+    }
 }

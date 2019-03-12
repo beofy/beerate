@@ -1,21 +1,21 @@
-/**
-  * Copyright 2019 bejson.com 
-  */
-package cn.beerate.model.bean.eastmoney.f10.capitalstockstructure;
-
+package cn.beerate.model.entity.eastmoney.f10.capitalstockstructure;
+import cn.beerate.model.Model;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-/**
- * Auto-generated: 2019-01-23 17:32:21
- *
- * @author bejson.com (i@bejson.com)
- * @website http://www.bejson.com/java2pojo/
- */
+import javax.persistence.Entity;
+
 @ApiModel(description = "股本结构详情")
-@Data
-public class CapitalStockStructureDetail {
+@Setter
+@Getter
+@Entity
+public class t_eastmoney_capital_stock_structure_detail extends Model {
+
+    @ApiModelProperty(value = "股票代码")
+    private String code;
+
     @ApiModelProperty(value = "未流通股份")
     private String wltgf;
 
@@ -69,4 +69,5 @@ public class CapitalStockStructureDetail {
 
     @ApiModelProperty(value = "流通股份合计占比")
     private String ltgfhfzb;
+
 }

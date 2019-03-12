@@ -12,7 +12,7 @@ import java.util.Map;
  * 股东研究
  */
 @Component
-@Transactional
+@Transactional(readOnly = true)
 public class ShareholderResearchService extends BaseCrawlService {
     private final String URL="http://emweb.securities.eastmoney.com/ShareholderResearch/ShareholderResearchAjax";
 

@@ -12,7 +12,7 @@ import java.util.Map;
  * 财务分析
  */
 @Component
-@Transactional
+@Transactional(readOnly = true)
 public class NewFinanceAnalysisService extends BaseCrawlService {
 
     /** 财务分析-页面 */

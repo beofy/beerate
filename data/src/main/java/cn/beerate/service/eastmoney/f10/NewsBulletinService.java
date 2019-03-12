@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Component
-@Transactional
+@Transactional(readOnly = true)
 public class NewsBulletinService extends BaseCrawlService {
     private final String URL ="http://emweb.securities.eastmoney.com/NewsBulletin/NewsBulletinAjax";
 

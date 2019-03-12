@@ -21,7 +21,7 @@ public class CompanySurveyServiceTest {
 
     @Test
     public void testUpdateCompanySurveys(){
-        companySurveyService.updateCompanySurveys();
+        companySurveyService.updateAllStockCodesData();
     }
 
 }

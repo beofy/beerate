@@ -3,10 +3,7 @@ package cn.beerate.model;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
+import javax.persistence.*;
 import java.util.Date;
 
 @MappedSuperclass
@@ -17,6 +14,9 @@ public class Model {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Date createTime = new Date();
+    @Column(columnDefinition = "timestamp NULL DEFAULT CURRENT_TIMESTAMP")
+    private Date createTime=new Date();
+
+    private Date updateTime;
 
 }
