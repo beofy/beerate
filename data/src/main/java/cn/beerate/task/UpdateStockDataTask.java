@@ -1,6 +1,7 @@
 package cn.beerate.task;
 
 import cn.beerate.service.cninfo.DisclosureService;
+import cn.beerate.service.eastmoney.f10.CapitalStockStructureService;
 import cn.beerate.service.eastmoney.f10.CompanyBigNewsService;
 import cn.beerate.service.eastmoney.f10.CompanyManagementService;
 import cn.beerate.service.eastmoney.f10.CompanySurveyService;
@@ -17,12 +18,14 @@ public class UpdateStockDataTask {
     private CompanySurveyService companySurveyService;
     private CompanyBigNewsService companyBigNewsService;
     private CompanyManagementService companyManagementService;
+    private CapitalStockStructureService capitalStockStructureService;
 
-    public UpdateStockDataTask(DisclosureService disclosureService, CompanySurveyService companySurveyService, CompanyBigNewsService companyBigNewsService, CompanyManagementService companyManagementService) {
+    public UpdateStockDataTask(DisclosureService disclosureService, CompanySurveyService companySurveyService, CompanyBigNewsService companyBigNewsService, CompanyManagementService companyManagementService, CapitalStockStructureService capitalStockStructureService) {
         this.disclosureService = disclosureService;
         this.companySurveyService = companySurveyService;
         this.companyBigNewsService = companyBigNewsService;
         this.companyManagementService = companyManagementService;
+        this.capitalStockStructureService = capitalStockStructureService;
     }
 
     /**
@@ -59,4 +62,10 @@ public class UpdateStockDataTask {
         logger.info("------------------结束定时任务：更新公司高管数据------------------");
     }
 
+    @Scheduled(cron = "0 0 11 * * ?")
+    public void updateCapitalStockStructure(){
+        logger.info("------------------开始定时任务：更新股本结构数据------------------");
+        capitalStockStructureService.updateAllStockCodesData();
+        logger.info("------------------结束定时任务：更新股本结构数据------------------");
+    }
 }
