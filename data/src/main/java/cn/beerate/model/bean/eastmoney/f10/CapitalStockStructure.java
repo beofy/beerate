@@ -1,8 +1,6 @@
 package cn.beerate.model.bean.eastmoney.f10;
 
 import cn.beerate.model.entity.eastmoney.f10.capitalstockstructure.t_eastmoney_capital_stock_structure_detail;
-import cn.beerate.model.bean.eastmoney.f10.capitalstockstructure.ShareChangeList;
-import cn.beerate.model.bean.eastmoney.f10.capitalstockstructure.UnlistedShareChangeList;
 import cn.beerate.model.entity.eastmoney.f10.capitalstockstructure.t_eastmoney_share_change;
 import cn.beerate.model.entity.eastmoney.f10.capitalstockstructure.t_eastmoney_unlisted_share;
 import cn.beerate.model.entity.eastmoney.f10.companybignews.t_eastmoney_xsjj;
