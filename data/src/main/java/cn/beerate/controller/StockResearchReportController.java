@@ -3,10 +3,10 @@ package cn.beerate.controller;
 import cn.beerate.common.Constants.StatusCode;
 import cn.beerate.common.Message;
 import cn.beerate.common.util.StockCodeUtil;
-import cn.beerate.model.bean.eastmoney.report.GGSR;
+import cn.beerate.model.entity.eastmoney.report.t_eastmoney_ggsr;
+import cn.beerate.model.entity.eastmoney.report.t_eastmoney_hysr;
 import cn.beerate.service.eastmoney.report.StockResearchReportService;
 import io.swagger.annotations.*;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -35,13 +35,18 @@ public class StockResearchReportController {
             @ApiImplicitParam(value = "评级类别 \t0-全部 1-买入 2-增持 3-中性 4-减持 5-卖出", name = "mkt", paramType = "query", dataType = "string", required = true),
             @ApiImplicitParam(value = "评级变动 \t0-全部 1-维持 2-调高 3-调低 4-首次 5-无", name = "stat", paramType = "query", dataType = "string", required = true)
     })
-    public Message<List<GGSR>> shareholderResearch(@Param("pageSize") String pageSize,@Param("currPage") String currPage,@Param("code") String code,@Param("mkt") String mkt,@Param("stat") String stat){
+    public Message<List<t_eastmoney_ggsr>> shareholderResearch(@Param("pageSize") String pageSize, @Param("currPage") String currPage, @Param("code") String code, @Param("mkt") String mkt, @Param("stat") String stat){
        if(code==null||code.isEmpty()){
            code="";
        }else{
            if(!StockCodeUtil.isStockCode(code)){
                return Message.error("股票代码错误");
            }
+       }
+
+       Message<List<t_eastmoney_ggsr>>  message = stockResearchReportService.findStockResearchReport(code,currPage,pageSize);
+       if (!message.fail()){
+           return message;
        }
 
        return stockResearchReportService.stockResearchReport(pageSize,currPage,code,mkt,stat);
@@ -74,10 +79,16 @@ public class StockResearchReportController {
             @ApiImplicitParam(value = "评级类别 \t0-全部 1-买入 2-增持 3-中性 4-减持 5-卖出", name = "mkt", paramType = "query", dataType = "string", required = true),
             @ApiImplicitParam(value = "评级变动 \t0-全部 1-维持 2-调高 3-调低 4-首次 5-无", name = "stat", paramType = "query", dataType = "string", required = true)
     })
-    public Message industryResearchReport(String pageSize, String currPage,String sc,String mkt,String stat){
+    public Message<List<t_eastmoney_hysr>> industryResearchReport(String pageSize, String currPage, String sc, String mkt, String stat){
         if(sc==null){
             sc="";
         }
+
+        Message<List<t_eastmoney_hysr>>  message = stockResearchReportService.findIndustryResearchReport(currPage,pageSize);
+        if (!message.fail()){
+            return message;
+        }
+
         return stockResearchReportService.industryResearchReport(pageSize,currPage,sc,mkt,stat);
     }
 }
