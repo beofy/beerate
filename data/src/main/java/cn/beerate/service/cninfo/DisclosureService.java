@@ -320,7 +320,7 @@ public class DisclosureService extends BaseCrawlService {
         for (t_stock_announcement announcement : announcementsBean.getAnnouncements()) {
             //已存的announcementId
             String announcementId = announcementIdMap.get(announcement.getAnnouncementId());
-            if(announcementId==""){
+            if(announcementId.equals("")){
                 //设置没有下一页数据
                 announcementsBean.setHasMore(false);
                 return announcementsBean.getAnnouncements();
@@ -333,7 +333,7 @@ public class DisclosureService extends BaseCrawlService {
            return announcementsBean.getAnnouncements();
         }else{
             List<t_stock_announcement> stockAnnouncementList = getCurrDisclosuresByApi(code,nextPage,pageSize,searchkey,beginDate,endDate, announcementIdMap);
-            announcementsBean.getAnnouncements().forEach(stockAnnouncement -> { stockAnnouncementList.add(stockAnnouncement);});
+            stockAnnouncementList.addAll(announcementsBean.getAnnouncements());
             return stockAnnouncementList;
         }
 
