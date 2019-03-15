@@ -17,7 +17,7 @@ public class EastMoneyService extends BaseCrawlService{
 
     protected IEastMoneyService eastMoneyService;
 
-    public <T> Message<T> getBean(Class<T> tClass,String url, Map<String,String> params){
+    protected  <T> Message<T> getBean(Class<T> tClass,String url, Map<String,String> params){
         JSONObject jsonObject = super.getJsonObject(url,params);
         Message<String> message = isError(jsonObject);
 
@@ -30,7 +30,7 @@ public class EastMoneyService extends BaseCrawlService{
         return Message.success(bean);
     }
 
-    public <T> Message<List<T>> getListBean(Class<T> tClass, String url, Map<String,String> params){
+    protected <T> Message<List<T>> getListBean(Class<T> tClass, String url, Map<String,String> params){
         String jsonString = super.getJsonString(url,params);
         Object o = JSON.parse(jsonString);
 
@@ -43,6 +43,9 @@ public class EastMoneyService extends BaseCrawlService{
         }
 
         JSONArray jsonArray = super.getJsonArray(url,params);
+        if(jsonArray==null){
+            return Message.error();
+        }
         List<T> listBean= jsonArray.toJavaList(tClass);
 
         return Message.success(listBean);
@@ -57,6 +60,10 @@ public class EastMoneyService extends BaseCrawlService{
     }
 
     public void updateAllStockCodesData() {
+        updateAllStockCodesData(this.eastMoneyService);
+    }
+
+    public void updateAllStockCodesData(IEastMoneyService eastMoneyService) {
         for (String s : StockCodeUtil.getStockCode()) {
             try {
                 eastMoneyService.updateByStockCodes(s);

@@ -6,6 +6,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
 import java.util.HashMap;
@@ -50,6 +51,11 @@ public class BaseCrawlService {
     protected String getJsonString(String url, Map<String,String> params){
         try{
             String text = this.request(url,params);
+            String title = Jsoup.parse(text).body().getElementsByTag("title").text();
+            if(title.equals("无F10资料")){
+                return "{\"status\":\"-1\",\"message\":\"无F10资料\"}";
+            }
+
             //解析json，并去除转义字符
             Object o = JSON.parse(text);
 
