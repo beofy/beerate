@@ -1,19 +1,33 @@
-package cn.beerate.model.bean.eastmoney.f10.shareholderresearch;
+package cn.beerate.model.entity.eastmoney.f10.shareholderresearch;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+
+import javax.persistence.*;
+import java.util.Date;
 
 @ApiModel(description = "基金持股列表")
-@Data
-public class JjcgDetail {
+@Setter
+@Getter
+@Entity
+public class t_eastmoney_jjcg_detail{
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long jjcg_detail_id;
+
+    @Column(columnDefinition = "timestamp NULL DEFAULT CURRENT_TIMESTAMP")
+    private Date createTime=new Date();
+
+    private Date updateTime;
+
     @ApiModelProperty("持股数(股)")
     private String cgs;
 
     @ApiModelProperty("持仓市值(元)")
     private String cgsz;
 
-    @ApiModelProperty("")
     private String id;
 
     @ApiModelProperty("基金代码")
@@ -22,7 +36,7 @@ public class JjcgDetail {
     @ApiModelProperty("基金名称")
     private String jjmc;
 
-    @ApiModelProperty("")
+    @Column(name = "_order")
     private String order;
 
     @ApiModelProperty("占净值比")

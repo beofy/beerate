@@ -5,10 +5,8 @@ import cn.beerate.common.Message;
 import cn.beerate.common.util.DateUtil;
 import cn.beerate.common.util.StockCodeUtil;
 import cn.beerate.model.bean.eastmoney.f10.ShareholderResearch;
-import cn.beerate.model.bean.eastmoney.f10.shareholderresearch.Zlcc;
+import cn.beerate.model.entity.eastmoney.f10.shareholderresearch.t_eastmoney_zlcc;
 import cn.beerate.service.eastmoney.f10.ShareholderResearchService;
-import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
 import io.swagger.annotations.*;
 import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -39,16 +37,7 @@ public class ShareholderResearchController {
             return Message.error("股票代码错误");
         }
 
-        Message<String> message = shareholderResearchService.shareholderResearch(aBStock);
-        //未抓取到
-        if(message.fail()){
-            return Message.error("无数据");
-        }
-
-        //json转对象
-        JSONObject jsonObject = JSONObject.parseObject(message.getData());
-
-        return Message.success(jsonObject.toJavaObject(ShareholderResearch.class));
+        return shareholderResearchService.shareholderResearch(aBStock);
     }
 
     @GetMapping(value = "/mainPositionsHodler")
@@ -57,7 +46,7 @@ public class ShareholderResearchController {
             @ApiImplicitParam(value = "股票代码", name = "code", paramType = "query", dataType = "string", required = true),
             @ApiImplicitParam(value = "日期", name = "date", paramType = "query", dataType = "string", required = true),
     })
-    public Message<List<Zlcc>> mainPositionsHodler(@Param("code") String code, @Param("date") String date){
+    public Message<List<t_eastmoney_zlcc>> mainPositionsHodler(@Param("code") String code, @Param("date") String date){
         String aBStock = StockCodeUtil.getABStock(code);
         if(aBStock==null){
             return Message.error("股票代码错误");
@@ -67,15 +56,6 @@ public class ShareholderResearchController {
             return Message.error("时间格式错误");
         }
 
-        Message<String> message = shareholderResearchService.mainPositionsHodler(aBStock,date);
-        //未抓取到
-        if(message.fail()){
-            return Message.error("无数据");
-        }
-
-        //json转对象
-        JSONArray jsonArray = JSONObject.parseArray(message.getData());
-
-        return Message.success(jsonArray.toJavaList(Zlcc.class));
+        return shareholderResearchService.mainPositionsHodler(aBStock,date);
     }
 }

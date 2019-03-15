@@ -1,20 +1,21 @@
-/**
-  * Copyright 2019 bejson.com 
-  */
-package cn.beerate.model.bean.eastmoney.f10.shareholderresearch;
+package cn.beerate.model.entity.eastmoney.f10.shareholderresearch;
+import cn.beerate.model.Model;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-/**
- * Auto-generated: 2019-01-24 14:51:13
- *
- * @author bejson.com (i@bejson.com)
- * @website http://www.bejson.com/java2pojo/
- */
+import javax.persistence.Entity;
+
 @ApiModel(description = "机构持仓")
-@Data
-public class Zlcc {
+@Setter
+@Getter
+@Entity
+public class t_eastmoney_zlcc  extends Model {
+
+    @ApiModelProperty(value = "股票代码")
+    private String code;
+
     @ApiModelProperty(value = "日期")
     private String rq;
 

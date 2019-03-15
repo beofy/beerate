@@ -20,8 +20,9 @@ public class UpdateStockDataTask {
     private StockResearchReportService stockResearchReportService;
     private NewFinanceAnalysisService financeAnalysisService;
     private BonusFinancingService bonusFinancingService;
+    private ShareholderResearchService shareholderResearchService;
 
-    public UpdateStockDataTask(DisclosureService disclosureService, CompanySurveyService companySurveyService, CompanyBigNewsService companyBigNewsService, CompanyManagementService companyManagementService, CapitalStockStructureService capitalStockStructureService, StockResearchReportService stockResearchReportService, NewFinanceAnalysisService financeAnalysisService, BonusFinancingService bonusFinancingService) {
+    public UpdateStockDataTask(DisclosureService disclosureService, CompanySurveyService companySurveyService, CompanyBigNewsService companyBigNewsService, CompanyManagementService companyManagementService, CapitalStockStructureService capitalStockStructureService, StockResearchReportService stockResearchReportService, NewFinanceAnalysisService financeAnalysisService, BonusFinancingService bonusFinancingService, ShareholderResearchService shareholderResearchService) {
         this.disclosureService = disclosureService;
         this.companySurveyService = companySurveyService;
         this.companyBigNewsService = companyBigNewsService;
@@ -30,6 +31,7 @@ public class UpdateStockDataTask {
         this.stockResearchReportService = stockResearchReportService;
         this.financeAnalysisService = financeAnalysisService;
         this.bonusFinancingService = bonusFinancingService;
+        this.shareholderResearchService = shareholderResearchService;
     }
 
     /**
@@ -132,5 +134,12 @@ public class UpdateStockDataTask {
         logger.info("------------------开始定时任务：更新分红融资数据------------------");
         bonusFinancingService.updateAllStockCodesData();
         logger.info("------------------开始定时任务：更新分红融资数据------------------");
+    }
+
+    @Scheduled(cron = "0 0 22 * * ?")
+    public void updateRhareholderResearch() {
+        logger.info("------------------开始定时任务：更新股东研究数据------------------");
+        shareholderResearchService.updateAllStockCodesData();
+        logger.info("------------------开始定时任务：更新股东研究数据------------------");
     }
 }

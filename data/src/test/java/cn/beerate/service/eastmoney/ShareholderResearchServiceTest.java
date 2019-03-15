@@ -22,4 +22,9 @@ public class ShareholderResearchServiceTest {
     public void testMainPositionsHodler(){
         researchService.mainPositionsHodler("sz000001","2017-12-31");
     }
+
+    @Test
+    public void updateRhareholderResearch() {
+        researchService.updateAllStockCodesData();
+    }
 }

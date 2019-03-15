@@ -1,12 +1,18 @@
-package cn.beerate.model.bean.eastmoney.f10.shareholderresearch;
+package cn.beerate.model.entity.eastmoney.f10.shareholderresearch;
 
+import cn.beerate.model.Model;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+
+import javax.persistence.Entity;
 
 @ApiModel(description = "十大股东列表")
-@Data
-public class SdgdDetail {
+@Setter
+@Getter
+@Entity
+public class t_eastmoney_sdgd_detail  extends Model {
 
     @ApiModelProperty("变动比例")
     private String bdbl;
