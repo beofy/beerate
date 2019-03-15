@@ -18,14 +18,16 @@ public class UpdateStockDataTask {
     private CompanyManagementService companyManagementService;
     private CapitalStockStructureService capitalStockStructureService;
     private StockResearchReportService stockResearchReportService;
+    private NewFinanceAnalysisService financeAnalysisService;
 
-    public UpdateStockDataTask(DisclosureService disclosureService, CompanySurveyService companySurveyService, CompanyBigNewsService companyBigNewsService, CompanyManagementService companyManagementService, CapitalStockStructureService capitalStockStructureService, StockRelationshipService stockRelationshipService) {
+    public UpdateStockDataTask(DisclosureService disclosureService, CompanySurveyService companySurveyService, CompanyBigNewsService companyBigNewsService, CompanyManagementService companyManagementService, CapitalStockStructureService capitalStockStructureService, StockResearchReportService stockResearchReportService, NewFinanceAnalysisService financeAnalysisService) {
         this.disclosureService = disclosureService;
         this.companySurveyService = companySurveyService;
         this.companyBigNewsService = companyBigNewsService;
         this.companyManagementService = companyManagementService;
         this.capitalStockStructureService = capitalStockStructureService;
         this.stockResearchReportService = stockResearchReportService;
+        this.financeAnalysisService = financeAnalysisService;
     }
 
     /**
@@ -78,6 +80,48 @@ public class UpdateStockDataTask {
         logger.info("------------------开始定时任务：更新行业研报数据------------------");
         stockResearchReportService.updateIndustryResearchReport("50","1","","0","0");
         logger.info("------------------结束定时任务：更新行业研报数据------------------");
+    }
+
+    @Scheduled(cron = "0 0 15 * * ?")
+    public void updateMainTarget(){
+        logger.info("------------------开始定时任务：更新主要指标数据------------------");
+        financeAnalysisService.updateAllStockCodesData(financeAnalysisService.getMainTargetService());
+        logger.info("------------------开始定时任务：更新主要指标报数据------------------");
+    }
+
+    @Scheduled(cron = "0 0 16 * * ?")
+    public void updateDubangAnalysis(){
+        logger.info("------------------开始定时任务：更新杜邦分析数据------------------");
+        financeAnalysisService.updateAllStockCodesData(financeAnalysisService.getDubangAnalysisService());
+        logger.info("------------------开始定时任务：更新杜邦分析数据------------------");
+    }
+
+    @Scheduled(cron = "0 0 17 * * ?")
+    public void updateZcfzb(){
+        logger.info("------------------开始定时任务：更新资产负载表数据------------------");
+        financeAnalysisService.updateAllStockCodesData(financeAnalysisService.getZcfzbService());
+        logger.info("------------------开始定时任务：更新资产负载表数据------------------");
+    }
+
+    @Scheduled(cron = "0 0 18 * * ?")
+    public void updateLrb(){
+        logger.info("------------------开始定时任务：更新利润表数据------------------");
+        financeAnalysisService.updateAllStockCodesData(financeAnalysisService.getLrbService());
+        logger.info("------------------开始定时任务：更新利润表数据------------------");
+    }
+
+    @Scheduled(cron = "0 0 19 * * ?")
+    public void updateXjllb(){
+        logger.info("------------------开始定时任务：更新现金流量表数据------------------");
+        financeAnalysisService.updateAllStockCodesData(financeAnalysisService.getXjllbService());
+        logger.info("------------------开始定时任务：更新现金流量表数据------------------");
+    }
+
+    @Scheduled(cron = "0 0 20 * * ?")
+    public void updatePercent(){
+        logger.info("------------------开始定时任务：更新百分比报表数据------------------");
+        financeAnalysisService.updateAllStockCodesData(financeAnalysisService.getPercentService());
+        logger.info("------------------开始定时任务：更新百分比报表数据------------------");
     }
 
 }

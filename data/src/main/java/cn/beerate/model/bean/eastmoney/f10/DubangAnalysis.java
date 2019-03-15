@@ -1,5 +1,6 @@
-package cn.beerate.model.bean.eastmoney.f10.newfinanceanalysis;
+package cn.beerate.model.bean.eastmoney.f10;
 
+import cn.beerate.model.entity.eastmoney.f10.newfinanceanalysis.t_eastmoney_dubang;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -13,9 +14,9 @@ import java.util.List;
 public class DubangAnalysis {
 
     @ApiModelProperty("报告期")
-    private List<Dubang> bgq;
+    private List<t_eastmoney_dubang> bgq;
 
     @ApiModelProperty("年度")
-    private List<Dubang> nd;
+    private List<t_eastmoney_dubang> nd;
 
 }

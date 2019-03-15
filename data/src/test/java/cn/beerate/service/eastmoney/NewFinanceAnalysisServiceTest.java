@@ -18,20 +18,48 @@ public class NewFinanceAnalysisServiceTest {
     @Test
     public void testAll(){
         //测试主要指标
-       Message<String> message = financeAnalysisService.mainTarget("0","SZ000002");
+       financeAnalysisService.mainTarget("0","SZ000002");
         //测试杜邦分析
-        message = financeAnalysisService.dubangAnalysis("SZ000002");
+        financeAnalysisService.dubangAnalysis("SZ000002");
         //测试资产负债表
-        message = financeAnalysisService.zcfzb("0","1","","SZ000002");
+        financeAnalysisService.zcfzb("0","1","","SZ000002");
         //测试利润表
-        message = financeAnalysisService.lrb("0","1","","SZ000002");
+        financeAnalysisService.lrb("0","1","","SZ000002");
         //现金流量表
-        message = financeAnalysisService.xjllb("0","1","","SZ000002");
-
+        financeAnalysisService.xjllb("0","1","","SZ000002");
         //百分比报表-按类型
-        message = financeAnalysisService.percentIndex("SZ000002");
+        Message message = financeAnalysisService.percentIndex("SZ000002");
         //百分比报表-按类型
-        message = financeAnalysisService.percent("SZ000002","0");
+        financeAnalysisService.percent("SZ000002","0");
     }
 
+    @Test
+    public void updateMainTarget(){
+        financeAnalysisService.updateAllStockCodesData(financeAnalysisService.getMainTargetService());
+    }
+
+    @Test
+    public void updateDubangAnalysis(){
+        financeAnalysisService.updateAllStockCodesData(financeAnalysisService.getDubangAnalysisService());
+    }
+
+    @Test
+    public void updateZcfzb(){
+        financeAnalysisService.updateAllStockCodesData(financeAnalysisService.getZcfzbService());
+    }
+
+    @Test
+    public void updateLrb(){
+        financeAnalysisService.updateAllStockCodesData(financeAnalysisService.getLrbService());
+    }
+
+    @Test
+    public void updateXjllb(){
+        financeAnalysisService.updateAllStockCodesData(financeAnalysisService.getXjllbService());
+    }
+
+    @Test
+    public void updatePercent(){
+        financeAnalysisService.updateAllStockCodesData(financeAnalysisService.getPercentService());
+    }
 }

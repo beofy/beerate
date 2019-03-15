@@ -1,12 +1,23 @@
-package cn.beerate.model.bean.eastmoney.f10.newfinanceanalysis;
+package cn.beerate.model.entity.eastmoney.f10.newfinanceanalysis;
 
+import cn.beerate.model.Model;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+import javax.persistence.Entity;
 
 @ApiModel(description = "利润表")
 @NoArgsConstructor
-public class Lrb {
+@Setter
+@Getter
+@Entity
+public class t_eastmoney_lrb  extends Model {
+
+    @ApiModelProperty(value = "股票代码")
+    private String code;
 
     @ApiModelProperty("股票代码")
     public String SECURITYCODE;

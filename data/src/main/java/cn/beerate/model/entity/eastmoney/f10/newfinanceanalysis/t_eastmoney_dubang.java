@@ -1,14 +1,27 @@
-package cn.beerate.model.bean.eastmoney.f10.newfinanceanalysis;
+package cn.beerate.model.entity.eastmoney.f10.newfinanceanalysis;
 
+import cn.beerate.model.Model;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+import javax.persistence.Entity;
 
 @ApiModel(description = "杜邦分析")
 @NoArgsConstructor
-@Data
-public class Dubang {
+@Setter
+@Getter
+@Entity
+public class t_eastmoney_dubang extends Model {
+
+    @ApiModelProperty(value = "股票代码")
+    private String code;
+
+    @ApiModelProperty(value = "报告类型")
+    private String type;
 
     @ApiModelProperty("日期")
     private String date;

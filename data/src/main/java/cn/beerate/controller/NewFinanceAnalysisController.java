@@ -3,10 +3,10 @@ package cn.beerate.controller;
 import cn.beerate.common.Constants.StatusCode;
 import cn.beerate.common.Message;
 import cn.beerate.common.util.StockCodeUtil;
-import cn.beerate.model.bean.eastmoney.f10.newfinanceanalysis.*;
+import cn.beerate.model.bean.eastmoney.f10.Zb;
+import cn.beerate.model.bean.eastmoney.f10.DubangAnalysis;
+import cn.beerate.model.entity.eastmoney.f10.newfinanceanalysis.*;
 import cn.beerate.service.eastmoney.f10.NewFinanceAnalysisService;
-import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
 import io.swagger.annotations.*;
 import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -34,7 +34,7 @@ public class NewFinanceAnalysisController {
             @ApiImplicitParam(value = "股票代码", name = "code", paramType = "query", dataType = "string", required = true),
             @ApiImplicitParam(value = "指标类型：\n0-按报告期\n1-按年度\n2-按单季度", name = "type", paramType = "query", dataType = "string", required = true),
     })
-    public Message<List<MainTarget>> mainTarget(@Param("code") String code, @Param("type") String type){
+    public Message<List<t_eastmoney_main_target>> mainTarget(@Param("code") String code, @Param("type") String type){
         //参数校验
         String aBStock = StockCodeUtil.getABStock(code);
         if(aBStock==null){
@@ -51,16 +51,13 @@ public class NewFinanceAnalysisController {
             return  Message.error("type参数错误");
         }
 
-        Message<String> message = newFinanceAnalysisService.mainTarget(type,aBStock);
-        //未抓取到
-        if(message.fail()){
-            return Message.error("无数据");
+        //从数据库获取
+        Message<List<t_eastmoney_main_target>> message = newFinanceAnalysisService.findMainTargetByCodeAndType(aBStock,type);
+        if(!message.fail()){
+            return message;
         }
 
-        //jsonarray转对象
-        JSONArray jsonArray = JSONArray.parseArray(message.getData());
-
-        return Message.success(jsonArray.toJavaList(MainTarget.class));
+        return newFinanceAnalysisService.mainTarget(type,aBStock);
     }
 
     @GetMapping(value = "/dubangAnalysis")
@@ -75,17 +72,14 @@ public class NewFinanceAnalysisController {
         if(aBStock==null){
             return Message.error("股票代码错误");
         }
+        Message<DubangAnalysis> dubangAnalysisMessage =newFinanceAnalysisService.findDubangAnalysis(aBStock);
 
-        Message<String> message =   newFinanceAnalysisService.dubangAnalysis(aBStock);
-        //未抓取到
-        if(message.fail()){
-            return Message.error("无数据");
+        //从数据库获取
+        if(!dubangAnalysisMessage.fail()){
+            return dubangAnalysisMessage;
         }
 
-        //json转对象
-        JSONObject jsonObject = JSONObject.parseObject(message.getData());
-
-        return Message.success(jsonObject.toJavaObject(DubangAnalysis.class));
+        return newFinanceAnalysisService.dubangAnalysis(aBStock);
     }
 
     @GetMapping(value = "/zcfzb")
@@ -99,7 +93,7 @@ public class NewFinanceAnalysisController {
             @ApiImplicitParam(value = "结束时间", name = "endDate", paramType = "query", dataType = "string"),
             @ApiImplicitParam(value = "股票代码", name = "code", paramType = "query", dataType = "string", required = true),
     })
-    public Message<List<Zcfzb>> zcfzb(String reportDateType, String  reportType, String  endDate, String  code){
+    public Message<List<t_eastmonney_zcfzb>> zcfzb(String reportDateType, String  reportType, String  endDate, String  code){
 
         //参数校验
         String aBStock = StockCodeUtil.getABStock(code);
@@ -111,16 +105,7 @@ public class NewFinanceAnalysisController {
             endDate="";
         }
 
-        Message<String> message =   newFinanceAnalysisService.zcfzb(reportDateType,reportType,endDate,aBStock);
-        //未抓取到
-        if(message.fail()){
-            return Message.error("无数据");
-        }
-
-        //json转对象
-        JSONArray jsonArray = JSONArray.parseArray(message.getData());
-
-        return Message.success(jsonArray.toJavaList(Zcfzb.class));
+        return newFinanceAnalysisService.zcfzb(reportDateType,reportType,endDate,aBStock);
     }
 
     @GetMapping(value = "/lrb")
@@ -134,7 +119,7 @@ public class NewFinanceAnalysisController {
             @ApiImplicitParam(value = "结束时间", name = "endDate", paramType = "query", dataType = "string"),
             @ApiImplicitParam(value = "股票代码", name = "code", paramType = "query", dataType = "string", required = true),
     })
-    public Message<List<Lrb>> lrb(String reportDateType,String reportType,String endDate,String code){
+    public Message<List<t_eastmoney_lrb>> lrb(String reportDateType, String reportType, String endDate, String code){
         //参数校验
         String aBStock = StockCodeUtil.getABStock(code);
         if(aBStock==null){
@@ -145,16 +130,7 @@ public class NewFinanceAnalysisController {
             endDate="";
         }
 
-        Message<String> message =   newFinanceAnalysisService.lrb(reportDateType,reportType,endDate,aBStock);
-        //未抓取到
-        if(message.fail()){
-            return Message.error("无数据");
-        }
-
-        //json转对象
-        JSONArray jsonArray = JSONArray.parseArray(message.getData());
-
-        return Message.success(jsonArray.toJavaList(Lrb.class));
+        return newFinanceAnalysisService.lrb(reportDateType,reportType,endDate,aBStock);
     }
 
     @GetMapping(value = "/xjllb")
@@ -168,7 +144,7 @@ public class NewFinanceAnalysisController {
             @ApiImplicitParam(value = "结束时间", name = "endDate", paramType = "query", dataType = "string"),
             @ApiImplicitParam(value = "股票代码", name = "code", paramType = "query", dataType = "string", required = true),
     })
-    public Message<List<Xjllb>> xjllb(String reportDateType, String  reportType, String  endDate, String  code){
+    public Message<List<t_eastmoney_xjllb>> xjllb(String reportDateType, String  reportType, String  endDate, String  code){
         //参数校验
         String aBStock = StockCodeUtil.getABStock(code);
         if(aBStock==null){
@@ -179,16 +155,7 @@ public class NewFinanceAnalysisController {
             endDate="";
         }
 
-        Message<String> message =  newFinanceAnalysisService.xjllb(reportDateType,reportType,endDate,aBStock);
-        //未抓取到
-        if(message.fail()){
-            return Message.error("无数据");
-        }
-
-        //json转对象
-        JSONArray jsonArray = JSONArray.parseArray(message.getData());
-
-        return Message.success(jsonArray.toJavaList(Xjllb.class));
+        return newFinanceAnalysisService.xjllb(reportDateType,reportType,endDate,aBStock);
     }
 
     @GetMapping(value = "/percent")
@@ -197,22 +164,13 @@ public class NewFinanceAnalysisController {
             @ApiImplicitParam(value = "股票代码", name = "code", paramType = "query", dataType = "string", required = true),
             @ApiImplicitParam(value = "类型", name = "type", paramType = "query", dataType = "string", required = true),
     })
-    public Message<Zb> percentIndex(String code,String type){
+    public Message<Zb> percent(String code, String type){
         //参数校验
         String aBStock = StockCodeUtil.getABStock(code);
         if(aBStock==null){
             return Message.error("股票代码错误");
         }
 
-        Message<String> message =   newFinanceAnalysisService.percent(aBStock,type);
-        //未抓取到
-        if(message.fail()){
-            return Message.error("无数据");
-        }
-
-        //json转对象
-        JSONObject jsonObject = JSONObject.parseObject(message.getData());
-
-        return Message.success(jsonObject.toJavaObject(Zb.class));
+        return newFinanceAnalysisService.percent(aBStock,type);
     }
 }

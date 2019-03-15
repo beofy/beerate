@@ -1,14 +1,16 @@
 package cn.beerate.model.entity.cninfo;
 
 import cn.beerate.model.Model;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 
 
 @Entity
-@Data
+@Setter
+@Getter
 public class t_stock_disclosure extends Model {
 
     /** 公告时间 */
