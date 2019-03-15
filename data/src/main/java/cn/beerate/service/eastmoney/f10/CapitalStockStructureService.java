@@ -71,44 +71,88 @@ public class CapitalStockStructureService extends EastMoneyService implements IE
 
             //保存历年股本变动实体数据
             List<t_eastmoney_share_change> eastmoneyShareChangeList = new ArrayList<>();
-            for (int i = 0; i < shareChangeList.get(0).getChangeList().size(); i++) {//股票代码和日期
-                eastmoneyShareChangeList.add(new t_eastmoney_share_change(code,shareChangeList.get(0).getChangeList().get(i),null,null,null,null,null,null,null));
-            }
-            for (int i = 0; i < shareChangeList.get(1).getChangeList().size(); i++) {//总股本
-                eastmoneyShareChangeList.get(i).setZgb(shareChangeList.get(1).getChangeList().get(i));
-            }
-            for (int i = 0; i < shareChangeList.get(2).getChangeList().size(); i++) {//流通受限股份
-                eastmoneyShareChangeList.get(i).setLtsxgf(shareChangeList.get(2).getChangeList().get(i));
-            }
-            for (int i = 0; i < shareChangeList.get(3).getChangeList().size(); i++) {//国有法人持股(受限)
-                eastmoneyShareChangeList.get(i).setGyfrcg(shareChangeList.get(3).getChangeList().get(i));
-            }
-            for (int i = 0; i < shareChangeList.get(4).getChangeList().size(); i++) {//其他内资持股(受限)
-                eastmoneyShareChangeList.get(i).setQtnzcg(shareChangeList.get(4).getChangeList().get(i));
-            }
-            for (int i = 0; i < shareChangeList.get(5).getChangeList().size(); i++) {//已流通股份
-                eastmoneyShareChangeList.get(i).setYltgf(shareChangeList.get(5).getChangeList().get(i));
-            }
-            for (int i = 0; i < shareChangeList.get(6).getChangeList().size(); i++) {//已上市流通A股
-                eastmoneyShareChangeList.get(i).setYssltAg(shareChangeList.get(6).getChangeList().get(i));
-            }
-            for (int i = 0; i < shareChangeList.get(7).getChangeList().size(); i++) {//变动原因
-                eastmoneyShareChangeList.get(i).setBdyy(shareChangeList.get(7).getChangeList().get(i));
+            if(shareChangeList.size()==5){
+
+                for (int i = 0; i < shareChangeList.get(0).getChangeList().size(); i++) {//股票代码和日期
+                    eastmoneyShareChangeList.add(new t_eastmoney_share_change(code,shareChangeList.get(0).getChangeList().get(i),null,null,null,null,null,null,null));
+                }
+                for (int i = 0; i < shareChangeList.get(1).getChangeList().size(); i++) {//总股本
+                    eastmoneyShareChangeList.get(i).setZgb(shareChangeList.get(1).getChangeList().get(i));
+                }
+                for (int i = 0; i < shareChangeList.get(2).getChangeList().size(); i++) {//已流通股份
+                    eastmoneyShareChangeList.get(i).setYltgf(shareChangeList.get(2).getChangeList().get(i));
+                }
+                for (int i = 0; i < shareChangeList.get(3).getChangeList().size(); i++) {//已上市流通A股
+                    eastmoneyShareChangeList.get(i).setYssltAg(shareChangeList.get(3).getChangeList().get(i));
+                }
+                for (int i = 0; i < shareChangeList.get(4).getChangeList().size(); i++) {//变动原因
+                    eastmoneyShareChangeList.get(i).setBdyy(shareChangeList.get(4).getChangeList().get(i));
+                }
+
+            }else if(shareChangeList.size()==7){
+                for (int i = 0; i < shareChangeList.get(0).getChangeList().size(); i++) {//股票代码和日期
+                    eastmoneyShareChangeList.add(new t_eastmoney_share_change(code,shareChangeList.get(0).getChangeList().get(i),null,null,null,null,null,null,null));
+                }
+                for (int i = 0; i < shareChangeList.get(1).getChangeList().size(); i++) {//总股本
+                    eastmoneyShareChangeList.get(i).setZgb(shareChangeList.get(1).getChangeList().get(i));
+                }
+                for (int i = 0; i < shareChangeList.get(2).getChangeList().size(); i++) {//流通受限股份
+                    eastmoneyShareChangeList.get(i).setLtsxgf(shareChangeList.get(2).getChangeList().get(i));
+                }
+                for (int i = 0; i < shareChangeList.get(3).getChangeList().size(); i++) {//其他内资持股(受限)
+                    eastmoneyShareChangeList.get(i).setQtnzcg(shareChangeList.get(3).getChangeList().get(i));
+                }
+                for (int i = 0; i < shareChangeList.get(4).getChangeList().size(); i++) {//已流通股份
+                    eastmoneyShareChangeList.get(i).setYltgf(shareChangeList.get(4).getChangeList().get(i));
+                }
+                for (int i = 0; i < shareChangeList.get(5).getChangeList().size(); i++) {//已上市流通A股
+                    eastmoneyShareChangeList.get(i).setYssltAg(shareChangeList.get(5).getChangeList().get(i));
+                }
+                for (int i = 0; i < shareChangeList.get(6).getChangeList().size(); i++) {//变动原因
+                    eastmoneyShareChangeList.get(i).setBdyy(shareChangeList.get(6).getChangeList().get(i));
+                }
+            }else if(shareChangeList.size()==8){
+                for (int i = 0; i < shareChangeList.get(0).getChangeList().size(); i++) {//股票代码和日期
+                    eastmoneyShareChangeList.add(new t_eastmoney_share_change(code,shareChangeList.get(0).getChangeList().get(i),null,null,null,null,null,null,null));
+                }
+                for (int i = 0; i < shareChangeList.get(1).getChangeList().size(); i++) {//总股本
+                    eastmoneyShareChangeList.get(i).setZgb(shareChangeList.get(1).getChangeList().get(i));
+                }
+                for (int i = 0; i < shareChangeList.get(2).getChangeList().size(); i++) {//流通受限股份
+                    eastmoneyShareChangeList.get(i).setLtsxgf(shareChangeList.get(2).getChangeList().get(i));
+                }
+                for (int i = 0; i < shareChangeList.get(3).getChangeList().size(); i++) {//国有法人持股(受限)
+                    eastmoneyShareChangeList.get(i).setGyfrcg(shareChangeList.get(3).getChangeList().get(i));
+                }
+                for (int i = 0; i < shareChangeList.get(4).getChangeList().size(); i++) {//其他内资持股(受限)
+                    eastmoneyShareChangeList.get(i).setQtnzcg(shareChangeList.get(4).getChangeList().get(i));
+                }
+                for (int i = 0; i < shareChangeList.get(5).getChangeList().size(); i++) {//已流通股份
+                    eastmoneyShareChangeList.get(i).setYltgf(shareChangeList.get(5).getChangeList().get(i));
+                }
+                for (int i = 0; i < shareChangeList.get(6).getChangeList().size(); i++) {//已上市流通A股
+                    eastmoneyShareChangeList.get(i).setYssltAg(shareChangeList.get(6).getChangeList().get(i));
+                }
+                for (int i = 0; i < shareChangeList.get(7).getChangeList().size(); i++) {//变动原因
+                    eastmoneyShareChangeList.get(i).setBdyy(shareChangeList.get(7).getChangeList().get(i));
+                }
             }
 
             //保存股本构成实体数据
             List<t_eastmoney_unlisted_share> unlistedShareList = new ArrayList<>();
-            for (int i = 0; i < unlistedShareChangeList.get(0).getChangeList().size(); i++) {//股票代码和日期
-                unlistedShareList.add(new t_eastmoney_unlisted_share(code,unlistedShareChangeList.get(0).getChangeList().get(i),null,null,null));
-            }
-            for (int i = 0; i < unlistedShareChangeList.get(1).getChangeList().size(); i++) {//股份总数
-                unlistedShareList.get(i).setGfzs(unlistedShareChangeList.get(1).getChangeList().get(i));
-            }
-            for (int i = 0; i < unlistedShareChangeList.get(2).getChangeList().size(); i++) {//已上市流通A股
-                unlistedShareList.get(i).setYssltAg(unlistedShareChangeList.get(2).getChangeList().get(i));
-            }
-            for (int i = 0; i < unlistedShareChangeList.get(3).getChangeList().size(); i++) {//受限流通股份
-                unlistedShareList.get(i).setSxltgf(unlistedShareChangeList.get(3).getChangeList().get(i));
+            if(!unlistedShareChangeList.isEmpty()){
+                for (int i = 0; i < unlistedShareChangeList.get(0).getChangeList().size(); i++) {//股票代码和日期
+                    unlistedShareList.add(new t_eastmoney_unlisted_share(code,unlistedShareChangeList.get(0).getChangeList().get(i),null,null,null));
+                }
+                for (int i = 0; i < unlistedShareChangeList.get(1).getChangeList().size(); i++) {//股份总数
+                    unlistedShareList.get(i).setGfzs(unlistedShareChangeList.get(1).getChangeList().get(i));
+                }
+                for (int i = 0; i < unlistedShareChangeList.get(2).getChangeList().size(); i++) {//已上市流通A股
+                    unlistedShareList.get(i).setYssltAg(unlistedShareChangeList.get(2).getChangeList().get(i));
+                }
+                for (int i = 0; i < unlistedShareChangeList.get(3).getChangeList().size(); i++) {//受限流通股份
+                    unlistedShareList.get(i).setSxltgf(unlistedShareChangeList.get(3).getChangeList().get(i));
+                }
             }
 
             //删除数据
