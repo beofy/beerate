@@ -1,21 +1,23 @@
-/**
-  * Copyright 2019 bejson.com 
-  */
-package cn.beerate.model.bean.eastmoney.f10.bonusfinancing;
+package cn.beerate.model.entity.eastmoney.f10.bonusfinancing;
 
+import cn.beerate.model.Model;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-/**
- * Auto-generated: 2019-01-23 13:57:36
- *
- * @author bejson.com (i@bejson.com)
- * @website http://www.bejson.com/java2pojo/
- */
+import javax.persistence.Entity;
+
+
 @ApiModel(description = "增发明细")
-@Data
-public class Zfmx {
+@Setter
+@Getter
+@Entity
+public class t_eastmoney_zfmx extends Model {
+
+    @ApiModelProperty(value = "股票代码")
+    private String code;
+
     @ApiModelProperty(value = "增发时间")
     private String zfsj;
 

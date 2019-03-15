@@ -1,20 +1,22 @@
-/**
-  * Copyright 2019 bejson.com 
-  */
-package cn.beerate.model.bean.eastmoney.f10.bonusfinancing;
+package cn.beerate.model.entity.eastmoney.f10.bonusfinancing;
+import cn.beerate.model.Model;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-/**
- * Auto-generated: 2019-01-23 13:57:36
- *
- * @author bejson.com (i@bejson.com)
- * @website http://www.bejson.com/java2pojo/
- */
+import javax.persistence.Entity;
+
+
 @ApiModel(description = "配股明细")
-@Data
-public class Pgmx {
+@Setter
+@Getter
+@Entity
+public class t_eastmoney_pgmx extends Model {
+
+    @ApiModelProperty(value = "股票代码")
+    private String code;
+
     @ApiModelProperty(value = "配股公告日")
     private String pgggr;
 

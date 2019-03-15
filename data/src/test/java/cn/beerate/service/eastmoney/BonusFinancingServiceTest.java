@@ -17,9 +17,13 @@ public class BonusFinancingServiceTest {
 
     @Test
     public void testAll(){
+        bonusFinancingService.bonusFinancing("SZ000002");
+        bonusFinancingService.bonusDetailChart("SZ000002","2018-08-21");
+    }
 
-       Message message = bonusFinancingService.bonusFinancing("SZ000002");
+    @Test
+    public void testUpdateAllStockCodesData(){
 
-       message= bonusFinancingService.bonusDetailChart("SZ000002","2018-08-21");
+        bonusFinancingService.updateAllStockCodesData();
     }
 }

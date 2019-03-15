@@ -39,16 +39,13 @@ public class BonusFinancingController {
             return Message.error("股票代码错误");
         }
 
-        Message<String> message = bonusFinancingService.bonusFinancing(aBStock);
-        //未抓取到
-        if(message.getCode()==StatusCode.ERROR){
-            return Message.error("无数据");
+        //从数据库查询
+        Message<BonusFinancing>  bonusFinancingMessage = bonusFinancingService.findByStockCode(aBStock);
+        if(!bonusFinancingMessage.fail()){
+            return bonusFinancingMessage;
         }
 
-        //json转对象
-        JSONObject jsonObject = JSONObject.parseObject(message.getData());
-
-        return Message.success(jsonObject.toJavaObject(BonusFinancing.class));
+        return bonusFinancingService.bonusFinancing(aBStock);
     }
 
     @GetMapping(value = "/getBonusDetail")

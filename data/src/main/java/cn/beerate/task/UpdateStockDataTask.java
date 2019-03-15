@@ -19,8 +19,9 @@ public class UpdateStockDataTask {
     private CapitalStockStructureService capitalStockStructureService;
     private StockResearchReportService stockResearchReportService;
     private NewFinanceAnalysisService financeAnalysisService;
+    private BonusFinancingService bonusFinancingService;
 
-    public UpdateStockDataTask(DisclosureService disclosureService, CompanySurveyService companySurveyService, CompanyBigNewsService companyBigNewsService, CompanyManagementService companyManagementService, CapitalStockStructureService capitalStockStructureService, StockResearchReportService stockResearchReportService, NewFinanceAnalysisService financeAnalysisService) {
+    public UpdateStockDataTask(DisclosureService disclosureService, CompanySurveyService companySurveyService, CompanyBigNewsService companyBigNewsService, CompanyManagementService companyManagementService, CapitalStockStructureService capitalStockStructureService, StockResearchReportService stockResearchReportService, NewFinanceAnalysisService financeAnalysisService, BonusFinancingService bonusFinancingService) {
         this.disclosureService = disclosureService;
         this.companySurveyService = companySurveyService;
         this.companyBigNewsService = companyBigNewsService;
@@ -28,6 +29,7 @@ public class UpdateStockDataTask {
         this.capitalStockStructureService = capitalStockStructureService;
         this.stockResearchReportService = stockResearchReportService;
         this.financeAnalysisService = financeAnalysisService;
+        this.bonusFinancingService = bonusFinancingService;
     }
 
     /**
@@ -124,4 +126,11 @@ public class UpdateStockDataTask {
         logger.info("------------------开始定时任务：更新百分比报表数据------------------");
     }
 
+
+    @Scheduled(cron = "0 0 21 * * ?")
+    public void updatebonusFinancing(){
+        logger.info("------------------开始定时任务：更新分红融资数据------------------");
+        bonusFinancingService.updateAllStockCodesData();
+        logger.info("------------------开始定时任务：更新分红融资数据------------------");
+    }
 }
