@@ -2,8 +2,8 @@
   * Copyright 2019 bejson.com 
   */
 package cn.beerate.model.bean.eastmoney.f10;
-import cn.beerate.model.bean.eastmoney.f10.capitaloperation.CapitalFrom;
-import cn.beerate.model.bean.eastmoney.f10.capitaloperation.ProjectProgress;
+import cn.beerate.model.entity.eastmoney.f10.capitaloperation.t_eastmoney_capital_from;
+import cn.beerate.model.entity.eastmoney.f10.capitaloperation.t_eastmoney_project_progress;
 import io.swagger.annotations.ApiModel;
 import lombok.Data;
 
@@ -18,6 +18,6 @@ import java.util.List;
 @ApiModel(description = "资本运作")
 @Data
 public class CapitalOperation {
-    private List<CapitalFrom> CapitalFrom;
-    private List<ProjectProgress> ProjectProgress;
+    private List<t_eastmoney_capital_from> CapitalFrom;
+    private List<t_eastmoney_project_progress> ProjectProgress;
 }

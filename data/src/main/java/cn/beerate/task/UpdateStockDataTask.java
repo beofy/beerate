@@ -21,8 +21,10 @@ public class UpdateStockDataTask {
     private NewFinanceAnalysisService financeAnalysisService;
     private BonusFinancingService bonusFinancingService;
     private ShareholderResearchService shareholderResearchService;
+    private CapitalOperationService capitalOperationService;
+    private BusinessAnalysisService businessAnalysisService;
 
-    public UpdateStockDataTask(DisclosureService disclosureService, CompanySurveyService companySurveyService, CompanyBigNewsService companyBigNewsService, CompanyManagementService companyManagementService, CapitalStockStructureService capitalStockStructureService, StockResearchReportService stockResearchReportService, NewFinanceAnalysisService financeAnalysisService, BonusFinancingService bonusFinancingService, ShareholderResearchService shareholderResearchService) {
+    public UpdateStockDataTask(DisclosureService disclosureService, CompanySurveyService companySurveyService, CompanyBigNewsService companyBigNewsService, CompanyManagementService companyManagementService, CapitalStockStructureService capitalStockStructureService, StockResearchReportService stockResearchReportService, NewFinanceAnalysisService financeAnalysisService, BonusFinancingService bonusFinancingService, ShareholderResearchService shareholderResearchService, CapitalOperationService capitalOperationService, BusinessAnalysisService businessAnalysisService) {
         this.disclosureService = disclosureService;
         this.companySurveyService = companySurveyService;
         this.companyBigNewsService = companyBigNewsService;
@@ -32,6 +34,8 @@ public class UpdateStockDataTask {
         this.financeAnalysisService = financeAnalysisService;
         this.bonusFinancingService = bonusFinancingService;
         this.shareholderResearchService = shareholderResearchService;
+        this.capitalOperationService = capitalOperationService;
+        this.businessAnalysisService = businessAnalysisService;
     }
 
     /**
@@ -142,4 +146,19 @@ public class UpdateStockDataTask {
         shareholderResearchService.updateAllStockCodesData();
         logger.info("------------------开始定时任务：更新股东研究数据------------------");
     }
+
+    @Scheduled(cron = "0 0 23 * * ?")
+    public void updateCapitalOperation() {
+        logger.info("------------------开始定时任务：更新资本运作数据------------------");
+        capitalOperationService.updateAllStockCodesData();
+        logger.info("------------------开始定时任务：更新资本运作数据------------------");
+    }
+
+    @Scheduled(cron = "0 0 1 * * ?")
+    public void updateBusinessAnalysis() {
+        logger.info("------------------开始定时任务：更新经营分析数据------------------");
+        businessAnalysisService.updateAllStockCodesData();
+        logger.info("------------------开始定时任务：更新经营分析数据------------------");
+    }
+
 }

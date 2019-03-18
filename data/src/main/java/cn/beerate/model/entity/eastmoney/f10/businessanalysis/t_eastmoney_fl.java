@@ -1,14 +1,20 @@
-package cn.beerate.model.bean.eastmoney.f10.businessanalysis;
+package cn.beerate.model.entity.eastmoney.f10.businessanalysis;
 
+import cn.beerate.model.Model;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+import javax.persistence.Entity;
 
 @ApiModel(description = "分类")
 @NoArgsConstructor
-@Data
-public class Fl {
+@Setter
+@Getter
+@Entity
+public class t_eastmoney_fl extends Model {
     @ApiModelProperty("日期")
     private String rq;
 
@@ -39,6 +45,6 @@ public class Fl {
     @ApiModelProperty("单位")
     private String dw;
 
-    @ApiModelProperty("")
     private String orderby;
+
 }

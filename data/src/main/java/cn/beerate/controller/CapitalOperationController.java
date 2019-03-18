@@ -5,7 +5,6 @@ import cn.beerate.common.Message;
 import cn.beerate.common.util.StockCodeUtil;
 import cn.beerate.model.bean.eastmoney.f10.CapitalOperation;
 import cn.beerate.service.eastmoney.f10.CapitalOperationService;
-import com.alibaba.fastjson.JSONObject;
 import io.swagger.annotations.*;
 import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -38,18 +37,13 @@ public class CapitalOperationController {
             return Message.error("股票代码错误");
         }
 
-        Message<String> message = capitalOperationService.capitalOperation(aBStock,orderBy,isAsc);
-        //未抓取到
-        if(message.fail()){
-            return Message.error("无数据");
+        //从数据库获取
+        Message<CapitalOperation> capitalOperationMessage = capitalOperationService.findCapitalOperationByCode(aBStock);
+        if(!capitalOperationMessage.fail()){
+            return capitalOperationMessage;
         }
 
-        //json转对象
-        JSONObject jsonObject = JSONObject.parseObject(message.getData());
-
-        return Message.success(jsonObject.toJavaObject(CapitalOperation.class));
+        return capitalOperationService.capitalOperation(aBStock,orderBy,isAsc);
     }
-
-
 
 }

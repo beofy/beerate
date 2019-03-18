@@ -1,11 +1,18 @@
 package cn.beerate.service.eastmoney.f10;
 
 import cn.beerate.common.Message;
-import cn.beerate.service.BaseCrawlService;
+import cn.beerate.dao.eastmoney.f10.capitaloperation.CapitalFromDao;
+import cn.beerate.dao.eastmoney.f10.capitaloperation.ProjectProgressDao;
+import cn.beerate.model.bean.eastmoney.f10.CapitalOperation;
+import cn.beerate.model.entity.eastmoney.f10.capitaloperation.t_eastmoney_capital_from;
+import cn.beerate.model.entity.eastmoney.f10.capitaloperation.t_eastmoney_project_progress;
+import cn.beerate.service.EastMoneyService;
+import cn.beerate.service.IEastMoneyService;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -13,9 +20,18 @@ import java.util.Map;
  */
 @Component
 @Transactional(readOnly = true)
-public class CapitalOperationService extends BaseCrawlService {
+public class CapitalOperationService extends EastMoneyService implements IEastMoneyService {
 
-    private final String CAPITAL_OPERATION_AJAX="http://emweb.securities.eastmoney.com/CapitalOperation/CapitalOperationAjax";
+
+    private CapitalFromDao capitalFromDao;
+    private ProjectProgressDao projectProgressDao;
+
+    public CapitalOperationService(CapitalFromDao capitalFromDao, ProjectProgressDao projectProgressDao) {
+        this.capitalFromDao = capitalFromDao;
+        this.projectProgressDao = projectProgressDao;
+
+        super.eastMoneyService=this;
+    }
 
     /**
      * 资本运作
@@ -44,13 +60,43 @@ public class CapitalOperationService extends BaseCrawlService {
      * @param isAsc  false：降序 | true:升序
      * @return Message<String>
      */
-    public Message<String> capitalOperation(String code, String orderBy, String isAsc){
-        Map<String,String> params = new HashMap<String,String>();
+    public Message<CapitalOperation> capitalOperation(String code, String orderBy, String isAsc){
+        String url="http://emweb.securities.eastmoney.com/CapitalOperation/CapitalOperationAjax";
+        Map<String,String> params = new HashMap<>();
         params.put("code",code);
         params.put("orderBy",orderBy);
         params.put("isAsc",isAsc);
 
-        return Message.success(super.getJsonString(this.CAPITAL_OPERATION_AJAX,params));
+        return super.getBean(CapitalOperation.class,url,params);
+    }
+
+    public Message<CapitalOperation> findCapitalOperationByCode(String code){
+        CapitalOperation capitalOperation = new CapitalOperation();
+        capitalOperation.setCapitalFrom(capitalFromDao.findByCode(code));
+        capitalOperation.setProjectProgress(projectProgressDao.findByCode(code));
+
+        return Message.success(capitalOperation);
+    }
+
+    @Override
+    public void updateByStockCodes(String code) {
+        Message<CapitalOperation> capitalOperationMessage = capitalOperation(code,"1","false");
+        if(!capitalOperationMessage.fail()){
+            List<t_eastmoney_capital_from> capitalFromList = capitalOperationMessage.getData().getCapitalFrom();//募集资金来源
+            List<t_eastmoney_project_progress> projectProgressList = capitalOperationMessage.getData().getProjectProgress();// 项目进度
+
+            //添加股票代码
+            capitalFromList.forEach(t_eastmoney_capital_from -> t_eastmoney_capital_from.setCode(code));
+            projectProgressList.forEach(t_eastmoney_project_progress -> t_eastmoney_project_progress.setCode(code));
+
+            //删除数据
+            capitalFromDao.deleteByCode(code);
+            projectProgressDao.deleteByCode(code);
+
+            //保存数据
+            capitalFromDao.saveAll(capitalFromList);
+            projectProgressDao.saveAll(projectProgressList);
+        }
     }
 
 }
